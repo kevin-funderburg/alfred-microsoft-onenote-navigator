@@ -1,0 +1,1968 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Color</key>
+		<string>0.776471 0.639216 0.466667 1.000000</string>
+		<key>Gosid</key>
+		<string>{41101E5F-F70B-7D4A-A86E-2ADA14348926}{0001}</string>
+		<key>Password Protected</key>
+		<false/>
+		<key>Read Only</key>
+		<false/>
+		<key>Type</key>
+		<integer>4</integer>
+		<key>name</key>
+		<string>Planning</string>
+	</dict>
+	<dict>
+		<key>Color</key>
+		<string>1.000000 0.756863 0.078431 1.000000</string>
+		<key>Gosid</key>
+		<string>{191BB192-48B4-CD4C-9429-E8CD12E82169}{0001}</string>
+		<key>Password Protected</key>
+		<false/>
+		<key>Read Only</key>
+		<false/>
+		<key>Type</key>
+		<integer>4</integer>
+		<key>name</key>
+		<string>Various</string>
+	</dict>
+	<dict>
+		<key>Children</key>
+		<array>
+			<dict>
+				<key>Children</key>
+				<array>
+					<dict>
+						<key>Color</key>
+						<string>0.670588 0.000000 0.545098 1.000000</string>
+						<key>Gosid</key>
+						<string>{6232F285-7B89-8E48-B333-7AB67A78B72E}{0001}</string>
+						<key>Password Protected</key>
+						<false/>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>4</integer>
+						<key>name</key>
+						<string>Class Info</string>
+					</dict>
+					<dict>
+						<key>Color</key>
+						<string>0.000000 0.705882 0.294118 1.000000</string>
+						<key>Gosid</key>
+						<string>{0960A9B2-A2B5-3047-A379-29072CBF1E70}{0001}</string>
+						<key>Password Protected</key>
+						<false/>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>4</integer>
+						<key>name</key>
+						<string>Book Notes</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>1.000000 0.756863 0.078431 1.000000</string>
+								<key>Gosid</key>
+								<string>{125CAE14-DEF5-794A-9691-4FF06C6EFD63}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>hw0</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.549020 0.227451 1.000000</string>
+								<key>Gosid</key>
+								<string>{B6942A9A-7794-0B44-9DA9-4C779DEF7296}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>hw1</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.823529 0.000000 0.470588 1.000000</string>
+								<key>Gosid</key>
+								<string>{1A56E187-216C-D846-81E7-9F4069976AF9}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>hw2</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.549020 0.227451 1.000000</string>
+								<key>Gosid</key>
+								<string>{83D35481-EAE6-B048-A3E9-1115848C4F61}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>hw3</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.823529 0.000000 0.470588 1.000000</string>
+								<key>Gosid</key>
+								<string>{01CE186B-996D-7A48-984A-5201459EAA7D}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>hw4</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{4464CE01-5C51-F845-A50E-95218ACBAE25}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Homework</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.627451 0.843137 1.000000</string>
+								<key>Gosid</key>
+								<string>{41AF665F-D563-824B-9E53-65608493CC6E}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Exam 1</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.309804 0.545098 1.000000</string>
+								<key>Gosid</key>
+								<string>{D18F9F47-AD61-1749-9E33-0DAA7E73C581}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Exam 2</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{5EE410AC-C810-C74B-8CDF-258E1E71313B}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Lecture Notes</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.411765 0.686275 1.000000</string>
+								<key>Gosid</key>
+								<string>{C588CF36-B3BB-214E-A53A-8A93CC9E9E18}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Proposal</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.964706 0.388235 0.050980 1.000000</string>
+								<key>Gosid</key>
+								<string>{1C57A1F8-DF4B-4344-B27B-1BC4C055C846}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Various</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{1F03800C-E691-ED45-8BB5-8D9DFBAE0512}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Project</string>
+					</dict>
+				</array>
+				<key>Color</key>
+				<string>0.000000 0.000000 0.000000 1.000000</string>
+				<key>Gosid</key>
+				<string>{DEE03BD9-8C2E-1942-A392-6394D17A959B}{0001}</string>
+				<key>Read Only</key>
+				<false/>
+				<key>Type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>Computer Architecture</string>
+			</dict>
+			<dict>
+				<key>Children</key>
+				<array>
+					<dict>
+						<key>Color</key>
+						<string>0.000000 0.549020 0.227451 1.000000</string>
+						<key>Gosid</key>
+						<string>{2DDEEB62-61AC-B548-8F79-1FDE26651D72}{0001}</string>
+						<key>Password Protected</key>
+						<false/>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>4</integer>
+						<key>name</key>
+						<string>Class Info</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.905882 0.070588 0.141176 1.000000</string>
+								<key>Gosid</key>
+								<string>{DE5068FE-CADC-6248-9FE5-AD99AB8C22CF}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Exam 1</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.356863 0.176471 0.564706 1.000000</string>
+								<key>Gosid</key>
+								<string>{A8DE056A-CA43-9145-9ED4-F2AD6FBBC259}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Exam 2</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{C4F4981E-231E-B34C-84D2-FF078E195C94}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Lecture Notes</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.670588 0.000000 0.545098 1.000000</string>
+								<key>Gosid</key>
+								<string>{3EA81B73-5D98-D944-8790-C1F8AE36AB7A}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Project 2</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>1.000000 0.756863 0.078431 1.000000</string>
+										<key>Gosid</key>
+										<string>{528210F7-2F9A-3740-8A7D-C15A71751500}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>SRS</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.905882 0.070588 0.141176 1.000000</string>
+										<key>Gosid</key>
+										<string>{DAE051C6-C368-1F45-AC41-13E5CE3925BD}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>SDD</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.494118 0.768627 0.000000 1.000000</string>
+										<key>Gosid</key>
+										<string>{D689E281-D91F-D545-80AB-7F0ECB889E1A}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Code</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.756863 0.000000 0.321569 1.000000</string>
+										<key>Gosid</key>
+										<string>{FF568EBA-3BD1-864C-A267-BEE67BA18863}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Test Plan</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>1.000000 0.756863 0.078431 1.000000</string>
+										<key>Gosid</key>
+										<string>{2A3666AD-F2BB-4E47-9877-42712A17D797}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Individual Analysis</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{8581768E-26A6-6B44-9F35-87B3C3A0A484}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Project 1</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{DFD399F5-849B-BB4B-B11D-99A27D75A7B0}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Projects</string>
+					</dict>
+				</array>
+				<key>Color</key>
+				<string>0.000000 0.000000 0.000000 1.000000</string>
+				<key>Gosid</key>
+				<string>{22902CA8-E3E9-C746-9571-331BC3F7C5F7}{0001}</string>
+				<key>Read Only</key>
+				<false/>
+				<key>Type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>Software Engineering</string>
+			</dict>
+			<dict>
+				<key>Children</key>
+				<array>
+					<dict>
+						<key>Color</key>
+						<string>0.756863 0.000000 0.321569 1.000000</string>
+						<key>Gosid</key>
+						<string>{44E64B32-109A-4041-B550-1BF450471574}{0001}</string>
+						<key>Password Protected</key>
+						<false/>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>4</integer>
+						<key>name</key>
+						<string>Class Info</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.776471 0.639216 0.466667 1.000000</string>
+								<key>Gosid</key>
+								<string>{772C1ABB-E377-C64A-BD18-D37F2CE3C7CA}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Exam 1</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{38C0075A-30B0-284D-94BF-408B81AB07BB}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Exam Reviews</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.964706 0.388235 0.050980 1.000000</string>
+										<key>Gosid</key>
+										<string>{80C08DAD-AD58-6540-8E2B-5BC4F4C51498}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Homework 1</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.309804 0.545098 1.000000</string>
+										<key>Gosid</key>
+										<string>{D6A110E9-65D7-0247-B56A-BFF22DCC7B1C}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Homework 2</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.627451 0.843137 1.000000</string>
+										<key>Gosid</key>
+										<string>{FEDED732-5C3E-1F43-AB79-656E4E268616}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Homework 3</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{04856886-1B3F-8E4A-B1D4-082FC5D64747}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Exam 1</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.627451 0.843137 1.000000</string>
+										<key>Gosid</key>
+										<string>{3B35F52C-87D0-7444-9F88-ED5816DD2DD9}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Homework 4</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.411765 0.686275 1.000000</string>
+										<key>Gosid</key>
+										<string>{861D4A36-A0C7-BF49-9612-97EDEF456BCF}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Homework 5</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{51BA36F3-3E21-474E-82D8-FC3EC53E67E8}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Exam 2</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{1AA96793-9DBF-544F-8636-D29546A83500}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Homework</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.309804 0.545098 1.000000</string>
+								<key>Gosid</key>
+								<string>{BA857F9D-9A04-8946-B244-F75D866AC330}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Exam 1</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.517647 0.576471 0.596078 1.000000</string>
+								<key>Gosid</key>
+								<string>{EA0271E6-0AE0-F449-8784-6B84A2531598}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Exam 2</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{08D4F444-36D3-F246-9722-D535ED2A21E2}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Lecture Notes</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.905882 0.070588 0.141176 1.000000</string>
+								<key>Gosid</key>
+								<string>{FE3CA677-7775-5847-A4F0-A36F2A80A84B}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Lab Info</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.549020 0.227451 1.000000</string>
+								<key>Gosid</key>
+								<string>{1E6402BE-8A1B-D147-A73F-277B04CA4CB8}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Project 1</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.964706 0.388235 0.050980 1.000000</string>
+								<key>Gosid</key>
+								<string>{FA0A2895-DDB4-9A44-A060-F008B78DC5BE}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Project 2</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.905882 0.070588 0.141176 1.000000</string>
+								<key>Gosid</key>
+								<string>{66F87307-EFED-AE4C-84A4-62C67103B760}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Project 3</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{28B68C1B-2340-234C-A90A-B5AE28581B37}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Projects</string>
+					</dict>
+				</array>
+				<key>Color</key>
+				<string>0.000000 0.000000 0.000000 1.000000</string>
+				<key>Gosid</key>
+				<string>{03EE96B9-C3C5-1F4D-AE5A-61916874DDE1}{0001}</string>
+				<key>Read Only</key>
+				<false/>
+				<key>Type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>System Security</string>
+			</dict>
+		</array>
+		<key>Color</key>
+		<string>0.000000 0.000000 0.000000 1.000000</string>
+		<key>Gosid</key>
+		<string>{6FDB5972-FCA7-1845-BCC0-D04C3BEA0FDA}{0001}</string>
+		<key>Read Only</key>
+		<false/>
+		<key>Type</key>
+		<integer>2</integer>
+		<key>name</key>
+		<string>_Spring 2019</string>
+	</dict>
+	<dict>
+		<key>Children</key>
+		<array>
+			<dict>
+				<key>Children</key>
+				<array>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.627451 0.843137 1.000000</string>
+								<key>Gosid</key>
+								<string>{0E92F2CB-5995-A904-3DD6-FABC3AB1B8FB}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Term Paper</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.309804 0.545098 1.000000</string>
+								<key>Gosid</key>
+								<string>{D33ED092-69D6-DF44-A7FB-855A071D6155}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Class Info</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>1.000000 0.756863 0.078431 1.000000</string>
+								<key>Gosid</key>
+								<string>{A6F9F06E-89DD-1D49-AF01-5619BA93BEEE}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Resources</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.705882 0.294118 1.000000</string>
+								<key>Gosid</key>
+								<string>{1EB95CAD-BB29-6441-89AA-163F5962BCAD}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Homework</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.776471 0.639216 0.466667 1.000000</string>
+								<key>Gosid</key>
+								<string>{895EFFF3-4447-A90C-175C-7ACC6EA1B33F}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Lecture Notes</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.356863 0.176471 0.564706 1.000000</string>
+								<key>Gosid</key>
+								<string>{E70F8080-F140-9A42-800F-EB9B4EED5F14}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Group Project</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{66802A02-1B49-3045-8F7F-F637D53E2423}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Computer Ethics</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.117647 0.764706 0.705882 1.000000</string>
+								<key>Gosid</key>
+								<string>{25713FA4-B44B-764F-A4BC-807747357529}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Class Info</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.756863 0.000000 0.321569 1.000000</string>
+								<key>Gosid</key>
+								<string>{7A7DEF7A-778E-9D46-A0ED-22B98A452286}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Resources</string>
+							</dict>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.411765 0.686275 1.000000</string>
+								<key>Gosid</key>
+								<string>{A854EFEA-8F87-2142-8DCD-DF5DA73F593F}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Homework</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.549020 0.227451 1.000000</string>
+										<key>Gosid</key>
+										<string>{82380B37-12A0-1744-BCC9-9BB47F358B9D}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 2</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{F17B9493-EC88-C646-825C-FCAAB38CFDD9}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Notes</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{F1AC5CFF-81AD-2147-BCB4-1E5C7AF71259}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Prob and Stats</string>
+					</dict>
+				</array>
+				<key>Color</key>
+				<string>0.000000 0.000000 0.000000 1.000000</string>
+				<key>Gosid</key>
+				<string>{B0694174-FAC9-3548-A517-76BFA874A8EA}{0001}</string>
+				<key>Read Only</key>
+				<false/>
+				<key>Type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>Fall 2017</string>
+			</dict>
+			<dict>
+				<key>Children</key>
+				<array>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>1.000000 0.756863 0.078431 1.000000</string>
+								<key>Gosid</key>
+								<string>{DC195766-2C18-320F-2ACF-91AE1B44F4E9}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>VM Notes</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.670588 0.000000 0.545098 1.000000</string>
+										<key>Gosid</key>
+										<string>{BA5584CD-3E8C-F307-2031-7BF7CFD98CB4}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Homework 5</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.309804 0.545098 1.000000</string>
+										<key>Gosid</key>
+										<string>{002D25BD-72BE-3809-0E02-76F62DC15EB7}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Homework 6</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.705882 0.294118 1.000000</string>
+										<key>Gosid</key>
+										<string>{3E4CC69E-F691-0609-0C47-6CDAF4172AAD}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Homework 7</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{63FFA840-5903-7B4C-B275-4CB44587D27D}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Homework</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.411765 0.686275 1.000000</string>
+										<key>Gosid</key>
+										<string>{9A5C72B7-2583-A30C-00F6-C9121214AC89}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Group Project 1</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.627451 0.843137 1.000000</string>
+										<key>Gosid</key>
+										<string>{C03E3593-3EB9-4F04-0FC8-0680FC619071}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Group Project 2</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.549020 0.227451 1.000000</string>
+										<key>Gosid</key>
+										<string>{E41779CB-32FE-3B0E-0BB5-56F599D0BA45}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 1 Lab</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.905882 0.070588 0.141176 1.000000</string>
+										<key>Gosid</key>
+										<string>{E8D87734-6975-0A0C-3065-9D6C9A8E2C61}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 2 Lab</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.705882 0.294118 1.000000</string>
+										<key>Gosid</key>
+										<string>{9B607AE0-FF6E-F007-0428-2D92E349F55F}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Lab 3</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.494118 0.768627 0.000000 1.000000</string>
+										<key>Gosid</key>
+										<string>{7781DE01-3694-5A00-38FD-0442CE59F221}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Lab 4</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.494118 0.768627 0.000000 1.000000</string>
+										<key>Gosid</key>
+										<string>{8B53107B-B82A-F208-02AF-EFDBB1A2BD6B}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Lab 5</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.117647 0.764706 0.705882 1.000000</string>
+										<key>Gosid</key>
+										<string>{3260A886-7853-6001-2DAE-3C84FC8470A7}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Lab 6</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{92CED15B-56F2-9F47-9225-35ED2780E034}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Labs</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>1.000000 0.756863 0.078431 1.000000</string>
+										<key>Gosid</key>
+										<string>{CE1752C6-3C9B-A40F-19AE-980634490FE5}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 1</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.964706 0.388235 0.050980 1.000000</string>
+										<key>Gosid</key>
+										<string>{06A74A55-A1E8-7F03-3F49-9ACC257AD562}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 2</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.776471 0.639216 0.466667 1.000000</string>
+										<key>Gosid</key>
+										<string>{997BCABE-E920-7A00-02A8-65C296D8C11C}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 3</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{1217188E-A2E5-7043-B2BA-5A62537DC1E5}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Lecture Notes</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.517647 0.576471 0.596078 1.000000</string>
+										<key>Gosid</key>
+										<string>{C6320FC4-102F-F802-00A5-C8506D8A6F1F}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Writing Assembly Language</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{1B7F4EC8-B152-E54A-8CAC-C5D57783AF62}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Resources</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{EAD6C425-939B-9C4D-B29E-E1B053389080}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Assembly Language</string>
+					</dict>
+				</array>
+				<key>Color</key>
+				<string>0.000000 0.000000 0.000000 1.000000</string>
+				<key>Gosid</key>
+				<string>{1C6C6B6F-3FE7-A242-A211-FD80D5B8142B}{0001}</string>
+				<key>Read Only</key>
+				<false/>
+				<key>Type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>Summer 2017</string>
+			</dict>
+		</array>
+		<key>Color</key>
+		<string>0.000000 0.000000 0.000000 1.000000</string>
+		<key>Gosid</key>
+		<string>{9B896AB2-6AC6-F04F-BC2E-E1A60220BDB2}{0001}</string>
+		<key>Read Only</key>
+		<false/>
+		<key>Type</key>
+		<integer>2</integer>
+		<key>name</key>
+		<string>2017</string>
+	</dict>
+	<dict>
+		<key>Children</key>
+		<array>
+			<dict>
+				<key>Children</key>
+				<array>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.411765 0.686275 1.000000</string>
+								<key>Gosid</key>
+								<string>{80AA16FB-0B53-3F09-1B77-C76F8889C973}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Resources</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.670588 0.000000 0.545098 1.000000</string>
+										<key>Gosid</key>
+										<string>{A413D3C2-D829-C94E-9C70-A8B511FBD558}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 3</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.905882 0.070588 0.141176 1.000000</string>
+										<key>Gosid</key>
+										<string>{CBCCADF2-7ACA-5B41-B4C7-0197AC66D528}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 4</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.776471 0.639216 0.466667 1.000000</string>
+										<key>Gosid</key>
+										<string>{1FA9A840-2861-EA45-AC6E-C2C2AEAB97C3}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 5</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.756863 0.000000 0.321569 1.000000</string>
+										<key>Gosid</key>
+										<string>{8B9F1E0A-C496-2246-9097-9EB8024FC37B}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 6</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.309804 0.545098 1.000000</string>
+										<key>Gosid</key>
+										<string>{B1242ABF-4E09-6848-A7AF-644200F4F0A6}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 7</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.411765 0.686275 1.000000</string>
+										<key>Gosid</key>
+										<string>{A2E56B96-44F0-6542-97DD-02FB96DC1863}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 8</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.776471 0.639216 0.466667 1.000000</string>
+										<key>Gosid</key>
+										<string>{CE50BC6D-1884-A448-BE65-800A85C6D96A}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Optional Assignment</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{1A9D4FC1-116D-3441-8302-22945B5F543D}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Assignments</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.823529 0.000000 0.470588 1.000000</string>
+										<key>Gosid</key>
+										<string>{98A0D13E-4E85-E449-8577-2B47762EA3B2}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Resources</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.549020 0.227451 1.000000</string>
+										<key>Gosid</key>
+										<string>{A58D3B39-8088-A40D-3C1B-A8AAA846ACDC}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Lecture</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.670588 0.000000 0.545098 1.000000</string>
+										<key>Gosid</key>
+										<string>{45701891-3068-BB09-15B6-B02FB2431B88}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Drills and Challenges</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.905882 0.070588 0.141176 1.000000</string>
+										<key>Gosid</key>
+										<string>{056740FB-15E2-AD0D-343A-BA7F43ABFB11}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Examples</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{AD4ACB9F-0B2F-1641-B45D-71CB21AB0A65}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Exam 1</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.494118 0.768627 0.000000 1.000000</string>
+										<key>Gosid</key>
+										<string>{E5A79915-0C09-7A45-909A-DC361DFBD54A}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Lectures</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>1.000000 0.756863 0.078431 1.000000</string>
+										<key>Gosid</key>
+										<string>{0F57D2E4-4B82-AA49-9B6B-ADEF1BD96F43}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Study Guide</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.549020 0.227451 1.000000</string>
+										<key>Gosid</key>
+										<string>{B2D705ED-8C51-3E42-BA6A-B432411A0BE8}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Examples</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{5B43899F-8429-7644-BF23-0971C23B5658}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Exam 2</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.964706 0.388235 0.050980 1.000000</string>
+										<key>Gosid</key>
+										<string>{58A1DA2F-BD47-0644-8B1F-04CD1ADFB158}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Lectures</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.356863 0.176471 0.564706 1.000000</string>
+										<key>Gosid</key>
+										<string>{9B7B698A-E05A-DD49-80FA-9BA68B80CFB4}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Study Guide</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{C1711F33-E96F-8348-A977-7D190891C35E}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Exam 3</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{A8BF3655-FB58-6D43-9B2A-A5E45D53E664}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Data Structures</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.627451 0.843137 1.000000</string>
+								<key>Gosid</key>
+								<string>{C71C7767-E70B-8048-B2E1-AF07DC473803}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Course Info</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.964706 0.388235 0.050980 1.000000</string>
+										<key>Gosid</key>
+										<string>{6662FBE1-18D6-B24E-974F-3D26A089049A}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 1</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.705882 0.294118 1.000000</string>
+										<key>Gosid</key>
+										<string>{38EF1C0D-0632-5C4E-9D1A-A254653465FC}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 2</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{98C2B23D-7DC7-E34A-B84E-8F438D3EC82A}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Lecture Notes</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.905882 0.070588 0.141176 1.000000</string>
+										<key>Gosid</key>
+										<string>{DAE3AD1A-0F29-C645-B07C-702E80885887}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 1</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.411765 0.686275 1.000000</string>
+										<key>Gosid</key>
+										<string>{1AB43B19-0B75-3F47-9F07-A8F46F3B9233}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 2</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.356863 0.176471 0.564706 1.000000</string>
+										<key>Gosid</key>
+										<string>{837303EF-C7F3-3942-8499-99F9B4D7F9ED}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 3</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.627451 0.843137 1.000000</string>
+										<key>Gosid</key>
+										<string>{E9DD27C0-B042-0B4C-8968-70071A9ED924}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 4</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.823529 0.000000 0.470588 1.000000</string>
+										<key>Gosid</key>
+										<string>{F82171D8-5D68-1C48-B637-6447BF97338F}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Assignment 5</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{D5FBAF6C-1FBD-0245-85D7-35BADC16C58E}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Programming Assignments</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{F5E76E5A-E254-874F-A185-967F1B979933}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Object Oriented Design</string>
+					</dict>
+				</array>
+				<key>Color</key>
+				<string>0.000000 0.000000 0.000000 1.000000</string>
+				<key>Gosid</key>
+				<string>{3571455C-5F96-DA43-A030-4B79BD981A99}{0001}</string>
+				<key>Read Only</key>
+				<false/>
+				<key>Type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>Fall 2018</string>
+			</dict>
+			<dict>
+				<key>Children</key>
+				<array>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.905882 0.070588 0.141176 1.000000</string>
+								<key>Gosid</key>
+								<string>{04420259-6A43-6249-9BCE-DFCAB8B041BF}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Notes</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{F10B2FA9-480F-9148-8713-597F2E9DC24A}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Differential Equations</string>
+					</dict>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.000000 0.309804 0.545098 1.000000</string>
+								<key>Gosid</key>
+								<string>{3C6B7C29-529C-D347-B2D9-0A8CE9DBD81F}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Class Info</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{D6379052-B7E6-A941-B179-52449065B297}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Linear Algebra</string>
+					</dict>
+				</array>
+				<key>Color</key>
+				<string>0.000000 0.000000 0.000000 1.000000</string>
+				<key>Gosid</key>
+				<string>{648BA56E-630D-AE40-AC42-1ACA3E1501C3}{0001}</string>
+				<key>Read Only</key>
+				<false/>
+				<key>Type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>Spring 2018</string>
+			</dict>
+			<dict>
+				<key>Children</key>
+				<array>
+					<dict>
+						<key>Children</key>
+						<array>
+							<dict>
+								<key>Color</key>
+								<string>0.117647 0.764706 0.705882 1.000000</string>
+								<key>Gosid</key>
+								<string>{9A328EB1-2FD5-EC42-8DB8-86DA9C35F654}{0001}</string>
+								<key>Password Protected</key>
+								<false/>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>4</integer>
+								<key>name</key>
+								<string>Class Info</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.517647 0.576471 0.596078 1.000000</string>
+										<key>Gosid</key>
+										<string>{15651CA2-F148-854B-9FE2-0C449FA7383E}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 1</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>1.000000 0.756863 0.078431 1.000000</string>
+										<key>Gosid</key>
+										<string>{11DA69B0-A916-CA45-AC18-E4D91526C6F6}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Exam 2</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{004E629F-0EC3-DD42-BF03-5500660C747B}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Lecture Notes</string>
+							</dict>
+							<dict>
+								<key>Children</key>
+								<array>
+									<dict>
+										<key>Color</key>
+										<string>0.756863 0.000000 0.321569 1.000000</string>
+										<key>Gosid</key>
+										<string>{1F77098C-DEF4-5A44-A7D8-1D506DBD5442}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Project 1</string>
+									</dict>
+									<dict>
+										<key>Color</key>
+										<string>0.000000 0.309804 0.545098 1.000000</string>
+										<key>Gosid</key>
+										<string>{3997F1CC-3D4A-BE4A-90A6-46E1319124E4}{0001}</string>
+										<key>Password Protected</key>
+										<false/>
+										<key>Read Only</key>
+										<false/>
+										<key>Type</key>
+										<integer>4</integer>
+										<key>name</key>
+										<string>Project 3</string>
+									</dict>
+								</array>
+								<key>Color</key>
+								<string>0.000000 0.000000 0.000000 1.000000</string>
+								<key>Gosid</key>
+								<string>{365522A9-33B8-9849-9904-4EB963BC3522}{0001}</string>
+								<key>Read Only</key>
+								<false/>
+								<key>Type</key>
+								<integer>2</integer>
+								<key>name</key>
+								<string>Projects</string>
+							</dict>
+						</array>
+						<key>Color</key>
+						<string>0.000000 0.000000 0.000000 1.000000</string>
+						<key>Gosid</key>
+						<string>{FBB97974-B779-FD4D-B354-D682BDB4D99F}{0001}</string>
+						<key>Read Only</key>
+						<false/>
+						<key>Type</key>
+						<integer>2</integer>
+						<key>name</key>
+						<string>Foundations CS II</string>
+					</dict>
+				</array>
+				<key>Color</key>
+				<string>0.000000 0.000000 0.000000 1.000000</string>
+				<key>Gosid</key>
+				<string>{3CC03312-1D5E-6D4F-87A3-C370E7A1DEB3}{0001}</string>
+				<key>Read Only</key>
+				<false/>
+				<key>Type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>Summer 2018</string>
+			</dict>
+		</array>
+		<key>Color</key>
+		<string>0.000000 0.000000 0.000000 1.000000</string>
+		<key>Gosid</key>
+		<string>{C66DEB1A-6BD4-0A46-9FFD-59B19CDFD77D}{0001}</string>
+		<key>Read Only</key>
+		<false/>
+		<key>Type</key>
+		<integer>2</integer>
+		<key>name</key>
+		<string>2018</string>
+	</dict>
+</array>
+</plist>
