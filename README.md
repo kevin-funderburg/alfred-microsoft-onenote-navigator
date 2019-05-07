@@ -1,8 +1,7 @@
 Navigate OneNote Notebooks With Alfred
 ===============================
 
-Use Alfred to browse through your notebook, sections and pages and then jump to them instantly.
-
+Use Alfred to browse through your Microsoft OneNote notebooks, section groups and sections and then jump to them instantly.
 
 ![](demo.gif)
 
