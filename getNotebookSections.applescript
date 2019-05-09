@@ -24,7 +24,7 @@ on run argv
 		set wlib to load script workflowFolder & "/q_workflow.scpt" as POSIX file
 		
 		# create a new Workflow Class
-		set wf to wlib's new_workflow()
+		set wf to wlib's newWorkflow()
 		
 		tell wf
 			set uid to wf's getUID()
@@ -88,7 +88,7 @@ on run argv
 				set iconPath to "icons/section.png"
 			end if
 			
-			add_result of wf given theUid:(|name| of c), theArg:|name| of c, theTitle:|name| of c, theSubtitle:subPreFix, theIcon:{theType:missing value, thePath:iconPath}, theAutocomplete:|name| of c, theType:missing value, isValid:"yes", theQuicklook:"/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns", theVars:{{|name|:"subPreFix", value:subPreFix}, {|name|:"argURL", value:theURL}, {|name|:"leaf", value:"false"}, {|name|:"theURL", value:theURL}}, theMods:{cmd:{isValid:"yes", theArg:theURL, theSubtitle:theURL}, alt:missing value}
+			add_result of wf given theUid:(|name| of c), theArg:|name| of c, theTitle:|name| of c, theSubtitle:subPreFix, theIcon:{theType:missing value, thePath:iconPath}, theAutocomplete:|name| of c, theType:missing value, isValid:"yes", theQuicklook:"/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns", theVars:{{|name|:"subPreFix", value:subPreFix}, {|name|:"argURL", value:theURL}, {|name|:"leaf", value:"false"}, {|name|:"theURL", value:theURL}}, theMods:{cmd:{isValid:"yes", theArg:theURL, theSubtitle:theURL}, alt:missing value, ctrl:missing value, shift:missing value, fn:missing value}, theText:missing value
 		end repeat
 		
 	on error errMsg number errNum
@@ -105,7 +105,7 @@ on run argv
 		
 		set theURL to theURL & ".one"
 		
-		add_result of wf given theUid:(|name| of n), theArg:theURL, theTitle:|name| of n, theSubtitle:theURL, theIcon:{theType:missing value, thePath:"icons/section.png"}, theAutocomplete:|name| of n, theType:missing value, isValid:"yes", theQuicklook:"/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns", theVars:{{|name|:"leaf", value:"true"}, {|name|:"theURL", value:theURL}}, theMods:{cmd:{isValid:"yes", theArg:theURL, theSubtitle:theURL}, alt:missing value}
+		add_result of wf given theUid:(|name| of n), theArg:theURL, theTitle:|name| of n, theSubtitle:theURL, theIcon:{theType:missing value, thePath:"icons/section.png"}, theAutocomplete:|name| of n, theType:missing value, isValid:"yes", theQuicklook:"/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns", theVars:{{|name|:"leaf", value:"true"}, {|name|:"theURL", value:theURL}}, theMods:{cmd:{isValid:"yes", theArg:theURL, theSubtitle:theURL}, alt:missing value, ctrl:missing value, shift:missing value, fn:missing value}, theText:missing value
 	end try
 	
 	return wf's to_json("")
