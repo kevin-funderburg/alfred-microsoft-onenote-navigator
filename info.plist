@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>com.alfredapp.onenotenavigator</string>
+	<string>com.kfunderburg.oneNoteNav</string>
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
@@ -41,6 +41,16 @@
 				<string>38ED37E1-455B-440D-B7D8-3FB851080E9E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>552711B7-C004-41BA-8BED-F242B026EEBF</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -201,6 +211,8 @@
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -218,7 +230,7 @@
 				<key>runningsubtext</key>
 				<string>getting sections...</string>
 				<key>script</key>
-				<string>osascript getNotebookSections.scpt "{query}"</string>
+				<string>python getNotebookSections.py "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -237,7 +249,7 @@
 			<key>uid</key>
 			<string>6771EF9E-41FD-4889-83E4-7DAFEBC371AC</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -279,53 +291,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>keyword</key>
-				<string>oon</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>getting notebooks...</string>
-				<key>script</key>
-				<string>osascript getNotebooks.scpt "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Type the name of the Notebook</string>
-				<key>title</key>
-				<string>Open '{query}' Notebook</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>287531D3-CE59-4A0B-B703-D7097780131B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>paths</key>
 				<array>
 					<string>/Applications/Microsoft OneNote.app</string>
@@ -360,6 +325,55 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>;o</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>getting notebooks...</string>
+				<key>script</key>
+				<string>python getNotebooks.py "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Type the name of the Notebook</string>
+				<key>title</key>
+				<string>Open '{query}' Notebook</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>287531D3-CE59-4A0B-B703-D7097780131B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -379,7 +393,7 @@
 			<key>xpos</key>
 			<integer>600</integer>
 			<key>ypos</key>
-			<integer>180</integer>
+			<integer>190</integer>
 		</dict>
 		<key>0C5C02C4-644E-4D9A-973F-F3A9E6F6E28C</key>
 		<dict>
@@ -395,7 +409,7 @@
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>180</integer>
+			<integer>240</integer>
 		</dict>
 		<key>38ED37E1-455B-440D-B7D8-3FB851080E9E</key>
 		<dict>
@@ -422,7 +436,7 @@
 			<key>xpos</key>
 			<integer>500</integer>
 			<key>ypos</key>
-			<integer>250</integer>
+			<integer>270</integer>
 		</dict>
 		<key>5751CB16-621F-419C-9202-8F5819FBDD56</key>
 		<dict>
@@ -451,7 +465,7 @@
 			<key>xpos</key>
 			<integer>730</integer>
 			<key>ypos</key>
-			<integer>180</integer>
+			<integer>190</integer>
 		</dict>
 		<key>E4302695-9ABB-4A7F-88DA-233DDCF8EDFF</key>
 		<dict>
