@@ -254,6 +254,24 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>variables</key>
+				<dict>
+					<key>q</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>38ED37E1-455B-440D-B7D8-3FB851080E9E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>inputstring</key>
 				<string>{var:leaf}</string>
 				<key>matchcasesensitive</key>
@@ -267,24 +285,6 @@
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
 			<string>5751CB16-621F-419C-9202-8F5819FBDD56</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>variables</key>
-				<dict>
-					<key>q</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>38ED37E1-455B-440D-B7D8-3FB851080E9E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -381,6 +381,50 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>819D7AC2-99F1-4FE5-9479-89CC4C640FB9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>onenotehelp</string>
+				<key>subtext</key>
+				<string>Paste the link copied from a OneNote notebook/section/page</string>
+				<key>text</key>
+				<string>OneNote Nav helper</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A43B90B4-929B-4EFC-BE87-7F24215169F9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Use Alfred to browse through your Microsoft OneNote notebooks, section groups and sections and then jump to them instantly.</string>
@@ -458,6 +502,20 @@
 			<key>ypos</key>
 			<integer>140</integer>
 		</dict>
+		<key>819D7AC2-99F1-4FE5-9479-89CC4C640FB9</key>
+		<dict>
+			<key>xpos</key>
+			<integer>225</integer>
+			<key>ypos</key>
+			<integer>410</integer>
+		</dict>
+		<key>A43B90B4-929B-4EFC-BE87-7F24215169F9</key>
+		<dict>
+			<key>xpos</key>
+			<integer>55</integer>
+			<key>ypos</key>
+			<integer>415</integer>
+		</dict>
 		<key>D6459412-6E76-48D5-88F1-5DA52C20D506</key>
 		<dict>
 			<key>colorindex</key>
@@ -477,8 +535,6 @@
 			<integer>60</integer>
 		</dict>
 	</dict>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
 	<string>1.1</string>
 	<key>webaddress</key>

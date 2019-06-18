@@ -31,7 +31,7 @@ def main(wf):
     log.info('Workflow response complete')
 
     dataPlist = wf.datadir + "/data.plist"
-    pl = plistlib.readPlist(os.path.expanduser(dataPlist))
+    pl = plistlib.load(os.path.expanduser(dataPlist))
 
     notebook = os.getenv('notebook')
     q = os.getenv('q')
@@ -66,14 +66,6 @@ def main(wf):
             else:
                 theURL = theURL + "/" + c["Name"]
 
-            # # it = wf.add_item(title=c["Name"],
-            #                  subtitle=subPreFix,
-            #                  arg=c["Name"],
-            #                  autocomplete=c["Name"],
-            #                  valid=True,
-            #                  icon=APPICON,
-            #                  icontype="file",
-            #                  quicklookurl=APPICON)
             it = wf.add_item(title=c["Name"],
                              subtitle=subPreFix,
                              arg=c["Name"],
@@ -91,14 +83,6 @@ def main(wf):
         theURL = os.getenv("theURL")
         theURL += ".one"
 
-        # it = wf.add_item(title=p["Name"],
-        #                  subtitle=theURL,
-        #                  arg=theURL,
-        #                  autocomplete=p["Name"],
-        #                  valid=True,
-        #                  icon=APPICON,
-        #                  icontype="file",
-        #                  quicklookurl=APPICON)
         it = wf.add_item(title=p["Name"],
                          subtitle=theURL,
                          arg=theURL,

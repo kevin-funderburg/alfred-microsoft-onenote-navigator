@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 
 import os
 import sys
-from workflow import Workflow3
+from workflow import Workflow3, ICON_INFO
 
 wf = None
 log = None
@@ -31,24 +31,43 @@ def main(wf):
     log.info('Workflow response complete')
 
     dataPlist = wf.datadir + "/data.plist"
-    pl = plistlib.readPlist(os.path.expanduser(ONENOTEPLIST))
-    plistlib.writePlist(pl, dataPlist)  # write all notebook plist data to data.plist for getNotebookSections.py
 
-    for p in pl:
-        it = wf.add_item(title=p["Name"],
-                         subtitle="View " + p["Name"] + "'s sections",
-                         arg=p["Name"],
-                         autocomplete=p["Name"],
-                         valid=True,
-                         icon="icon.png",
-                         icontype="file",
-                         quicklookurl=APPICON)
-        it.setvar('subPreFix', "")
-        it.setvar('notebook', p["Name"])
-        it.setvar('theURL', "")
-        it.add_modifier('cmd', subtitle="view " + p["Name"] + "in OneNote", arg=URLBASE + p["Name"], valid=True)
+    if not os.path.exists(dataPlist):
+        log.info('data.plist missing, creating empty plist')
+        data = {}
+        plistlib.writePlist(data, dataPlist)
+
+    if "URLbase" not in dataPlist:
+        it = wf.add_item(title="OneNote URL not found",
+                         subtitle="Copy a link from a notebook and paste it into the helper",
+                         icon=ICON_INFO)
+    else:
+        pl = plistlib.readPlist(os.path.expanduser(ONENOTEPLIST))
+        data = {'URLbase': URLBASE,
+                'notebooks': pl}
+        # pl2 = pl
+        # pl2["URLbase"] = URLBASE
+        plistlib.writePlist(data, dataPlist)  # write all notebook plist data to data.plist for getNotebookSections.py
+
+        for n in data["notebooks"]:
+            it = wf.add_item(title=n["Name"],
+                             subtitle="View " + n["Name"] + "'s sections",
+                             arg=n["Name"],
+                             autocomplete=n["Name"],
+                             valid=True,
+                             icon="icon.png",
+                             icontype="file",
+                             quicklookurl=APPICON)
+            it.setvar('subPreFix', "")
+            it.setvar('notebook', n["Name"])
+            it.setvar('theURL', "")
+            it.add_modifier('cmd', subtitle=URLBASE + n["Name"], arg=URLBASE + n["Name"], valid=True)
 
     return wf.send_feedback()
+
+
+# def config(wf):
+
 
 
 if __name__ == "__main__":
