@@ -31,7 +31,7 @@ def main(wf):
     log.info('Workflow response complete')
 
     dataPlist = wf.datadir + "/data.plist"
-    pl = plistlib.load(os.path.expanduser(dataPlist))
+    pl = plistlib.readPlist(os.path.expanduser(dataPlist))
 
     notebook = os.getenv('notebook')
     q = os.getenv('q')
