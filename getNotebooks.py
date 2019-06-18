@@ -7,7 +7,11 @@ import os
 import sys
 import re
 import argparse
+import json
+import subprocess
+
 from workflow import Workflow3, ICON_INFO, ICON_WARNING
+from unicodedata import normalize
 
 __version__ = '1.1'
 
@@ -20,6 +24,9 @@ UPDATE_SETTINGS={
         'github_slug': 'kevin-funderburg/alfred-microsoft-onenote-navigator',
 }
 # DEFAULT_DATA_FILE=
+# DEFAULT_SETTINGS={
+#     'urlbase': None
+# }
 ONENOTEPLIST = "~/Library/Group Containers/UBF8T346G9.Office/OneNote/ShareExtension/Notebooks.plist"
 ICON_APP = "/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns"
 
@@ -35,6 +42,7 @@ def main(wf):
                     autocomplete='workflow:update',
                     icon=ICON_INFO)
 
+    # wf.clear_settings()
     # build argument parser to parse script args and collect their
     # values
     parser = argparse.ArgumentParser()
@@ -57,10 +65,12 @@ def main(wf):
     # decide what to do based on arguments
     if args.urlbase:  # Script was passed as a URL
         if 'onenote:https' in args.urlbase:
-            args.urlbase = re.search('(onenote.*/Documents/).*', args.urlbase).group(1)
+            args.urlbase = subprocess.check_output(re.search('(onenote.*/Documents/).*', args.urlbase).group(1))
             # save the URL
-            wf.settings['urlbase'] = args.urlbase
-            return 0
+            # output = wf.decode(output)
+            # settings['urlbase'] = "onenote:https://d.docs.live.net/9478a1a4ec3795b7/Documents/"
+
+            # return 0
         else:
             wf.add_item("The argument is not a OneNote URL string",
                         "right click a OneNote page and click 'Copy Link to Page'",
@@ -73,6 +83,7 @@ def main(wf):
     # Check that we have a URL saved
     ####################################################################
     try:
+        # urlbase = wf.settings['urlbase']
         urlbase = wf.settings.get('urlbase', None)
     except "URL Not Found":
             wf.add_item('No URL set yet.',
@@ -83,10 +94,17 @@ def main(wf):
             return 0
 
     if args.type == 'notebook':
+        # urlbase = "onenote:https://d.docs.live.net/9478a1a4ec3795b7/Documents/"
         one_note_pl = plistlib.readPlist(os.path.expanduser(ONENOTEPLIST))
         # write all notebook plist data to data.plist for getNotebookSections.py
         plistlib.writePlist(one_note_pl, wf.datafile('data.plist'))
+        # urlbase = wf.encode(urlbase)
+        # log.debug(c)
+        # log.debug("urlbase is: " + wf.settings.get('ulbase'), None)
 
+        # with open(wf.settings_path, "r") as read_file:
+        #     settings = json.load(read_file)
+        # urlbase = settings.get()
         for n in one_note_pl:
             it = wf.add_item(title=n["Name"],
                              subtitle="View " + n["Name"] + "'s sections",
@@ -96,10 +114,11 @@ def main(wf):
                              icon="icon.png",
                              icontype="file",
                              quicklookurl=ICON_APP)
+            # urlbase = str(urlbase + n["Name"])
             it.setvar('subPreFix', "")
             it.setvar('notebook', n["Name"])
             it.setvar('theURL', "")
-            it.add_modifier('cmd', subtitle=urlbase + n["Name"], arg=urlbase + n["Name"], valid=True)
+            it.add_modifier('cmd', subtitle = wf.settings['urlbase'], arg = wf.settings['urlbase'], valid=True)
 
         # if len(wf.items) == 0:
         #     wf.add_item('No notebooks found', icon=ICON_WARNING)
