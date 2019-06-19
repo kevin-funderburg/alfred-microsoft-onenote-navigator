@@ -218,7 +218,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>69D19A65-4DD4-4D64-AA45-C8E93780ABA5</string>
+				<string>54DA9471-7013-4280-954A-4CB02C3FA0F0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -626,7 +626,7 @@
 				<key>runningsubtext</key>
 				<string>getting sections...</string>
 				<key>script</key>
-				<string>python getNotebookSections.py "{query}"</string>
+				<string>python getNotebooks.py --type "section"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -727,29 +727,6 @@
 			<string>E79639AC-DC3B-4B51-AE14-747B55A55AD1</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>python getNotebooks.py --seturl "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>69D19A65-4DD4-4D64-AA45-C8E93780ABA5</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -906,13 +883,6 @@
 			<key>ypos</key>
 			<integer>140</integer>
 		</dict>
-		<key>69D19A65-4DD4-4D64-AA45-C8E93780ABA5</key>
-		<dict>
-			<key>xpos</key>
-			<integer>240</integer>
-			<key>ypos</key>
-			<integer>800</integer>
-		</dict>
 		<key>819D7AC2-99F1-4FE5-9479-89CC4C640FB9</key>
 		<dict>
 			<key>xpos</key>
@@ -957,9 +927,9 @@
 		<key>BEDFE032-2B6D-44E1-BE66-395EA2077A8D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>10</integer>
+			<integer>30</integer>
 			<key>ypos</key>
-			<integer>800</integer>
+			<integer>770</integer>
 		</dict>
 		<key>D6459412-6E76-48D5-88F1-5DA52C20D506</key>
 		<dict>
