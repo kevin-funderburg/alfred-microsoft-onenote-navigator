@@ -10,6 +10,7 @@ Browse and open your Microsoft OneNote notebooks from [Alfred 3][alfredapp].
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Configuration](#configuration)
 - [Licensing & thanks](#licensing--thanks)
 - [Changelog](#changelog)
 
@@ -32,12 +33,25 @@ Download [the latest release][gh-releases] and double-click the file to install 
 Usage
 -----
 
-The keyword is `;o`:
+The main keyword is `;o`:
 
 - `;o [<query>]` — View and filter OneNote notebooks.
 
     - `↩` or `⌘+<NUM>` — View the selections sub-sections, if it has no sub-sections (deepest level of notebook) it will open the page in OneNote.
     - `⌘+↩` — Open selection in OneNote instead.
+
+Base url is stored with `seturl`:
+
+<a id="configuration"></a>
+### Configuration ###
+
+The workflow locates a plist file that contains the names of the notebooks, sections and pages, and then uses those to build a URL that OneNote can respond to. The base of the URL, however, is unique to each machine and cannot be found within the plist. So in order for this workflow to work
+1. Open OneNote, right click a notebook, section, or page and click the "Copy Link to {Page/Notebook/Section}".
+2. Use the `seturl` keyword and paste the copied link and press ↩︎. After the base url is stored, the workflow should be functional.
+
+- View the gif below to see this in action.
+
+![](seturldemo.gif)
 
 <a id="licensing--thanks"></a>
 Licensing & thanks
@@ -51,8 +65,10 @@ This workflow uses on the wonderful library [alfred-workflow](https://github.com
 Changelog
 ---------
 
-- v0.1.0 — 06/14/19
+- v1.0.0 — 06/14/19
     - First public release
+- v1.2.0 - 06/19/19
+    - Fixed storage of base url
 
 
 [alfredapp]: https://www.alfredapp.com/
