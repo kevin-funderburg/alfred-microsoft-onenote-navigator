@@ -8,8 +8,6 @@ import sys
 import re
 import argparse
 import plistlib
-import json
-import subprocess
 
 from workflow import Workflow3, ICON_INFO, ICON_WARNING
 
@@ -17,24 +15,27 @@ __version__ = '1.1'
 
 wf = None
 log = None
+
 HELP_URL = 'https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator'
 
 # GitHub repo for self-updating
 UPDATE_SETTINGS={'github_slug': 'kevin-funderburg/alfred-microsoft-onenote-navigator'}
 
-DEFAULT_SETTINGS={'urlbase': None}
+DEFAULT_SETTINGS = {'urlbase': "null"}
 
-ONENOTEPLIST = "~/Library/Group Containers/UBF8T346G9.Office/OneNote/ShareExtension/Notebooks.plist"
+ONENOTE_PLIST = os.path.expanduser("~/Library/Group Containers/UBF8T346G9.Office/OneNote/ShareExtension/Notebooks.plist")
 ICON_APP = "/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns"
-
-
+DATA_DIR = os.path.expanduser("~/Library/Application Support/Alfred/Workflow Data/com.kfunderburg.oneNoteNav/")
+DATA_FILE = DATA_DIR + "data.plist"
+SETTINGS_PATH = os.path.expanduser(DATA_DIR) + "settings.plist"
 
 
 def main(wf):
+    if not os.path.exists(SETTINGS_PATH):
+        log.info("no settings set, creating default settings")
+        plistlib.writePlist(DEFAULT_SETTINGS, SETTINGS_PATH)
 
-    urlpath = wf.datadir + "/onenoteinfo.plist"
-    if not os.path.exists(urlpath):
-        plistlib.writePlist({"urlbase": ""}, urlpath)
+    settings = plistlib.readPlist(SETTINGS_PATH)
 
     if wf.update_available:
         # Add a notification to top of Script Filter results
@@ -42,7 +43,6 @@ def main(wf):
                     'Action this item to install the update',
                     autocomplete='workflow:update',
                     icon=ICON_INFO)
-    # wf.clear_settings()
     # build argument parser to parse script args and collect their
     # values
     parser = argparse.ArgumentParser()
@@ -56,12 +56,13 @@ def main(wf):
     ####################################################################
     # Save the provided URL base
     ####################################################################
+    log.debug("arg is type: {0}".format(args.type))
 
     if args.urlbase:  # Script was passed as a URL
         if 'onenote:https' in args.urlbase:
             # extract onenote url
             args.urlbase = re.search('(onenote.*/Documents/).*', args.urlbase).group(1)
-            plistlib.writePlist({"urlbase": args.urlbase}, urlpath)
+            plistlib.writePlist({"urlbase": args.urlbase}, SETTINGS_PATH)
             wf.add_item("url set successfully",
                         valid=False,
                         icon=ICON_INFO)
@@ -76,9 +77,8 @@ def main(wf):
 
     ####################################################################
     # Check that we have a URL saved
-    ####################################################################
-    urlpl = plistlib.readPlist(urlpath)
-    if urlpl['urlbase'] is "":
+    ##################################################################
+    if settings['urlbase'] == "null":
         wf.add_item('No URL set yet.',
                     'Please use seturl to set your OneNote url base.',
                     valid=False,
@@ -88,11 +88,11 @@ def main(wf):
 
     if args.type == 'notebook':
         # get plist data from OneNote plist
-        one_note_pl = plistlib.readPlist(os.path.expanduser(ONENOTEPLIST))
+        onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
         # write all notebook plist data to data.plist for later iterations
-        plistlib.writePlist(one_note_pl, wf.datafile('data.plist'))
+        plistlib.writePlist(onenote_pl, DATA_FILE)
 
-        for n in one_note_pl:
+        for n in onenote_pl:
             it = wf.add_item(title=n["Name"],
                              subtitle="View " + n["Name"] + "'s sections",
                              arg=n["Name"],
@@ -105,14 +105,14 @@ def main(wf):
             it.setvar('notebook', n["Name"])
             it.setvar('theURL', "")
             it.add_modifier('cmd',
-                            subtitle="{0}{1}".format(urlpl['urlbase'], n["Name"]),
-                            arg="{0}{1}".format(urlpl['urlbase'], n["Name"]),
+                            subtitle="{0}{1}".format(settings['urlbase'], n["Name"]),
+                            arg="{0}{1}".format(settings['urlbase'], n["Name"]),
                             valid=True)
 
-        # if len(wf.items) == 0:
-        #     wf.add_item('No notebooks found', icon=ICON_WARNING)
-        #     wf.send_feedback()
-        #     return 0
+        if len(wf._items) == 0:
+            wf.add_item('No notebooks found', icon=ICON_WARNING)
+            wf.send_feedback()
+            return 0
 
         wf.send_feedback()
         return 0
@@ -120,52 +120,38 @@ def main(wf):
     if args.type == 'section':
         notebook = os.getenv('notebook')
         q = os.getenv('q')
-        # notebook = None
-        # q = 'Mac'
+
         if notebook is None:
             notebook = q
         found = False
-        # one_note_pl = plistlib.readPlist(os.path.expanduser(ONENOTEPLIST))
-        # # write all notebook plist data to data.plist for later iterations
-        # plistlib.writePlist(one_note_pl, wf.datafile('data.plist'))
-        pl = plistlib.readPlist(wf.datafile('data.plist'))
+
+        pl = plistlib.readPlist(DATA_FILE)
         for p in pl:
             if p["Name"] == q:
                 found = True
                 break
 
         if not found:
-            log.exception('section was not found')
-            pass
+            wf.add_item('No section ' + q + 'was found', icon=ICON_WARNING)
+            wf.send_feedback()
+            return 0
 
         if "Children" in p:
             # write children of current section to data.plist for further iterations
-            plistlib.writePlist(p["Children"], wf.datafile('data.plist'))
+            plistlib.writePlist(p["Children"], DATA_FILE)
             for c in p["Children"]:
                 subPreFix = os.getenv("subPreFix")
                 theURL = os.getenv("theURL")
 
                 if (subPreFix == "") or (subPreFix is None):
-                    # subPreFix = notebook + " > " + c["Name"]
                     subPreFix = "{0} > {1}".format(notebook, c["Name"])
                 else:
                     subPreFix = "{0} > {1}".format(subPreFix, c["Name"])
-                    # subPreFix = subPreFix + " > " + c["Name"]
 
-                if wf.settings is None:
-                    log.debug("settings is None")
-                else:
-                    log.debug("settings is not None")
-
-                settings = wf.settings
-                test = wf.decode(subprocess.check_output(settings.get('urlbase')))
-                log.debug(test)
                 if (theURL == "") or (theURL is None):
-                    theURL = "{0}{1}/{2}".format(test, notebook, c["Name"])
-                    # theURL = urlbase + notebook + "/" + c["Name"]
+                    theURL = "{0}{1}/{2}".format(settings['urlbase'], notebook, c["Name"])
                 else:
                     theURL = "{0}/{1}".format(theURL, c["Name"])
-                    # theURL = theURL + "/" + c["Name"]
 
                 it = wf.add_item(title=c["Name"],
                                  subtitle=subPreFix,
@@ -194,10 +180,10 @@ def main(wf):
                              quicklookurl=ICON_APP)
             it.setvar('leaf', "true")
 
-        # if len(wf.items) == 0:
-        #     wf.add_item('No sections found', icon=ICON_WARNING)
-        #     wf.send_feedback()
-        #     return 0
+        if len(wf._items) == 0:
+            wf.add_item('No sections found', icon=ICON_WARNING)
+            wf.send_feedback()
+            return 0
 
         wf.send_feedback()
         return 0
@@ -207,13 +193,7 @@ def main(wf):
     return 0
 
 
-
-
-
-
 if __name__ == "__main__":
-    # wf = Workflow3(update_settings=UPDATE_SETTINGS,
-    #                help_url=HELP_URL)
     wf = Workflow3(help_url=HELP_URL)
     log = wf.logger
     sys.exit(wf.run(main))

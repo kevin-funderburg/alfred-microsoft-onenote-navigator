@@ -552,6 +552,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>triggerid</key>
+				<string>recursion</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>911C6EEB-C645-4F1A-8DCC-605AE8824BD2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>externaltriggerid</key>
 				<string>recursion</string>
 				<key>passinputasargument</key>
@@ -565,19 +578,6 @@
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
 			<string>BEBB6199-4C53-49A0-93C9-E92AD14E6795</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>triggerid</key>
-				<string>recursion</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>911C6EEB-C645-4F1A-8DCC-605AE8824BD2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -721,14 +721,6 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>E79639AC-DC3B-4B51-AE14-747B55A55AD1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
@@ -776,6 +768,14 @@
 			<string>BEDFE032-2B6D-44E1-BE66-395EA2077A8D</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>E79639AC-DC3B-4B51-AE14-747B55A55AD1</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -927,9 +927,9 @@
 		<key>BEDFE032-2B6D-44E1-BE66-395EA2077A8D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>30</integer>
+			<integer>10</integer>
 			<key>ypos</key>
-			<integer>770</integer>
+			<integer>665</integer>
 		</dict>
 		<key>D6459412-6E76-48D5-88F1-5DA52C20D506</key>
 		<dict>
