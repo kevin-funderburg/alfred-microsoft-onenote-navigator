@@ -32,9 +32,9 @@ ICON_APP = "/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns"
 
 def main(wf):
 
-    urlplist = wf.datadir + "/onenoteinfo.plist"
-    if not os.path.exists(urlplist):
-        plistlib.writePlist({"urlbase": ""}, urlplist)
+    urlpath = wf.datadir + "/onenoteinfo.plist"
+    if not os.path.exists(urlpath):
+        plistlib.writePlist({"urlbase": ""}, urlpath)
 
     if wf.update_available:
         # Add a notification to top of Script Filter results
@@ -61,7 +61,10 @@ def main(wf):
         if 'onenote:https' in args.urlbase:
             # extract onenote url
             args.urlbase = re.search('(onenote.*/Documents/).*', args.urlbase).group(1)
-            wf.settings['urlbase'] = args.urlbase
+            plistlib.writePlist({"urlbase": args.urlbase}, urlpath)
+            wf.add_item("url set successfully",
+                        valid=False,
+                        icon=ICON_INFO)
             return 0
         else:
             wf.add_item("The argument is not a OneNote URL string",
@@ -74,9 +77,8 @@ def main(wf):
     ####################################################################
     # Check that we have a URL saved
     ####################################################################
-    try:
-        urlbase = wf.settings.get('urlbase', None)
-    except "URL Not Found":
+    urlpl = plistlib.readPlist(urlpath)
+    if urlpl['urlbase'] is "":
         wf.add_item('No URL set yet.',
                     'Please use seturl to set your OneNote url base.',
                     valid=False,
@@ -103,8 +105,8 @@ def main(wf):
             it.setvar('notebook', n["Name"])
             it.setvar('theURL', "")
             it.add_modifier('cmd',
-                            subtitle="{0}{1}".format(wf.settings.get('urlbase'), n["Name"]),
-                            arg="{0}{1}".format(wf.settings.get('urlbase'), n["Name"]),
+                            subtitle="{0}{1}".format(urlpl['urlbase'], n["Name"]),
+                            arg="{0}{1}".format(urlpl['urlbase'], n["Name"]),
                             valid=True)
 
         # if len(wf.items) == 0:
