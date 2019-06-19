@@ -8,73 +8,11 @@
 	<string>Tools</string>
 	<key>connections</key>
 	<dict>
-		<key>048ABB63-EEC5-4209-84B6-F3DDB8F6C481</key>
+		<key>098E82D9-67D2-4A44-8D5A-B77583E20E8A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D6459412-6E76-48D5-88F1-5DA52C20D506</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>0C5C02C4-644E-4D9A-973F-F3A9E6F6E28C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E4302695-9ABB-4A7F-88DA-233DDCF8EDFF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>287531D3-CE59-4A0B-B703-D7097780131B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>38ED37E1-455B-440D-B7D8-3FB851080E9E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>552711B7-C004-41BA-8BED-F242B026EEBF</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>38ED37E1-455B-440D-B7D8-3FB851080E9E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6771EF9E-41FD-4889-83E4-7DAFEBC371AC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>416F329E-D442-427F-BBAF-8544BB9B2C14</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>38ED37E1-455B-440D-B7D8-3FB851080E9E</string>
+				<string>B55BADE8-6661-424A-8F72-7A497432A5E5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -116,6 +54,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4879434B-20FE-4552-85FC-1A1A774C33DB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B30FA759-40A6-4CF6-BD72-514A249C50B3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
 		<key>54DA9471-7013-4280-954A-4CB02C3FA0F0</key>
 		<array>
 			<dict>
@@ -129,59 +80,13 @@
 				<false/>
 			</dict>
 		</array>
-		<key>552711B7-C004-41BA-8BED-F242B026EEBF</key>
+		<key>6CAA13DB-A20D-4310-9A55-FC43D97FF67D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>048ABB63-EEC5-4209-84B6-F3DDB8F6C481</string>
+				<string>70FD91D1-5BF7-43B1-97D9-7E678748EFB8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5751CB16-621F-419C-9202-8F5819FBDD56</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>048ABB63-EEC5-4209-84B6-F3DDB8F6C481</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>6771EF9E-41FD-4889-83E4-7DAFEBC371AC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0C5C02C4-644E-4D9A-973F-F3A9E6F6E28C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5751CB16-621F-419C-9202-8F5819FBDD56</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>552711B7-C004-41BA-8BED-F242B026EEBF</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -214,11 +119,70 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B30FA759-40A6-4CF6-BD72-514A249C50B3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>098E82D9-67D2-4A44-8D5A-B77583E20E8A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D73876FA-60AB-4F2D-852D-41B2F517D228</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B55BADE8-6661-424A-8F72-7A497432A5E5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1416E0D6-5E7C-43BA-BD94-413455B111B7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BEDFE032-2B6D-44E1-BE66-395EA2077A8D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>54DA9471-7013-4280-954A-4CB02C3FA0F0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E79639AC-DC3B-4B51-AE14-747B55A55AD1</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D73876FA-60AB-4F2D-852D-41B2F517D228</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6CAA13DB-A20D-4310-9A55-FC43D97FF67D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -277,278 +241,6 @@
 	<string>OneNote Navigator</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>triggerid</key>
-				<string>recursion</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>416F329E-D442-427F-BBAF-8544BB9B2C14</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>recursion</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>E4302695-9ABB-4A7F-88DA-233DDCF8EDFF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{var:leaf}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>matchstring</key>
-				<string>false</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>0C5C02C4-644E-4D9A-973F-F3A9E6F6E28C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>getting sections...</string>
-				<key>script</key>
-				<string>python getNotebookSections.py "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Type the name of the Section</string>
-				<key>title</key>
-				<string>View sections for '{query}'</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>6771EF9E-41FD-4889-83E4-7DAFEBC371AC</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{var:leaf}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>matchstring</key>
-				<string>true</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>5751CB16-621F-419C-9202-8F5819FBDD56</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>variables</key>
-				<dict>
-					<key>q</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>38ED37E1-455B-440D-B7D8-3FB851080E9E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>paths</key>
-				<array>
-					<string>/Applications/Microsoft OneNote.app</string>
-				</array>
-				<key>toggle</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
-			<key>uid</key>
-			<string>048ABB63-EEC5-4209-84B6-F3DDB8F6C481</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string>%20</string>
-				<key>url</key>
-				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>D6459412-6E76-48D5-88F1-5DA52C20D506</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>keyword</key>
-				<string>;o</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>getting notebooks...</string>
-				<key>script</key>
-				<string>python getNotebooks.py "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Type the name of the Notebook</string>
-				<key>title</key>
-				<string>Open '{query}' Notebook</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>287531D3-CE59-4A0B-B703-D7097780131B</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>552711B7-C004-41BA-8BED-F242B026EEBF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>onenotehelp</string>
-				<key>subtext</key>
-				<string>Paste the link copied from a OneNote notebook/section/page</string>
-				<key>text</key>
-				<string>OneNote Nav helper</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A43B90B4-929B-4EFC-BE87-7F24215169F9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>819D7AC2-99F1-4FE5-9479-89CC4C640FB9</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -736,7 +428,7 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>keyword</key>
-				<string>;p</string>
+				<string>;o</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -777,73 +469,228 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>OneNote URL base was stored successfully</string>
+				<key>title</key>
+				<string>OneNote URL setup</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1416E0D6-5E7C-43BA-BD94-413455B111B7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>true</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>098E82D9-67D2-4A44-8D5A-B77583E20E8A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>B55BADE8-6661-424A-8F72-7A497432A5E5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>seturl</string>
+				<key>subtext</key>
+				<string>paste a URL copied from a OneNote section/page/notebook and press ↩︎</string>
+				<key>text</key>
+				<string>OneNote Navigator setup</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4879434B-20FE-4552-85FC-1A1A774C33DB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python getNotebooks.py --seturl "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B30FA759-40A6-4CF6-BD72-514A249C50B3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>python getNotebooks.py --warn "true"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>70FD91D1-5BF7-43B1-97D9-7E678748EFB8</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>6CAA13DB-A20D-4310-9A55-FC43D97FF67D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>false</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>D73876FA-60AB-4F2D-852D-41B2F517D228</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Use Alfred to browse through your Microsoft OneNote notebooks, section groups and sections and then jump to them instantly.</string>
 	<key>uidata</key>
 	<dict>
-		<key>048ABB63-EEC5-4209-84B6-F3DDB8F6C481</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<integer>600</integer>
-			<key>ypos</key>
-			<integer>190</integer>
-		</dict>
-		<key>0C5C02C4-644E-4D9A-973F-F3A9E6F6E28C</key>
+		<key>098E82D9-67D2-4A44-8D5A-B77583E20E8A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>500</integer>
+			<integer>470</integer>
 			<key>ypos</key>
-			<integer>90</integer>
+			<integer>370</integer>
 		</dict>
-		<key>287531D3-CE59-4A0B-B703-D7097780131B</key>
-		<dict>
-			<key>xpos</key>
-			<integer>40</integer>
-			<key>ypos</key>
-			<integer>240</integer>
-		</dict>
-		<key>38ED37E1-455B-440D-B7D8-3FB851080E9E</key>
+		<key>1416E0D6-5E7C-43BA-BD94-413455B111B7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>220</integer>
+			<integer>570</integer>
 			<key>ypos</key>
-			<integer>170</integer>
+			<integer>340</integer>
 		</dict>
 		<key>3C01BC54-AABB-42B5-AEDB-A2DF87E78969</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>735</integer>
+			<integer>710</integer>
 			<key>ypos</key>
-			<integer>625</integer>
-		</dict>
-		<key>416F329E-D442-427F-BBAF-8544BB9B2C14</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<integer>40</integer>
-			<key>ypos</key>
-			<integer>60</integer>
+			<integer>185</integer>
 		</dict>
 		<key>478C050B-4671-4315-9F25-0EC9349969FC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>note</key>
-			<string>Get Sub Sections</string>
+			<string>get sub sections</string>
 			<key>xpos</key>
 			<integer>260</integer>
 			<key>ypos</key>
-			<integer>570</integer>
+			<integer>120</integer>
+		</dict>
+		<key>4879434B-20FE-4552-85FC-1A1A774C33DB</key>
+		<dict>
+			<key>xpos</key>
+			<integer>15</integer>
+			<key>ypos</key>
+			<integer>400</integer>
 		</dict>
 		<key>54DA9471-7013-4280-954A-4CB02C3FA0F0</key>
 		<dict>
@@ -852,43 +699,27 @@
 			<key>xpos</key>
 			<integer>190</integer>
 			<key>ypos</key>
-			<integer>600</integer>
+			<integer>150</integer>
 		</dict>
-		<key>552711B7-C004-41BA-8BED-F242B026EEBF</key>
+		<key>6CAA13DB-A20D-4310-9A55-FC43D97FF67D</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>1</integer>
 			<key>xpos</key>
-			<integer>500</integer>
+			<integer>520</integer>
 			<key>ypos</key>
-			<integer>270</integer>
+			<integer>490</integer>
 		</dict>
-		<key>5751CB16-621F-419C-9202-8F5819FBDD56</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<integer>500</integer>
-			<key>ypos</key>
-			<integer>170</integer>
-		</dict>
-		<key>6771EF9E-41FD-4889-83E4-7DAFEBC371AC</key>
+		<key>70FD91D1-5BF7-43B1-97D9-7E678748EFB8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>note</key>
-			<string>Get Sub Sections</string>
+			<string>invalid URL</string>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>570</integer>
 			<key>ypos</key>
-			<integer>140</integer>
-		</dict>
-		<key>819D7AC2-99F1-4FE5-9479-89CC4C640FB9</key>
-		<dict>
-			<key>xpos</key>
-			<integer>225</integer>
-			<key>ypos</key>
-			<integer>345</integer>
+			<integer>460</integer>
 		</dict>
 		<key>911C6EEB-C645-4F1A-8DCC-605AE8824BD2</key>
 		<dict>
@@ -897,7 +728,7 @@
 			<key>xpos</key>
 			<integer>10</integer>
 			<key>ypos</key>
-			<integer>490</integer>
+			<integer>20</integer>
 		</dict>
 		<key>998B71AC-C99E-44A4-A396-A065B3163983</key>
 		<dict>
@@ -906,48 +737,52 @@
 			<key>xpos</key>
 			<integer>570</integer>
 			<key>ypos</key>
-			<integer>620</integer>
+			<integer>185</integer>
 		</dict>
-		<key>A43B90B4-929B-4EFC-BE87-7F24215169F9</key>
+		<key>B30FA759-40A6-4CF6-BD72-514A249C50B3</key>
 		<dict>
 			<key>xpos</key>
-			<integer>360</integer>
+			<integer>260</integer>
 			<key>ypos</key>
-			<integer>330</integer>
+			<integer>400</integer>
+		</dict>
+		<key>B55BADE8-6661-424A-8F72-7A497432A5E5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<integer>520</integer>
+			<key>ypos</key>
+			<integer>370</integer>
 		</dict>
 		<key>BEBB6199-4C53-49A0-93C9-E92AD14E6795</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
+			<key>note</key>
+			<string>section group or section, keep calling until page is found</string>
 			<key>xpos</key>
 			<integer>570</integer>
 			<key>ypos</key>
-			<integer>490</integer>
+			<integer>20</integer>
 		</dict>
 		<key>BEDFE032-2B6D-44E1-BE66-395EA2077A8D</key>
 		<dict>
+			<key>note</key>
+			<string>get notebooks</string>
 			<key>xpos</key>
 			<integer>10</integer>
 			<key>ypos</key>
-			<integer>665</integer>
+			<integer>225</integer>
 		</dict>
-		<key>D6459412-6E76-48D5-88F1-5DA52C20D506</key>
+		<key>D73876FA-60AB-4F2D-852D-41B2F517D228</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>1</integer>
 			<key>xpos</key>
-			<integer>730</integer>
+			<integer>470</integer>
 			<key>ypos</key>
-			<integer>190</integer>
-		</dict>
-		<key>E4302695-9ABB-4A7F-88DA-233DDCF8EDFF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<integer>600</integer>
-			<key>ypos</key>
-			<integer>60</integer>
+			<integer>490</integer>
 		</dict>
 		<key>E79639AC-DC3B-4B51-AE14-747B55A55AD1</key>
 		<dict>
@@ -956,7 +791,7 @@
 			<key>xpos</key>
 			<integer>470</integer>
 			<key>ypos</key>
-			<integer>700</integer>
+			<integer>255</integer>
 		</dict>
 		<key>F1530CC5-58B6-41D0-A338-C8EA9320C997</key>
 		<dict>
@@ -965,7 +800,7 @@
 			<key>xpos</key>
 			<integer>470</integer>
 			<key>ypos</key>
-			<integer>520</integer>
+			<integer>50</integer>
 		</dict>
 		<key>F6ABC9EB-9621-40C5-B027-A4D0B520E001</key>
 		<dict>
@@ -974,7 +809,7 @@
 			<key>xpos</key>
 			<integer>470</integer>
 			<key>ypos</key>
-			<integer>600</integer>
+			<integer>150</integer>
 		</dict>
 	</dict>
 	<key>version</key>

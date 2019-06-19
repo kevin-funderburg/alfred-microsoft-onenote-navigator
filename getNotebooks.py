@@ -25,8 +25,13 @@ DEFAULT_SETTINGS = {'urlbase': "null"}
 
 ONENOTE_PLIST = os.path.expanduser("~/Library/Group Containers/UBF8T346G9.Office/OneNote/ShareExtension/Notebooks.plist")
 ICON_APP = "/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns"
-DATA_DIR = os.path.expanduser("~/Library/Application Support/Alfred/Workflow Data/com.kfunderburg.oneNoteNav/")
-DATA_FILE = DATA_DIR + "data.plist"
+DATA_DIR = "~/Library/Application Support/Alfred/Workflow Data/com.kfunderburg.oneNoteNav/"
+try:
+    os.mkdir(os.path.expanduser(DATA_DIR))
+except OSError:
+    pass
+
+DATA_FILE = os.path.expanduser(DATA_DIR) + "data.plist"
 SETTINGS_PATH = os.path.expanduser(DATA_DIR) + "settings.plist"
 
 
@@ -50,30 +55,37 @@ def main(wf):
     # value to 'urlbase' (dest).
     parser.add_argument('--seturl', dest='urlbase', nargs='?', default=None)
     parser.add_argument('--type', dest='type', nargs='?', default=None)
+    parser.add_argument('--warn', dest='warn', nargs='?', default=None)
     parser.add_argument('query', nargs='?', default=None)
     args = parser.parse_args(wf.args)
 
     ####################################################################
     # Save the provided URL base
     ####################################################################
-    log.debug("arg is type: {0}".format(args.type))
-
     if args.urlbase:  # Script was passed as a URL
+        log.debug("arg is url: {0}".format(args.urlbase))
         if 'onenote:https' in args.urlbase:
             # extract onenote url
             args.urlbase = re.search('(onenote.*/Documents/).*', args.urlbase).group(1)
             plistlib.writePlist({"urlbase": args.urlbase}, SETTINGS_PATH)
-            wf.add_item("url set successfully",
-                        valid=False,
-                        icon=ICON_INFO)
-            return 0
+            # tell alfred how to display a success notification
+            print("true")
         else:
-            wf.add_item("The argument is not a OneNote URL string",
-                        "right click a OneNote page/section/notebook and click 'Copy Link to Page' and try again",
-                        valid=False,
-                        icon=ICON_WARNING)
-            wf.send_feedback()
-            return 0
+            # tell alfred how to display alert that the url is bad
+            print("false")
+        return 0
+
+    ####################################################################
+    # Warn if bad url was passed in
+    ####################################################################
+    if args.warn:
+        wf.add_item(title='Argument is not a valid OneNote url.',
+                    subtitle="Right click a OneNote notebook/section/page "
+                             "& choose 'Copy Link to ...' & try again",
+                    valid=False,
+                    icon=ICON_WARNING)
+        wf.send_feedback()
+        return 0
 
     ####################################################################
     # Check that we have a URL saved
@@ -123,8 +135,8 @@ def main(wf):
 
         if notebook is None:
             notebook = q
-        found = False
 
+        found = False
         pl = plistlib.readPlist(DATA_FILE)
         for p in pl:
             if p["Name"] == q:
