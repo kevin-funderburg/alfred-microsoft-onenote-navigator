@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1A4D28F3-F12E-4497-9414-D83F5ADEE04A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B30FA759-40A6-4CF6-BD72-514A249C50B3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>478C050B-4671-4315-9F25-0EC9349969FC</key>
 		<array>
 			<dict>
@@ -110,7 +97,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>1A4D28F3-F12E-4497-9414-D83F5ADEE04A</string>
+				<string>B30FA759-40A6-4CF6-BD72-514A249C50B3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -605,23 +592,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>'{query}', {allvars}</string>
-				<key>cleardebuggertext</key>
-				<false/>
-				<key>processoutputs</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.debug</string>
-			<key>uid</key>
-			<string>1A4D28F3-F12E-4497-9414-D83F5ADEE04A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -723,13 +693,6 @@
 			<key>ypos</key>
 			<integer>340</integer>
 		</dict>
-		<key>1A4D28F3-F12E-4497-9414-D83F5ADEE04A</key>
-		<dict>
-			<key>xpos</key>
-			<integer>205</integer>
-			<key>ypos</key>
-			<integer>430</integer>
-		</dict>
 		<key>3C01BC54-AABB-42B5-AEDB-A2DF87E78969</key>
 		<dict>
 			<key>colorindex</key>
@@ -788,8 +751,10 @@
 		</dict>
 		<key>7CCC2901-5BE5-489E-808A-82CC1F5FCCB8</key>
 		<dict>
+			<key>note</key>
+			<string>surround url with quotes</string>
 			<key>xpos</key>
-			<integer>155</integer>
+			<integer>180</integer>
 			<key>ypos</key>
 			<integer>430</integer>
 		</dict>
