@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1A4D28F3-F12E-4497-9414-D83F5ADEE04A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B30FA759-40A6-4CF6-BD72-514A249C50B3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>478C050B-4671-4315-9F25-0EC9349969FC</key>
 		<array>
 			<dict>
@@ -58,13 +71,13 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B30FA759-40A6-4CF6-BD72-514A249C50B3</string>
+				<string>7CCC2901-5BE5-489E-808A-82CC1F5FCCB8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 		</array>
 		<key>54DA9471-7013-4280-954A-4CB02C3FA0F0</key>
@@ -85,6 +98,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>70FD91D1-5BF7-43B1-97D9-7E678748EFB8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7CCC2901-5BE5-489E-808A-82CC1F5FCCB8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1A4D28F3-F12E-4497-9414-D83F5ADEE04A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -564,6 +590,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>"{query}"</string>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>7CCC2901-5BE5-489E-808A-82CC1F5FCCB8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>'{query}', {allvars}</string>
+				<key>cleardebuggertext</key>
+				<false/>
+				<key>processoutputs</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.debug</string>
+			<key>uid</key>
+			<string>1A4D28F3-F12E-4497-9414-D83F5ADEE04A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -665,6 +723,13 @@
 			<key>ypos</key>
 			<integer>340</integer>
 		</dict>
+		<key>1A4D28F3-F12E-4497-9414-D83F5ADEE04A</key>
+		<dict>
+			<key>xpos</key>
+			<integer>205</integer>
+			<key>ypos</key>
+			<integer>430</integer>
+		</dict>
 		<key>3C01BC54-AABB-42B5-AEDB-A2DF87E78969</key>
 		<dict>
 			<key>colorindex</key>
@@ -720,6 +785,13 @@
 			<integer>570</integer>
 			<key>ypos</key>
 			<integer>460</integer>
+		</dict>
+		<key>7CCC2901-5BE5-489E-808A-82CC1F5FCCB8</key>
+		<dict>
+			<key>xpos</key>
+			<integer>155</integer>
+			<key>ypos</key>
+			<integer>430</integer>
 		</dict>
 		<key>911C6EEB-C645-4F1A-8DCC-605AE8824BD2</key>
 		<dict>
@@ -812,8 +884,10 @@
 			<integer>150</integer>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>1.2</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/kevin-funderburg</string>
 </dict>

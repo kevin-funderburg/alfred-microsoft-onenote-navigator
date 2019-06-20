@@ -66,8 +66,11 @@ def main(wf):
         log.debug("arg is url: {0}".format(args.urlbase))
         if 'onenote:https' in args.urlbase:
             # extract onenote url
-            args.urlbase = re.search('(onenote.*/Documents/).*', args.urlbase).group(1)
-            plistlib.writePlist({"urlbase": args.urlbase}, SETTINGS_PATH)
+            args.urlbase = re.search('(onenote:.*)', args.urlbase).group(1)
+            url = args.urlbase.split("/")
+            urlbase = url[0] + "//" + url[2] + "/" + url[3] + "/" + url[4] + "/"
+            # write to plist
+            plistlib.writePlist({"urlbase": urlbase}, SETTINGS_PATH)
             # tell alfred how to display a success notification
             print("true")
         else:
