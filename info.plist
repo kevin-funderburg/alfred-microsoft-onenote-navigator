@@ -409,14 +409,6 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>A4F3CF09-6FEC-4DD9-84FA-45F98CFE2D33</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
@@ -470,6 +462,14 @@
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>E79639AC-DC3B-4B51-AE14-747B55A55AD1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>A4F3CF09-6FEC-4DD9-84FA-45F98CFE2D33</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -561,7 +561,7 @@
 						<key>matchstring</key>
 						<string>true</string>
 						<key>outputlabel</key>
-						<string>success</string>
+						<string>valid</string>
 						<key>uid</key>
 						<string>F833E599-338E-414B-9418-18D44285F113</string>
 					</dict>
@@ -668,7 +668,7 @@
 			<key>xpos</key>
 			<integer>570</integer>
 			<key>ypos</key>
-			<integer>340</integer>
+			<integer>355</integer>
 		</dict>
 		<key>28405FF0-91B1-4336-8D9C-E8BA5B600330</key>
 		<dict>
@@ -682,9 +682,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>770</integer>
+			<integer>755</integer>
 			<key>ypos</key>
-			<integer>185</integer>
+			<integer>210</integer>
 		</dict>
 		<key>478C050B-4671-4315-9F25-0EC9349969FC</key>
 		<dict>
@@ -699,17 +699,19 @@
 		</dict>
 		<key>4879434B-20FE-4552-85FC-1A1A774C33DB</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<integer>15</integer>
 			<key>ypos</key>
-			<integer>400</integer>
+			<integer>415</integer>
 		</dict>
 		<key>4B97190A-DE57-49A5-A9DF-59E9AB7AC1D7</key>
 		<dict>
 			<key>xpos</key>
-			<integer>400</integer>
+			<integer>395</integer>
 			<key>ypos</key>
-			<integer>420</integer>
+			<integer>435</integer>
 		</dict>
 		<key>54DA9471-7013-4280-954A-4CB02C3FA0F0</key>
 		<dict>
@@ -729,25 +731,27 @@
 			<key>xpos</key>
 			<integer>570</integer>
 			<key>ypos</key>
-			<integer>460</integer>
+			<integer>475</integer>
 		</dict>
 		<key>7CCC2901-5BE5-489E-808A-82CC1F5FCCB8</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>surround url with quotes</string>
 			<key>xpos</key>
 			<integer>180</integer>
 			<key>ypos</key>
-			<integer>430</integer>
+			<integer>445</integer>
 		</dict>
 		<key>8F75DD60-C467-414F-8D16-4AC2229543B1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>1</integer>
 			<key>xpos</key>
 			<integer>505</integer>
 			<key>ypos</key>
-			<integer>490</integer>
+			<integer>505</integer>
 		</dict>
 		<key>911C6EEB-C645-4F1A-8DCC-605AE8824BD2</key>
 		<dict>
@@ -763,34 +767,36 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>570</integer>
+			<integer>565</integer>
 			<key>ypos</key>
-			<integer>185</integer>
+			<integer>210</integer>
 		</dict>
 		<key>A4F3CF09-6FEC-4DD9-84FA-45F98CFE2D33</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>710</integer>
+			<integer>700</integer>
 			<key>ypos</key>
-			<integer>215</integer>
+			<integer>240</integer>
 		</dict>
 		<key>B30FA759-40A6-4CF6-BD72-514A249C50B3</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<integer>260</integer>
 			<key>ypos</key>
-			<integer>400</integer>
+			<integer>415</integer>
 		</dict>
 		<key>B55BADE8-6661-424A-8F72-7A497432A5E5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>520</integer>
+			<integer>505</integer>
 			<key>ypos</key>
-			<integer>370</integer>
+			<integer>385</integer>
 		</dict>
 		<key>BEBB6199-4C53-49A0-93C9-E92AD14E6795</key>
 		<dict>
@@ -810,22 +816,22 @@
 			<key>xpos</key>
 			<integer>10</integer>
 			<key>ypos</key>
-			<integer>225</integer>
+			<integer>210</integer>
 		</dict>
 		<key>E79639AC-DC3B-4B51-AE14-747B55A55AD1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>470</integer>
+			<integer>465</integer>
 			<key>ypos</key>
-			<integer>255</integer>
+			<integer>240</integer>
 		</dict>
 	</dict>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.2.1</string>
+	<string>1.2.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator</string>
 </dict>
