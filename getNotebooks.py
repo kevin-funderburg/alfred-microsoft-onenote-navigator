@@ -9,7 +9,7 @@ import re
 import argparse
 import plistlib
 
-from workflow import Workflow3, ICON_INFO, ICON_WARNING
+from workflow import Workflow3, ICON_INFO, ICON_WARNING, ICON_ERROR
 
 __version__ = '1.1'
 
@@ -64,6 +64,10 @@ def main(wf):
     ####################################################################
     if args.urlbase:  # Script was passed as a URL
         log.debug("arg is url: {0}".format(args.urlbase))
+        if 'sharepoint' in args.urlbase:
+            # sharepoint URLs will not work, pass as an error
+            print("sharepoint")
+            return 0
         if 'onenote:https' in args.urlbase:
             # extract onenote url
             args.urlbase = re.search('(onenote:.*)', args.urlbase).group(1)
@@ -75,18 +79,25 @@ def main(wf):
             print("true")
         else:
             # tell alfred how to display alert that the url is bad
-            print("false")
+            print("invalid")
         return 0
 
     ####################################################################
     # Warn if bad url was passed in
     ####################################################################
     if args.warn:
-        wf.add_item(title='Argument is not a valid OneNote url.',
-                    subtitle="Right click a OneNote notebook/section/page "
-                             "& choose 'Copy Link to ...' & try again",
-                    valid=False,
-                    icon=ICON_WARNING)
+        if "sharepoint" in args.warn:
+            wf.add_item(title='URL is a Microsoft Sharepoint URL, these '
+                              'cannot be opened locally.',
+                        subtitle="OneNote must be in OneDrive for URLs to work",
+                        valid=False,
+                        icon=ICON_ERROR)
+        else:
+            wf.add_item(title='Argument is not a valid OneNote url.',
+                        subtitle="Right click a OneNote notebook/section/page "
+                                 "& choose 'Copy Link to ...' & try again",
+                        valid=False,
+                        icon=ICON_WARNING)
         wf.send_feedback()
         return 0
 
