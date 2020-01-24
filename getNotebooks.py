@@ -15,6 +15,7 @@ __version__ = '1.1'
 
 wf = None
 log = None
+# prefix = None
 
 HELP_URL = 'https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator'
 
@@ -219,7 +220,55 @@ def main(wf):
     return 0
 
 
+def get_sections(parent, prefix):
+    # local prefix
+    if len(parent) == 0:
+        it = wf.add_item(title=parent["Name"],
+                         subtitle=prefix,
+                         arg=parent["Name"],
+                         autocomplete=c["Name"],
+                         valid=True,
+                         icon="icons/section.png",
+                         icontype="file",
+                         quicklookurl=ICON_APP)
+        prefix = None
+
+    else:
+        count1 = 0
+        count2 = 0
+        for n in parent:
+            count2 += 1
+            sub = ""
+
+            if prefix is None:
+                prefix = n["Name"]
+                sub = prefix
+
+            else:
+                if "Children" not in n:
+                    sub = prefix + " > " + n["Name"]
+                else:
+                    prefix = prefix + " > " + n["Name"]
+                    sub = prefix
+
+            it = wf.add_item(title=n["Name"],
+                             subtitle=sub,
+                             arg=n["Name"],
+                             autocomplete=n["Name"],
+                             valid=True,
+                             icon="icons/section.png",
+                             icontype="file",
+                             quicklookurl=ICON_APP)
+            if "Children" in n:
+                get_sections(n["Children"], prefix)
+                prefix = None
+
+
 if __name__ == "__main__":
+    onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
     wf = Workflow3(help_url=HELP_URL)
-    log = wf.logger
-    sys.exit(wf.run(main))
+    get_sections(onenote_pl, None)
+    wf.send_feedback()
+
+    # log = wf.logger
+    # sys.exit(wf.run(main))
