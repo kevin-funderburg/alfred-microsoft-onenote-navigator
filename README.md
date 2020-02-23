@@ -2,7 +2,7 @@
 
 Browse and open your Microsoft OneNote notebooks from [Alfred 4][alfredapp].
 
-![](demo.gif)
+![](./imgs/demo.gif)
 
 <!-- MarkdownTOC autolink="true" bracket="round" depth="3" autoanchor="true" -->
 
@@ -29,12 +29,14 @@ Download [the latest release][gh-releases] and double-click the file to install 
 <a id="usage"></a>
 ## Usage
 
-The main keyword is `;o`:
+The two main keywords are `;o` & `;sa`:
 
-- `;o [<query>]` — View and filter OneNote notebooks.
+- `;o [<query>]` — Browse OneNote notebooks in Alfred.
 
     - <kbd>↩︎</kbd> or <kbd>⌘</kbd><kbd>NUM</kbd> — View the selections sub-sections, if it has no sub-sections (deepest level of notebook) it will open the page in OneNote.
     - <kbd>⌘</kbd><kbd>↩︎</kbd> — Open selection in OneNote instead.
+
+- `;sa [<query>]` - Search all notebooks/section groups/sections
 
 Base url is stored with `seturl`:
 
@@ -47,7 +49,7 @@ The workflow locates a plist file that contains the names of the notebooks, sect
     - **_NOTE:_** If your notebook is stored on Microsoft Sharepoint, the URL that's created _cannot be opened locally_, the notebook must be stored in OneDrive for the URL to valid.
 - View the gif below to see this in action.
 
-![](seturldemo.gif)
+![](./imgs/seturldemo.gif)
 
 <a id="licensing--thanks"></a>
 ## Licensing & thanks

@@ -31,6 +31,7 @@ DEFAULT_SETTINGS = {'urlbase': "null"}
 ONENOTE_PLIST = os.path.expanduser("~/Library/Group Containers/UBF8T346G9.Office/OneNote/ShareExtension/Notebooks.plist")
 ICON_APP = "/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns"
 DATA_DIR = "~/Library/Application Support/Alfred/Workflow Data/com.kfunderburg.oneNoteNav/"
+
 try:
     os.mkdir(os.path.expanduser(DATA_DIR))
 except OSError:
@@ -59,6 +60,7 @@ def main(wf):
     # add an optional (nargs='?') --seturl argument and save its
     # value to 'urlbase' (dest).
     parser.add_argument('--seturl', dest='urlbase', nargs='?', default=None)
+    parser.add_argument('--write', dest='write', nargs='?', default=None)
     parser.add_argument('--type', dest='type', nargs='?', default=None)
     parser.add_argument('--warn', dest='warn', nargs='?', default=None)
     parser.add_argument('query', nargs='?', default=None)
@@ -119,12 +121,20 @@ def main(wf):
 
     # get plist data from OneNote plist
     onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
+    # plist = plistlib.writePlistToString(onenote_pl)
+    # log.info(plist)
     global urlbase
     urlbase = settings['urlbase']
 
     if args.type == 'searchall':
         getAll(onenote_pl, None)
         wf.send_feedback()
+        return 0
+
+    if args.write:
+        log.debug("arg is write: {0}".format(args.type))
+
+        get_child(args.write)
         return 0
 
     if args.type == 'notebook':
@@ -240,7 +250,6 @@ def getAll(parent, prefix):
     :return: none
 
     """
-    global sub
     global subtitle
     global url
 
@@ -267,7 +276,7 @@ def getAll(parent, prefix):
                                  icon="icons/notebook.png",
                                  icontype="file",
                                  quicklookurl=ICON_APP)
-                it.add_modifier('cmd', subtitle=url, arg=url, valid=True)
+                it.add_modifier('cmd', subtitle="browse in Alfred", arg=subtitle, valid=True)
 
             else:
 
@@ -283,13 +292,13 @@ def getAll(parent, prefix):
                                  icon="icons/section.png",
                                  icontype="file",
                                  quicklookurl=ICON_APP)
-                it.add_modifier('cmd', subtitle=url, arg=url, valid=True)
+                it.add_modifier('cmd', subtitle="browse in Alfred", arg=subtitle, valid=True)
 
             getAll(parent["Children"], pre)
+
         else:
             subtitle = "{0} > {1}".format(prefix, parent["Name"])
             url = makeurl(subtitle)
-            log.info("url: " + url)
             it = wf.add_item(title=parent["Name"],
                              subtitle=subtitle,
                              arg=url + ".one",
@@ -298,7 +307,8 @@ def getAll(parent, prefix):
                              icon="icons/page.png",
                              icontype="file",
                              quicklookurl=ICON_APP)
-            it.add_modifier('cmd', subtitle=url, arg=url, valid=True)
+            it.setvar('child', subtitle)
+            it.add_modifier('cmd', subtitle="browse in Alfred", arg=subtitle, valid=True)
 
 
 def makeurl(prefix):
@@ -307,7 +317,36 @@ def makeurl(prefix):
     return newurl
 
 
+def get_child(childstr):
+    itms = childstr.split(" > ")
+    onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
+
+    pl = onenote_pl
+    child = None
+
+    for x in range(len(itms)):
+        if x == 0:
+            for p in pl:
+                if p["Name"] == itms[0]:
+                    log.info("found")
+                    notebook = p
+                    child = notebook["Children"]
+                    break
+        else:
+            for c in child:
+                if c["Name"] == itms[x]:
+                    if "Children" in c:
+                        child = c["Children"]
+
+                    break
+
+    log.info("child found")
+    plistlib.writePlist(onenote_pl, DATA_FILE)
+
+
 if __name__ == "__main__":
     wf = Workflow3(help_url=HELP_URL)
     log = wf.logger
+    # c = get_child("Work > Career > Preparing")
+    # log.info(c)
     sys.exit(wf.run(main))
