@@ -16,9 +16,9 @@ __version__ = '1.1'
 wf = None
 log = None
 sub = []
-output = ""
-theurl =""
-baseurl = "onenote:https://d.docs.live.net/9478a1a4ec3795b7/Documents/"
+subtitle = ""
+url = ""
+urlbase = None
 # prefix = None
 
 HELP_URL = 'https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator'
@@ -117,9 +117,17 @@ def main(wf):
         wf.send_feedback()
         return 0
 
+    # get plist data from OneNote plist
+    onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
+    global urlbase
+    urlbase = settings['urlbase']
+
+    if args.type == 'searchall':
+        getAll(onenote_pl, None)
+        wf.send_feedback()
+        return 0
+
     if args.type == 'notebook':
-        # get plist data from OneNote plist
-        onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
         # write all notebook plist data to data.plist for later iterations
         plistlib.writePlist(onenote_pl, DATA_FILE)
 
@@ -224,42 +232,82 @@ def main(wf):
     return 0
 
 
-def get_sections(parent, prefix):
+def getAll(parent, prefix):
+    """ recursively get every section of the parent
 
+    :param parent: entry point of search
+    :param prefix: subtitle of page, pass as None for root
+    :return: none
+
+    """
     global sub
-    global output
-    global theurl
+    global subtitle
+    global url
 
     if len(parent) > 0 and "Name" not in parent:
         for n in parent:
-            get_sections(n, prefix)
+            getAll(n, prefix)
         prefix = None
-        theurl = baseurl
+        url = ""
 
     if "Name" in parent:
         if "Children" in parent:
+
             if prefix is None:
+
                 pre = parent["Name"]
-                theurl = "{0}/{1}".format(baseurl, pre)
-                output = "{0}".format(parent["Name"])
-                print output
+                url = "{0}{1}".format(urlbase, pre)
+                subtitle = "{0}".format(parent["Name"])
+
+                it = wf.add_item(title=parent["Name"],
+                                 subtitle=subtitle,
+                                 arg=url,
+                                 autocomplete=parent["Name"],
+                                 valid=True,
+                                 icon="icons/notebook.png",
+                                 icontype="file",
+                                 quicklookurl=ICON_APP)
+                it.add_modifier('cmd', subtitle=url, arg=url, valid=True)
+
             else:
+
                 pre = prefix + " > " + parent["Name"]
-                theurl = theurl + "/" + parent["Name"]
+                subtitle = pre
+                url = makeurl(subtitle)
 
-            get_sections(parent["Children"], pre)
+                it = wf.add_item(title=parent["Name"],
+                                 subtitle=pre,
+                                 arg=url,
+                                 autocomplete=parent["Name"],
+                                 valid=True,
+                                 icon="icons/section.png",
+                                 icontype="file",
+                                 quicklookurl=ICON_APP)
+                it.add_modifier('cmd', subtitle=url, arg=url, valid=True)
+
+            getAll(parent["Children"], pre)
         else:
-            output = "{0} > {1}".format(prefix, parent["Name"])
-            print output
+            subtitle = "{0} > {1}".format(prefix, parent["Name"])
+            url = makeurl(subtitle)
+            log.info("url: " + url)
+            it = wf.add_item(title=parent["Name"],
+                             subtitle=subtitle,
+                             arg=url + ".one",
+                             autocomplete=parent["Name"],
+                             valid=True,
+                             icon="icons/page.png",
+                             icontype="file",
+                             quicklookurl=ICON_APP)
+            it.add_modifier('cmd', subtitle=url, arg=url, valid=True)
 
+
+def makeurl(prefix):
+    newurl = "{0}{1}".format(urlbase, prefix.replace(" > ", "/"))
+    newurl = newurl.replace(" ", "%20")
+    return newurl
 
 
 if __name__ == "__main__":
-    onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
-
-    get_sections(onenote_pl, None)
     wf = Workflow3(help_url=HELP_URL)
-    # wf.send_feedback()
-
-    # log = wf.logger
-    # sys.exit(wf.run(main))
+    log = wf.logger
+    sys.exit(wf.run(main))
