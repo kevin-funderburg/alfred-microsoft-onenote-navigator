@@ -3,9 +3,9 @@
 Search or browse any notebook/section group/section in Microsoft OneNote from [Alfred 4][alfredapp].
 
 ![](./imgs/searchdemo.gif)
-
+* * *
 ![](./imgs/browsedemo.gif)
-
+* * *
 <!-- MarkdownTOC autolink="true" bracket="round" depth="3" autoanchor="true" -->
 
 - [Features](#features)
