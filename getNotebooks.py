@@ -15,6 +15,10 @@ __version__ = '1.1'
 
 wf = None
 log = None
+sub = []
+output = ""
+theurl =""
+baseurl = "onenote:https://d.docs.live.net/9478a1a4ec3795b7/Documents/"
 # prefix = None
 
 HELP_URL = 'https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator'
@@ -221,54 +225,41 @@ def main(wf):
 
 
 def get_sections(parent, prefix):
-    # local prefix
-    if len(parent) == 0:
-        it = wf.add_item(title=parent["Name"],
-                         subtitle=prefix,
-                         arg=parent["Name"],
-                         autocomplete=c["Name"],
-                         valid=True,
-                         icon="icons/section.png",
-                         icontype="file",
-                         quicklookurl=ICON_APP)
-        prefix = None
 
-    else:
-        count1 = 0
-        count2 = 0
+    global sub
+    global output
+    global theurl
+
+    if len(parent) > 0 and "Name" not in parent:
         for n in parent:
-            count2 += 1
-            sub = ""
+            get_sections(n, prefix)
+        prefix = None
+        theurl = baseurl
 
+    if "Name" in parent:
+        if "Children" in parent:
             if prefix is None:
-                prefix = n["Name"]
-                sub = prefix
-
+                pre = parent["Name"]
+                theurl = "{0}/{1}".format(baseurl, pre)
+                output = "{0}".format(parent["Name"])
+                print output
             else:
-                if "Children" not in n:
-                    sub = prefix + " > " + n["Name"]
-                else:
-                    prefix = prefix + " > " + n["Name"]
-                    sub = prefix
+                pre = prefix + " > " + parent["Name"]
+                theurl = theurl + "/" + parent["Name"]
 
-            it = wf.add_item(title=n["Name"],
-                             subtitle=sub,
-                             arg=n["Name"],
-                             autocomplete=n["Name"],
-                             valid=True,
-                             icon="icons/section.png",
-                             icontype="file",
-                             quicklookurl=ICON_APP)
-            if "Children" in n:
-                get_sections(n["Children"], prefix)
-                prefix = None
+            get_sections(parent["Children"], pre)
+        else:
+            output = "{0} > {1}".format(prefix, parent["Name"])
+            print output
+
 
 
 if __name__ == "__main__":
     onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
-    wf = Workflow3(help_url=HELP_URL)
+
     get_sections(onenote_pl, None)
-    wf.send_feedback()
+    wf = Workflow3(help_url=HELP_URL)
+    # wf.send_feedback()
 
     # log = wf.logger
     # sys.exit(wf.run(main))
