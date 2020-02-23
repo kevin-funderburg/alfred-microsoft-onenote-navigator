@@ -1,8 +1,10 @@
 # Navigate OneNote Notebooks With Alfred
 
-Browse and open your Microsoft OneNote notebooks from [Alfred 4][alfredapp].
+Search or browse any notebook/section group/section in Microsoft OneNote from [Alfred 4][alfredapp].
 
-![](./imgs/demo.gif)
+![](./imgs/searchdemo.gif)
+
+![](./imgs/browsedemo.gif)
 
 <!-- MarkdownTOC autolink="true" bracket="round" depth="3" autoanchor="true" -->
 
@@ -18,9 +20,12 @@ Browse and open your Microsoft OneNote notebooks from [Alfred 4][alfredapp].
 <a id="features"></a>
 ## Features
 
-- Browse all OneNote Notebooks and sections/section groups
-- Press <kbd>↩︎</kbd> to continue diving deeper into notebook hierarchy. Once a page is found (deepest depth) it will open it in OneNote
-- Press <kbd>⌘</kbd><kbd>↩︎</kbd> to open the currently selected notebook/section/section group
+- Search or browse all OneNote Notebooks and sections/section groups
+- **When searching**:
+  - Press <kbd>↩︎</kbd> to open the selected item in OneNote
+- **When browsing**:
+  - Press <kbd>↩︎</kbd> to continue diving deeper into notebook hierarchy. Once a page is found (deepest depth) it will open it in OneNote
+  - Press <kbd>⌘</kbd><kbd>↩︎</kbd> to open the currently selected notebook/section/section group
 
 ## Installation
 
@@ -31,12 +36,13 @@ Download [the latest release][gh-releases] and double-click the file to install 
 
 The two main keywords are `;o` & `;sa`:
 
-- `;o [<query>]` — Browse OneNote notebooks in Alfred.
+- `;sa [<query>]` - Search all notebooks/section groups/sections
 
+    - <kbd>↩︎</kbd> or <kbd>⌘</kbd><kbd>NUM</kbd> — Open selection in OneNote
+
+- `;o [<query>]` — Browse OneNote notebooks in Alfred.
     - <kbd>↩︎</kbd> or <kbd>⌘</kbd><kbd>NUM</kbd> — View the selections sub-sections, if it has no sub-sections (deepest level of notebook) it will open the page in OneNote.
     - <kbd>⌘</kbd><kbd>↩︎</kbd> — Open selection in OneNote instead.
-
-- `;sa [<query>]` - Search all notebooks/section groups/sections
 
 Base url is stored with `seturl`:
 
@@ -67,6 +73,8 @@ This workflow uses on the wonderful library [alfred-workflow](https://github.com
     - Fixed storage of base url
 - v1.2.2 - 10/14/19
     - Added trap for sharepoint URLs
+- v1.3.0 - 02/23/20
+  - Added search all functionality
 
 
 [alfredapp]: https://www.alfredapp.com/
