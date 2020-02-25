@@ -11,7 +11,7 @@ import plistlib
 
 from workflow import Workflow3, ICON_INFO, ICON_WARNING, ICON_ERROR
 
-__version__ = '1.3.0'
+__version__ = '1.3.1'
 
 wf = None
 log = None
@@ -293,6 +293,7 @@ def browse_notebooks():
                          quicklookurl=ICON_APP)
         it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
         it.setvar('theTitle', n["Name"])
+
 
 if __name__ == "__main__":
     wf = Workflow3(help_url=HELP_URL)

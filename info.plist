@@ -815,7 +815,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Use Alfred to browse through your Microsoft OneNote notebooks, section groups and sections and then jump to them instantly.</string>
+	<string>Use Alfred to search &amp; browse through your Microsoft OneNote notebooks, section groups and sections and then jump to them instantly.</string>
 	<key>uidata</key>
 	<dict>
 		<key>0CEF0A1F-C4E6-491E-BA4B-D418D28D43CF</key>
@@ -1034,10 +1034,8 @@
 			<integer>10</integer>
 		</dict>
 	</dict>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>1.3.0</string>
+	<string>1.3.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator</string>
 </dict>
