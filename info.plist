@@ -488,7 +488,7 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>queuedelaycustom</key>
@@ -500,7 +500,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>getting all notebooks and sections...</string>
+				<string>{var:q}</string>
 				<key>script</key>
 				<string>python getNotebooks.py --type "browse"</string>
 				<key>scriptargtype</key>
@@ -508,13 +508,13 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>search all notebooks/sections/section groups</string>
+				<string></string>
 				<key>title</key>
-				<string>Search OneNote</string>
+				<string>{var:theTitle}</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>

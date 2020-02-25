@@ -125,11 +125,9 @@ def main(wf):
 
     if args.type == 'searchall':
         getAll(onenote_pl, None)
-
-    if args.type == 'browse':
+    elif args.type == 'browse':
         browse_child()
-
-    if args.type == 'browse_notebooks':
+    elif args.type == 'browse_notebooks':
         browse_notebooks()
 
     if len(wf._items) == 0:
@@ -173,6 +171,8 @@ def getAll(parent, prefix):
                                  icontype="file",
                                  quicklookurl=ICON_APP)
                 it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
+                it.setvar('theTitle', parent["Name"])
+
 
             else:
                 pre = prefix + " > " + parent["Name"]
@@ -188,6 +188,7 @@ def getAll(parent, prefix):
                                  icontype="file",
                                  quicklookurl=ICON_APP)
                 it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
+                it.setvar('theTitle', parent["Name"])
 
             getAll(parent["Children"], pre)
 
@@ -260,6 +261,7 @@ def browse_child():
                              icontype="file",
                              quicklookurl=ICON_APP)
             it.add_modifier('cmd', subtitle="open in OneNote", arg=url + ".one", valid=True)
+            it.setvar('theTitle', c["Name"])
 
         else:
             it = wf.add_item(title=c["Name"],
@@ -290,7 +292,7 @@ def browse_notebooks():
                          icontype="file",
                          quicklookurl=ICON_APP)
         it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
-
+        it.setvar('theTitle', n["Name"])
 
 if __name__ == "__main__":
     wf = Workflow3(help_url=HELP_URL)
