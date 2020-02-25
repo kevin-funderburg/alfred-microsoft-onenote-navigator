@@ -11,7 +11,7 @@ import plistlib
 
 from workflow import Workflow3, ICON_INFO, ICON_WARNING, ICON_ERROR
 
-__version__ = '1.1'
+__version__ = '1.3.0'
 
 wf = None
 log = None
@@ -57,8 +57,7 @@ def main(wf):
     # build argument parser to parse script args and collect their
     # values
     parser = argparse.ArgumentParser()
-    # add an optional (nargs='?') --seturl argument and save its
-    # value to 'urlbase' (dest).
+    # --seturl argument and save its value to 'urlbase' (dest).
     parser.add_argument('--seturl', dest='urlbase', nargs='?', default=None)
     parser.add_argument('--write', dest='write', nargs='?', default=None)
     parser.add_argument('--type', dest='type', nargs='?', default=None)
@@ -128,13 +127,21 @@ def main(wf):
 
     if args.type == 'searchall':
         getAll(onenote_pl, None)
+        # children = os.getenv('children')
+        # if children is None:
+        #     getAll(onenote_pl, None)
+        # else:
+        #     children = plistlib.readPlistFromString(children)
+        #     getAll(children, None)
         wf.send_feedback()
         return 0
 
-    if args.write:
+    if args.type == 'browse':
         log.debug("arg is write: {0}".format(args.type))
 
-        get_child(args.write)
+        browse_child()
+        wf.send_feedback()
+
         return 0
 
     if args.type == 'notebook':
@@ -270,13 +277,14 @@ def getAll(parent, prefix):
 
                 it = wf.add_item(title=parent["Name"],
                                  subtitle=subtitle,
-                                 arg=url,
+                                 arg=subtitle,
                                  autocomplete=parent["Name"],
                                  valid=True,
                                  icon="icons/notebook.png",
                                  icontype="file",
                                  quicklookurl=ICON_APP)
-                it.add_modifier('cmd', subtitle="browse in Alfred", arg=subtitle, valid=True)
+                it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
+                # it.setvar('children', plistlib.writePlistToString(parent["Children"]))
 
             else:
 
@@ -286,13 +294,14 @@ def getAll(parent, prefix):
 
                 it = wf.add_item(title=parent["Name"],
                                  subtitle=pre,
-                                 arg=url,
+                                 arg=subtitle,
                                  autocomplete=parent["Name"],
                                  valid=True,
                                  icon="icons/section.png",
                                  icontype="file",
                                  quicklookurl=ICON_APP)
-                it.add_modifier('cmd', subtitle="browse in Alfred", arg=subtitle, valid=True)
+                it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
+                # it.setvar('children', plistlib.writePlistToString(parent["Children"]))
 
             getAll(parent["Children"], pre)
 
@@ -307,8 +316,8 @@ def getAll(parent, prefix):
                              icon="icons/page.png",
                              icontype="file",
                              quicklookurl=ICON_APP)
-            it.setvar('child', subtitle)
-            it.add_modifier('cmd', subtitle="browse in Alfred", arg=subtitle, valid=True)
+            # it.setvar('child', subtitle)
+            # it.add_modifier('cmd', subtitle="browse in Alfred", arg=subtitle, valid=True)
 
 
 def makeurl(prefix):
@@ -337,16 +346,42 @@ def get_child(childstr):
                 if c["Name"] == itms[x]:
                     if "Children" in c:
                         child = c["Children"]
-
                     break
 
     log.info("child found")
-    plistlib.writePlist(onenote_pl, DATA_FILE)
+    return child
+
+
+def browse_child():
+    q = os.getenv('q')
+    # q = "Work > Career"
+    child = get_child(q)
+    for c in child:
+        sub = "{0} > {1}".format(q, c["Name"])
+        url = makeurl(sub)
+        if "Children" in c:
+            it = wf.add_item(title=c["Name"],
+                             subtitle=sub,
+                             arg=sub,
+                             autocomplete=c["Name"],
+                             valid=True,
+                             icon="icons/section.png",
+                             icontype="file",
+                             quicklookurl=ICON_APP)
+            it.add_modifier('cmd', subtitle="open in OneNote", arg=url + ".one", valid=True)
+
+        else:
+            it = wf.add_item(title=c["Name"],
+                             subtitle=sub,
+                             arg=url + ".one",
+                             autocomplete=c["Name"],
+                             valid=True,
+                             icon="icons/page.png",
+                             icontype="file",
+                             quicklookurl=ICON_APP)
 
 
 if __name__ == "__main__":
     wf = Workflow3(help_url=HELP_URL)
     log = wf.logger
-    # c = get_child("Work > Career > Preparing")
-    # log.info(c)
     sys.exit(wf.run(main))
