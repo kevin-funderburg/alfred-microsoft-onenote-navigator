@@ -125,122 +125,16 @@ def main(wf):
 
     if args.type == 'searchall':
         getAll(onenote_pl, None)
-        wf.send_feedback()
-        return 0
 
     if args.type == 'browse':
         browse_child()
-        wf.send_feedback()
-
-        return 0
 
     if args.type == 'browse_notebooks':
         browse_notebooks()
-        wf.send_feedback()
 
-        return 0
+    if len(wf._items) == 0:
+        wf.add_item('No workflow items were made', icon=ICON_WARNING)
 
-    if args.type == 'notebook':
-        # write all notebook plist data to data.plist for later iterations
-        plistlib.writePlist(onenote_pl, DATA_FILE)
-
-        for n in onenote_pl:
-            it = wf.add_item(title=n["Name"],
-                             subtitle="View " + n["Name"] + "'s sections",
-                             arg=n["Name"],
-                             autocomplete=n["Name"],
-                             valid=True,
-                             icon="icon.png",
-                             icontype="file",
-                             quicklookurl=ICON_APP)
-            it.setvar('subPreFix', "")
-            it.setvar('notebook', n["Name"])
-            it.setvar('theURL', "")
-            it.add_modifier('cmd',
-                            subtitle="{0}{1}".format(settings['urlbase'], n["Name"]),
-                            arg="{0}{1}".format(settings['urlbase'], n["Name"]),
-                            valid=True)
-
-        if len(wf._items) == 0:
-            wf.add_item('No notebooks found', icon=ICON_WARNING)
-            wf.send_feedback()
-            return 0
-
-        wf.send_feedback()
-        return 0
-
-    if args.type == 'section':
-        notebook = os.getenv('notebook')
-        q = os.getenv('q')
-
-        if notebook is None:
-            notebook = q
-
-        found = False
-        pl = plistlib.readPlist(DATA_FILE)
-        for p in pl:
-            if p["Name"] == q:
-                found = True
-                break
-
-        if not found:
-            wf.add_item('No section ' + q + 'was found', icon=ICON_WARNING)
-            wf.send_feedback()
-            return 0
-
-        if "Children" in p:
-            # write children of current section to data.plist for further iterations
-            plistlib.writePlist(p["Children"], DATA_FILE)
-            for c in p["Children"]:
-                subPreFix = os.getenv("subPreFix")
-                theURL = os.getenv("theURL")
-
-                if (subPreFix == "") or (subPreFix is None):
-                    subPreFix = "{0} > {1}".format(notebook, c["Name"])
-                else:
-                    subPreFix = "{0} > {1}".format(subPreFix, c["Name"])
-
-                if (theURL == "") or (theURL is None):
-                    theURL = "{0}{1}/{2}".format(settings['urlbase'], notebook, c["Name"])
-                else:
-                    theURL = "{0}/{1}".format(theURL, c["Name"])
-
-                it = wf.add_item(title=c["Name"],
-                                 subtitle=subPreFix,
-                                 arg=c["Name"],
-                                 autocomplete=c["Name"],
-                                 valid=True,
-                                 icon="icons/section.png",
-                                 icontype="file",
-                                 quicklookurl=ICON_APP)
-                it.setvar('subPreFix', subPreFix)
-                it.setvar('theURL', theURL)
-                it.setvar('leaf', "false")
-                it.add_modifier('cmd', subtitle=theURL, arg=theURL, valid=True)
-        else:
-            # section has no children so can't go any deeper
-            theURL = os.getenv("theURL")
-            theURL += ".one"
-
-            it = wf.add_item(title=p["Name"],
-                             subtitle=theURL,
-                             arg=theURL,
-                             autocomplete=p["Name"],
-                             valid=True,
-                             icon="icons/page.png",
-                             icontype="file",
-                             quicklookurl=ICON_APP)
-            it.setvar('leaf', "true")
-
-        if len(wf._items) == 0:
-            wf.add_item('No sections found', icon=ICON_WARNING)
-            wf.send_feedback()
-            return 0
-
-        wf.send_feedback()
-        return 0
-
-    wf.add_item('No workflow items were made', icon=ICON_WARNING)
     wf.send_feedback()
     return 0
 
@@ -345,6 +239,12 @@ def get_child(childstr):
 
 
 def browse_child():
+    """ get the children of the defined element
+
+    element is defined by the alfred variable q
+    which looks like [element] > [element]
+    :return: none
+    """
     q = os.getenv('q')
     child = get_child(q)
     for c in child:
@@ -373,6 +273,10 @@ def browse_child():
 
 
 def browse_notebooks():
+    """get the notebooks of the onenote plist
+
+    :return: none
+    """
     onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
     for n in onenote_pl:
         sub = "{0}".format(n["Name"])
@@ -386,6 +290,7 @@ def browse_notebooks():
                          icontype="file",
                          quicklookurl=ICON_APP)
         it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
+
 
 if __name__ == "__main__":
     wf = Workflow3(help_url=HELP_URL)
