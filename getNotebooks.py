@@ -120,26 +120,22 @@ def main(wf):
 
     # get plist data from OneNote plist
     onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
-    # plist = plistlib.writePlistToString(onenote_pl)
-    # log.info(plist)
     global urlbase
     urlbase = settings['urlbase']
 
     if args.type == 'searchall':
         getAll(onenote_pl, None)
-        # children = os.getenv('children')
-        # if children is None:
-        #     getAll(onenote_pl, None)
-        # else:
-        #     children = plistlib.readPlistFromString(children)
-        #     getAll(children, None)
         wf.send_feedback()
         return 0
 
     if args.type == 'browse':
-        log.debug("arg is write: {0}".format(args.type))
-
         browse_child()
+        wf.send_feedback()
+
+        return 0
+
+    if args.type == 'browse_notebooks':
+        browse_notebooks()
         wf.send_feedback()
 
         return 0
@@ -270,7 +266,6 @@ def getAll(parent, prefix):
         if "Children" in parent:
 
             if prefix is None:
-
                 pre = parent["Name"]
                 url = "{0}{1}".format(urlbase, pre)
                 subtitle = "{0}".format(parent["Name"])
@@ -284,10 +279,8 @@ def getAll(parent, prefix):
                                  icontype="file",
                                  quicklookurl=ICON_APP)
                 it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
-                # it.setvar('children', plistlib.writePlistToString(parent["Children"]))
 
             else:
-
                 pre = prefix + " > " + parent["Name"]
                 subtitle = pre
                 url = makeurl(subtitle)
@@ -301,7 +294,6 @@ def getAll(parent, prefix):
                                  icontype="file",
                                  quicklookurl=ICON_APP)
                 it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
-                # it.setvar('children', plistlib.writePlistToString(parent["Children"]))
 
             getAll(parent["Children"], pre)
 
@@ -316,8 +308,6 @@ def getAll(parent, prefix):
                              icon="icons/page.png",
                              icontype="file",
                              quicklookurl=ICON_APP)
-            # it.setvar('child', subtitle)
-            # it.add_modifier('cmd', subtitle="browse in Alfred", arg=subtitle, valid=True)
 
 
 def makeurl(prefix):
@@ -327,34 +317,35 @@ def makeurl(prefix):
 
 
 def get_child(childstr):
-    itms = childstr.split(" > ")
+    """ finds the child of the onenote plist
+
+    :param childstr: path of child, formatted as '[element] > [element]'
+    :return: child element of ooenote plist
+    """
+    items = childstr.split(" > ")
     onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
 
     pl = onenote_pl
     child = None
 
-    for x in range(len(itms)):
+    for x in range(len(items)):
         if x == 0:
             for p in pl:
-                if p["Name"] == itms[0]:
-                    log.info("found")
-                    notebook = p
-                    child = notebook["Children"]
+                if p["Name"] == items[0]:
+                    child = p["Children"]
                     break
         else:
             for c in child:
-                if c["Name"] == itms[x]:
+                if c["Name"] == items[x]:
                     if "Children" in c:
                         child = c["Children"]
                     break
 
-    log.info("child found")
     return child
 
 
 def browse_child():
     q = os.getenv('q')
-    # q = "Work > Career"
     child = get_child(q)
     for c in child:
         sub = "{0} > {1}".format(q, c["Name"])
@@ -380,6 +371,21 @@ def browse_child():
                              icontype="file",
                              quicklookurl=ICON_APP)
 
+
+def browse_notebooks():
+    onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
+    for n in onenote_pl:
+        sub = "{0}".format(n["Name"])
+        url = makeurl(sub)
+        it = wf.add_item(title=n["Name"],
+                         subtitle=sub,
+                         arg=sub,
+                         autocomplete=n["Name"],
+                         valid=True,
+                         icon="icons/notebook.png",
+                         icontype="file",
+                         quicklookurl=ICON_APP)
+        it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
 
 if __name__ == "__main__":
     wf = Workflow3(help_url=HELP_URL)
