@@ -1,10 +1,8 @@
 # Navigate OneNote Notebooks With Alfred
 
 Search or browse any notebook/section group/section in Microsoft OneNote from [Alfred 4][alfredapp].
-
-![](./imgs/searchdemo.gif)
 * * *
-![](./imgs/browsedemo.gif)
+![](./imgs/demo.gif)
 * * *
 <!-- MarkdownTOC autolink="true" bracket="round" depth="3" autoanchor="true" -->
 
@@ -22,7 +20,7 @@ Search or browse any notebook/section group/section in Microsoft OneNote from [A
 
 - Search or browse all OneNote Notebooks and sections/section groups
 - **When searching**:
-  - Press <kbd>↩︎</kbd> to open the selected item in OneNote
+  - Press <kbd>↩︎</kbd> to either open the selected item in OneNote or browse the selection.
 - **When browsing**:
   - Press <kbd>↩︎</kbd> to continue diving deeper into notebook hierarchy. Once a page is found (deepest depth) it will open it in OneNote
   - Press <kbd>⌘</kbd><kbd>↩︎</kbd> to open the currently selected notebook/section/section group
@@ -34,13 +32,14 @@ Download [the latest release][gh-releases] and double-click the file to install 
 <a id="usage"></a>
 ## Usage
 
-The two main keywords are `;o` & `;sa`:
+The two main keywords are `;so` & `;bo`:
 
-- `;sa [<query>]` - Search all notebooks/section groups/sections
+- `;so [<query>]` - Search all notebooks/section groups/sections
 
-    - <kbd>↩︎</kbd> or <kbd>⌘</kbd><kbd>NUM</kbd> — Open selection in OneNote
+    - <kbd>↩︎</kbd> or <kbd>⌘</kbd><kbd>NUM</kbd> — If the selection is a section with no subsections, then open selection in OneNote; otherwise browse selection in Alfred.
+    - <kbd>⌘</kbd><kbd>↩︎</kbd> — Open selection in OneNote instead of browse.
 
-- `;o [<query>]` — Browse OneNote notebooks in Alfred.
+- `;bo [<query>]` — Browse OneNote from top level Notebooks in Alfred.
     - <kbd>↩︎</kbd> or <kbd>⌘</kbd><kbd>NUM</kbd> — View the selections sub-sections, if it has no sub-sections (deepest level of notebook) it will open the page in OneNote.
     - <kbd>⌘</kbd><kbd>↩︎</kbd> — Open selection in OneNote instead.
 
