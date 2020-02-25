@@ -74,7 +74,9 @@ This workflow uses on the wonderful library [alfred-workflow](https://github.com
     - Added trap for sharepoint URLs
 - v1.3.0 - 02/23/20
   - Added search all functionality
-
+- v1.3.1 - 02/25/20
+  - Added ability to browse a selection after searching all.
+  - Improved code logic and added new keywords.
 
 [alfredapp]: https://www.alfredapp.com/
 [gh-releases]: https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator/releases/latest
