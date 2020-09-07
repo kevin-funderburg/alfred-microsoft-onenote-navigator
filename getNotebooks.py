@@ -81,6 +81,8 @@ def main(wf):
             urlbase = url[0] + "//" + url[2] + "/" + url[3] + "/" + url[4] + "/"
             # write to plist
             plistlib.writePlist({"urlbase": urlbase}, SETTINGS_PATH)
+            if "sharepoint" in url[2]:
+                urlbase += url[5] + "/"
             # tell alfred how to display a success notification
             print("true")
         else:
