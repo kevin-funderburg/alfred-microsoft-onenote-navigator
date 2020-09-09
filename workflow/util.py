@@ -249,6 +249,7 @@ def run_trigger(name, bundleid=None, arg=None):
         name (str): Name of External Trigger to call.
         bundleid (str, optional): Bundle ID of workflow trigger belongs to.
         arg (str, optional): Argument to pass to trigger.
+        :rtype: object
 
     """
     bundleid = bundleid or os.getenv('alfred_workflow_bundleid')

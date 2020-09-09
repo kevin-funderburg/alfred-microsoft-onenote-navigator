@@ -10,8 +10,10 @@ import argparse
 import plistlib
 
 from workflow import Workflow3, ICON_INFO, ICON_WARNING, ICON_ERROR
-
+from workflow.util import run_trigger, run_applescript, run_command
+from workflow.notify import notify
 __version__ = '1.3.1'
+
 
 wf = None
 log = None
@@ -42,6 +44,8 @@ SETTINGS_PATH = os.path.expanduser(DATA_DIR) + "settings.plist"
 
 
 def main(wf):
+    global urlbase
+
     if not os.path.exists(SETTINGS_PATH):
         log.info("no settings set, creating default settings")
         plistlib.writePlist(DEFAULT_SETTINGS, SETTINGS_PATH)
@@ -62,6 +66,7 @@ def main(wf):
     parser.add_argument('--write', dest='write', nargs='?', default=None)
     parser.add_argument('--type', dest='type', nargs='?', default=None)
     parser.add_argument('--warn', dest='warn', nargs='?', default=None)
+    parser.add_argument('--url', dest='url', nargs='?', default=None)
     parser.add_argument('query', nargs='?', default=None)
     args = parser.parse_args(wf.args)
 
@@ -74,13 +79,14 @@ def main(wf):
             # sharepoint URLs will not work, pass as an error
             print("sharepoint")
             return 0
-        if 'onenote:https' in args.urlbase:
+        elif 'onenote:https' in args.urlbase:
             # extract onenote url
             args.urlbase = re.search('(onenote:.*)', args.urlbase).group(1)
             url = args.urlbase.split("/")
             urlbase = url[0] + "//" + url[2] + "/" + url[3] + "/" + url[4] + "/"
             # write to plist
             plistlib.writePlist({"urlbase": urlbase}, SETTINGS_PATH)
+            # notify("OneNote URL setup", "OneNote URL base was stored successfully")
             # tell alfred how to display a success notification
             print("true")
         else:
@@ -107,6 +113,13 @@ def main(wf):
         wf.send_feedback()
         return 0
 
+    if args.url:
+        if 'onenote:https' in args.url:
+            open_url(args.url)
+        else:
+                run_trigger('browse', wf.bundleid, args.url)
+        return 0
+
     ####################################################################
     # Check that we have a URL saved
     ##################################################################
@@ -120,7 +133,6 @@ def main(wf):
 
     # get plist data from OneNote plist
     onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
-    global urlbase
     urlbase = settings['urlbase']
 
     if args.type == 'searchall':
@@ -172,7 +184,6 @@ def getAll(parent, prefix):
                                  quicklookurl=ICON_APP)
                 it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
                 it.setvar('theTitle', parent["Name"])
-
 
             else:
                 pre = prefix + " > " + parent["Name"]
@@ -293,6 +304,11 @@ def browse_notebooks():
                          quicklookurl=ICON_APP)
         it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
         it.setvar('theTitle', n["Name"])
+
+
+def open_url(url):
+    url.replace(" ", "%20")
+    run_command(['open', url])
 
 
 if __name__ == "__main__":
