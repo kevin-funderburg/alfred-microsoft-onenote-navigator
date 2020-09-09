@@ -12,6 +12,7 @@ import plistlib
 from workflow import Workflow3, ICON_INFO, ICON_WARNING, ICON_ERROR
 from workflow.util import run_trigger, run_applescript, run_command
 from workflow.notify import notify
+
 __version__ = '1.3.1'
 
 
@@ -117,7 +118,9 @@ def main(wf):
         if 'onenote:https' in args.url:
             open_url(args.url)
         else:
-                run_trigger('browse', wf.bundleid, args.url)
+            log.info("setting 'q' to: {0}".format(args.url))
+            wf.setvar("q", args.url, True)
+            run_trigger('browse_section', wf.bundleid)
         return 0
 
     ####################################################################
@@ -222,18 +225,15 @@ def makeurl(prefix):
     return newurl
 
 
-def get_child(childstr):
+def get_child(path):
     """ finds the child of the onenote plist
 
     :param childstr: path of child, formatted as '[element] > [element]'
     :return: child element of ooenote plist
     """
-    items = childstr.split(" > ")
-    onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
-
-    pl = onenote_pl
+    items = path.split(" > ")
+    pl = plistlib.readPlist(ONENOTE_PLIST)
     child = None
-
     for x in range(len(items)):
         if x == 0:
             for p in pl:
@@ -258,6 +258,8 @@ def browse_child():
     :return: none
     """
     q = os.getenv('q')
+    log.info("q is: {0}".format(q))
+    # q = q.split(" > ")
     child = get_child(q)
     for c in child:
         sub = "{0} > {1}".format(q, c["Name"])
@@ -296,7 +298,7 @@ def browse_notebooks():
         url = makeurl(sub)
         it = wf.add_item(title=n["Name"],
                          subtitle=sub,
-                         arg=sub,
+                         arg="",
                          autocomplete=n["Name"],
                          valid=True,
                          icon="icons/notebook.png",
@@ -304,11 +306,21 @@ def browse_notebooks():
                          quicklookurl=ICON_APP)
         it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
         it.setvar('theTitle', n["Name"])
+        it.setvar("q", sub)
 
 
 def open_url(url):
+    # aps = "tell application id \"com.runningwithcrayons.Alfred\" to" \
+    #       " run trigger \"hide\" in workflow \"com.kfunderburg.oneNoteNav\"" \
+    #       "with argument \"test\""
+    # run_applescript(aps)
     url.replace(" ", "%20")
+    run_trigger('hide', wf.bundleid)    # hide alfred
     run_command(['open', url])
+    aps = "tell application id \"com.runningwithcrayons.Alfred\" to " \
+          "remove configuration \"q\" in workflow \"com.kfunderburg.oneNoteNav\""
+    run_applescript(aps)
+    log.info("q var cleared")
 
 
 if __name__ == "__main__":

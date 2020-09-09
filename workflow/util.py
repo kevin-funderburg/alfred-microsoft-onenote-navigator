@@ -185,6 +185,7 @@ def run_command(cmd, **kwargs):
 
 
 def run_applescript(script, *args, **kwargs):
+    # type: (object, object, object) -> object
     """Execute an AppleScript script and return its output.
 
     .. versionadded:: 1.31

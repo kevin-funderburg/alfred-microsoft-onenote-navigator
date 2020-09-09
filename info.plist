@@ -73,18 +73,7 @@
 			</dict>
 		</array>
 		<key>67B91701-5160-4BF2-83EE-17F8159DF2E9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B2F72053-5620-46A8-8748-DB4EBBA0D222</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>71141C6A-C118-42E4-9E99-B06F5A067CC5</key>
 		<array>
 			<dict>
@@ -122,15 +111,17 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>B2F72053-5620-46A8-8748-DB4EBBA0D222</string>
+				<string>C0C20C27-0D91-4070-86B6-E7C132D3D5E5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
+		<key>76262B95-3C87-474D-BC55-1807CD03B0DA</key>
+		<array/>
 		<key>8F75DD60-C467-414F-8D16-4AC2229543B1</key>
 		<array>
 			<dict>
@@ -162,19 +153,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>35AD0043-2625-4300-8769-4C377E8C38B7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B2F72053-5620-46A8-8748-DB4EBBA0D222</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C0C20C27-0D91-4070-86B6-E7C132D3D5E5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -306,7 +284,7 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -378,7 +356,7 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -386,19 +364,6 @@
 			<string>CDC04AE0-AEE7-43D9-908E-1F36FAC31A50</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>triggerid</key>
-				<string>browse</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>67B91701-5160-4BF2-83EE-17F8159DF2E9</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -440,6 +405,11 @@
 				<key>withspace</key>
 				<false/>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>browse_section</string>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
@@ -460,10 +430,28 @@
 					<string>{query}</string>
 				</dict>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>set_q</string>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>B2F72053-5620-46A8-8748-DB4EBBA0D222</string>
+			<string>76262B95-3C87-474D-BC55-1807CD03B0DA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>hide</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>C7954467-8DC2-413C-B867-7480390F51C6</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -743,6 +731,19 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>browse</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>67B91701-5160-4BF2-83EE-17F8159DF2E9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Use Alfred to search &amp; browse through your Microsoft OneNote notebooks, section groups and sections and then jump to them instantly.</string>
@@ -778,7 +779,7 @@
 			<key>note</key>
 			<string>open url</string>
 			<key>xpos</key>
-			<integer>475</integer>
+			<integer>530</integer>
 			<key>ypos</key>
 			<integer>90</integer>
 		</dict>
@@ -812,9 +813,9 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>10</integer>
+			<integer>50</integer>
 			<key>ypos</key>
-			<integer>320</integer>
+			<integer>1130</integer>
 		</dict>
 		<key>70FD91D1-5BF7-43B1-97D9-7E678748EFB8</key>
 		<dict>
@@ -849,6 +850,15 @@
 			<key>ypos</key>
 			<integer>165</integer>
 		</dict>
+		<key>76262B95-3C87-474D-BC55-1807CD03B0DA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<integer>95</integer>
+			<key>ypos</key>
+			<integer>480</integer>
+		</dict>
 		<key>8F75DD60-C467-414F-8D16-4AC2229543B1</key>
 		<dict>
 			<key>colorindex</key>
@@ -875,15 +885,6 @@
 			<integer>10</integer>
 			<key>ypos</key>
 			<integer>685</integer>
-		</dict>
-		<key>B2F72053-5620-46A8-8748-DB4EBBA0D222</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<integer>185</integer>
-			<key>ypos</key>
-			<integer>350</integer>
 		</dict>
 		<key>B30FA759-40A6-4CF6-BD72-514A249C50B3</key>
 		<dict>
@@ -914,12 +915,19 @@
 			<key>ypos</key>
 			<integer>320</integer>
 		</dict>
+		<key>C7954467-8DC2-413C-B867-7480390F51C6</key>
+		<dict>
+			<key>xpos</key>
+			<integer>430</integer>
+			<key>ypos</key>
+			<integer>495</integer>
+		</dict>
 		<key>CDC04AE0-AEE7-43D9-908E-1F36FAC31A50</key>
 		<dict>
 			<key>note</key>
 			<string>recurse or open url</string>
 			<key>xpos</key>
-			<integer>475</integer>
+			<integer>530</integer>
 			<key>ypos</key>
 			<integer>245</integer>
 		</dict>
@@ -935,6 +943,8 @@
 			<integer>1130</integer>
 		</dict>
 	</dict>
+	<key>variables</key>
+	<dict/>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
