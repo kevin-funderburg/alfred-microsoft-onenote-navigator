@@ -284,7 +284,7 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -297,7 +297,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -321,7 +321,7 @@
 				<key>runningsubtext</key>
 				<string>getting notebooks...</string>
 				<key>script</key>
-				<string>/usr/bin/python getNotebooks.py --type browse_notebooks</string>
+				<string>/usr/bin/python getNotebooks.py --browse notebooks $1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -356,7 +356,7 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -370,6 +370,118 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>getting notebooks...</string>
+				<key>script</key>
+				<string>/usr/bin/python getNotebooks.py --type browse_notebooks</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>browse OneNote notebooks</string>
+				<key>title</key>
+				<string>Browse OneNote</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F6EAE9E6-2598-4E1C-8067-69CBC571BD9B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>browse</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>67B91701-5160-4BF2-83EE-17F8159DF2E9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>{var:q}</string>
+				<key>script</key>
+				<string>/usr/bin/python getNotebooks.py --browse section $1</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>{var:theTitle}</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>browse_section</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C0C20C27-0D91-4070-86B6-E7C132D3D5E5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -405,15 +517,10 @@
 				<key>withspace</key>
 				<false/>
 			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>browse_section</string>
-			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>C0C20C27-0D91-4070-86B6-E7C132D3D5E5</string>
+			<string>3BDE7F13-31B3-45FF-A103-E6E11E4650D6</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -731,19 +838,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>triggerid</key>
-				<string>browse</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>67B91701-5160-4BF2-83EE-17F8159DF2E9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Use Alfred to search &amp; browse through your Microsoft OneNote notebooks, section groups and sections and then jump to them instantly.</string>
@@ -773,6 +867,17 @@
 			<integer>175</integer>
 			<key>ypos</key>
 			<integer>685</integer>
+		</dict>
+		<key>3BDE7F13-31B3-45FF-A103-E6E11E4650D6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>browse section</string>
+			<key>xpos</key>
+			<integer>640</integer>
+			<key>ypos</key>
+			<integer>440</integer>
 		</dict>
 		<key>46C99F69-8F5D-4AA2-80A1-9BED07121C75</key>
 		<dict>
@@ -813,9 +918,9 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>50</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>1130</integer>
+			<integer>320</integer>
 		</dict>
 		<key>70FD91D1-5BF7-43B1-97D9-7E678748EFB8</key>
 		<dict>
@@ -942,11 +1047,27 @@
 			<key>ypos</key>
 			<integer>1130</integer>
 		</dict>
+		<key>F6EAE9E6-2598-4E1C-8067-69CBC571BD9B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>browse notebooks</string>
+			<key>xpos</key>
+			<integer>725</integer>
+			<key>ypos</key>
+			<integer>295</integer>
+		</dict>
 	</dict>
 	<key>variables</key>
-	<dict/>
+	<dict>
+		<key>q</key>
+		<string>School &gt; Undergrad</string>
+	</dict>
 	<key>variablesdontexport</key>
-	<array/>
+	<array>
+		<string>q</string>
+	</array>
 	<key>version</key>
 	<string>1.3.1</string>
 	<key>webaddress</key>

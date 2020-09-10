@@ -9,9 +9,9 @@ import re
 import argparse
 import plistlib
 
-from workflow import Workflow3, ICON_INFO, ICON_WARNING, ICON_ERROR
+from workflow import Workflow3, ICON_INFO, ICON_WARNING, \
+    ICON_ERROR, MATCH_ALL, MATCH_ALLCHARS, MATCH_SUBSTRING
 from workflow.util import run_trigger, run_applescript, run_command
-from workflow.notify import notify
 
 __version__ = '1.3.1'
 
@@ -21,8 +21,7 @@ sub = []
 subtitle = ""
 url = ""
 urlbase = None
-child = None
-# prefix = None
+all_data = []
 
 HELP_URL = 'https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator'
 
@@ -65,6 +64,7 @@ def main(wf):
     parser = argparse.ArgumentParser()
     # --seturl argument and save its value to 'urlbase' (dest).
     parser.add_argument('--seturl', dest='urlbase', nargs='?', default=None)
+    parser.add_argument('--browse', dest='browse', nargs='?', default=None)
     parser.add_argument('--write', dest='write', nargs='?', default=None)
     parser.add_argument('--type', dest='type', nargs='?', default=None)
     parser.add_argument('--warn', dest='warn', nargs='?', default=None)
@@ -72,47 +72,19 @@ def main(wf):
     parser.add_argument('query', nargs='?', default=None)
     args = parser.parse_args(wf.args)
 
+
     ####################################################################
     # Save the provided URL base
     ####################################################################
     if args.urlbase:  # Script was passed as a URL
-        log.debug("arg is url: {0}".format(args.urlbase))
-        if 'sharepoint' in args.urlbase:
-            # sharepoint URLs will not work, pass as an error
-            print("sharepoint")
-            return 0
-        elif 'onenote:https' in args.urlbase:
-            # extract onenote url
-            args.urlbase = re.search('(onenote:.*)', args.urlbase).group(1)
-            url = args.urlbase.split("/")
-            urlbase = url[0] + "//" + url[2] + "/" + url[3] + "/" + url[4] + "/"
-            # write to plist
-            plistlib.writePlist({"urlbase": urlbase}, SETTINGS_PATH)
-            # notify("OneNote URL setup", "OneNote URL base was stored successfully")
-            # tell alfred how to display a success notification
-            print("true")
-        else:
-            # tell alfred how to display alert that the url is bad
-            print("invalid")
+        set_url(args.urlbase)
         return 0
 
     ####################################################################
     # Warn if bad url was passed in
     ####################################################################
     if args.warn:
-        if "sharepoint" in args.warn:
-            wf.add_item(title='URL is a Microsoft Sharepoint URL, these '
-                              'cannot be opened locally.',
-                        subtitle="OneNote must be in OneDrive for URLs to work",
-                        valid=False,
-                        icon=ICON_ERROR)
-        else:
-            wf.add_item(title='Argument is not a valid OneNote url.',
-                        subtitle="Right click a OneNote notebook/section/page "
-                                 "& choose 'Copy Link to ...' & try again",
-                        valid=False,
-                        icon=ICON_WARNING)
-        wf.send_feedback()
+        warn(args.warn)
         return 0
 
     if args.url:
@@ -121,7 +93,10 @@ def main(wf):
         else:
             log.info("setting 'q' to: {0}".format(args.url))
             wf.setvar("q", args.url, True)
-            run_trigger('browse_section', wf.bundleid)
+            aps = "tell application id \"com.runningwithcrayons.Alfred\" to " \
+                  "run trigger \"browse_section\" in workflow \"com.kfunderburg.oneNoteNav\""
+            run_applescript(aps)
+            # run_trigger('browse_section', wf.bundleid)
         return 0
 
     ####################################################################
@@ -140,17 +115,182 @@ def main(wf):
     urlbase = settings['urlbase']
 
     if args.type == 'searchall':
-        getAll(onenote_pl, None)
-    elif args.type == 'browse':
-        browse_child()
-    elif args.type == 'browse_notebooks':
-        browse_notebooks()
+        get_all_data(onenote_pl, None)
 
-    if len(wf._items) == 0:
-        wf.add_item('No workflow items were made', icon=ICON_WARNING)
+        items = wf.filter(args.query, all_data, key_for_data, match_on=MATCH_ALL ^ MATCH_ALLCHARS ^ MATCH_SUBSTRING)
 
-    wf.send_feedback()
+        if not items:
+            wf.add_item(title='No matches',
+                        icon=ICON_WARNING)
+
+        for item in items:
+            it = wf.add_item(title=item["Name"],
+                             subtitle=item["subtitle"],
+                             arg=item["arg"],
+                             autocomplete=item["Name"],
+                             valid=item["valid"],
+                             icon=item["icon"],
+                             icontype=item["icon"],
+                             quicklookurl=ICON_APP)
+            if "onenote:https" not in item["arg"]:
+                it.add_modifier('cmd', subtitle="open in OneNote", arg=item["url"] + ".one", valid=True)
+                it.setvar('theTitle', item["Name"])
+
+        wf.send_feedback()
+        return 0
+
+    elif args.browse:
+        log.debug("browse is: {0}".format(args.browse))
+        log.debug("query is: {0}".format(args.query))
+
+        if args.browse == 'notebooks':
+            data = get_notebook_data()
+            items = wf.filter(args.query, data, key_for_data, match_on=MATCH_ALL ^ MATCH_ALLCHARS ^ MATCH_SUBSTRING)
+
+            if not items:
+                wf.add_item(title='No matches',
+                            icon=ICON_WARNING)
+
+            for item in items:
+                it = wf.add_item(title=item["Name"],
+                                 subtitle=item["subtitle"],
+                                 arg="",
+                                 autocomplete=item["Name"],
+                                 valid=True,
+                                 icon=item["icon"],
+                                 icontype="file",
+                                 quicklookurl=ICON_APP)
+                it.add_modifier('cmd', subtitle="open in OneNote", arg=item["arg"], valid=True)
+                it.setvar('theTitle', item["Name"])
+                it.setvar("q", item["subtitle"])
+
+            wf.send_feedback()
+            return 0
+
+        else:
+            data = browse_child()
+            items = wf.filter(args.query, data, key_for_data, match_on=MATCH_ALL ^ MATCH_ALLCHARS ^ MATCH_SUBSTRING)
+
+            if not items:
+                wf.add_item(title='No matches',
+                            icon=ICON_WARNING)
+
+            for item in items:
+                it = wf.add_item(title=item["Name"],
+                                 subtitle=item["subtitle"],
+                                 arg=item["arg"],
+                                 autocomplete=item["Name"],
+                                 valid=True,
+                                 icon=item["icon"],
+                                 icontype="file",
+                                 quicklookurl=ICON_APP)
+                log.debug("arg is: " + item["arg"])
+                if "onenote:https" not in item["arg"]:
+                    it.add_modifier('cmd', subtitle="open in OneNote", arg=item["url"] + ".one", valid=True)
+                    it.setvar('theTitle', item["Name"])
+
+            wf.send_feedback()
+            return 0
+
     return 0
+
+
+def key_for_data(data):
+    return '{}'.format(data['Name'])
+
+
+def get_notebook_data():
+    onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
+    data = []
+    for n in onenote_pl:
+        sub = "{0}".format(n["Name"])
+        log.debug("sub is: " + sub)
+        url = makeurl(sub)   # makeurl(sub)
+        item = {
+            "Name": n["Name"],
+            "subtitle": sub,
+            "arg": url,
+            "autocomplete": n["Name"],
+            "valid": True,
+            "icon": "icons/notebook.png",
+            "icontype": "file",
+            "quicklookurl": ICON_APP
+        }
+        data.append(item)
+    return data
+
+
+def get_all_data(parent, prefix):
+    """ recursively get every section of the parent
+
+    :param parent: entry point of search
+    :param prefix: subtitle of page, pass as None for root
+    :return: none
+
+    """
+    global subtitle
+    global url
+    global all_data
+
+    if len(parent) > 0 and "Name" not in parent:
+        for n in parent:
+            get_all_data(n, prefix)
+        prefix = None
+        url = ""
+
+    if "Name" in parent:
+        if "Children" in parent:
+
+            if prefix is None:
+                pre = parent["Name"]
+                url = "{0}{1}".format(urlbase, pre)
+                subtitle = "{0}".format(parent["Name"])
+                data = {
+                    "Name": parent["Name"],
+                    "subtitle": subtitle,
+                    "arg": subtitle,
+                    "autocomplete": parent["Name"],
+                    "valid": True,
+                    "icon": "icons/notebook.png",
+                    "icontype": "file",
+                    "quicklookurl": ICON_APP,
+                    "url": url
+                }
+                all_data.append(data)
+
+            else:
+                pre = prefix + " > " + parent["Name"]
+                subtitle = pre
+                url = makeurl(subtitle)
+                data = {
+                    "Name": parent["Name"],
+                    "subtitle": pre,
+                    "arg": subtitle,
+                    "autocomplete": parent["Name"],
+                    "valid": True,
+                    "icon": "icons/section.png",
+                    "icontype": "file",
+                    "quicklookurl": ICON_APP,
+                    "url": url
+                }
+                all_data.append(data)
+
+            get_all_data(parent["Children"], pre)
+
+        else:
+            subtitle = "{0} > {1}".format(prefix, parent["Name"])
+            url = makeurl(subtitle)
+            data = {
+                "Name": parent["Name"],
+                "subtitle": subtitle,
+                "arg": url + ".one",
+                "autocomplete": parent["Name"],
+                "valid": True,
+                "icon": "icons/page.png",
+                "icontype": "file",
+                "quicklookurl": ICON_APP
+            }
+            all_data.append(data)
 
 
 def getAll(parent, prefix):
@@ -226,87 +366,28 @@ def makeurl(prefix):
     return newurl
 
 
-def get_child(parent, names, index):
+def get_child(childstr):
     """ finds the child of the onenote plist
 
-    :param parent:
-    :type index: int
     :param childstr: path of child, formatted as '[element] > [element]'
     :return: child element of ooenote plist
     """
-    global child
-    # print(type(parent))
-    # assert isinstance(parent, dict)
-    # assert isinstance(names, list)
-    # assert isinstance(index, int)
-    if type(parent) is list:
-        for x in parent:
-            if x["Name"] == names[index]:
-                get_child(x, names, index)
-
-    else:
-        if (index < (len(names) - 1)) and "Name" in parent:
-            # print(type(parent))
-            if parent["Name"] == names[index]:
-                if "Children" in parent:
-                    get_child(parent["Children"], names, index + 1)
-                else:
-                    get_child(parent, names, index + 1)
-
-        if index == (len(names) - 1) and "Name" in parent:
-            if parent["Name"] == names[index]:
-                if "Children" in parent:
-                    child = parent["Children"]
-                else:
-                    child = parent
-                    # return parent
-
-
-
-
-
-    # if len(parent) > 0 and "Name" not in parent:
-    #     for n in parent:
-    #         get_child(n, names, index)
-    #
-    # else:
-    #     assert isinstance(index, int)
-    #     print("parent[\"Name\"]: " + parent["Name"]
-    #           + "\t\t\t\tnames[index]: " + names[index])
-    #
-    #     if parent["Name"] == names[index]:
-    #         if index < (len(names) - 1):
-    #             get_child(parent["Children"], names, index + 1)
-    #
-    #         elif index == (len(names) - 1):
-    #             if "Children" in parent:
-    #                 # child = parent["Children"]
-    #                 return [parent, parent["Children"]]
-    #             else:
-    #                 # child =  parent["Name"]
-    #                 return parent["Name"]
-    #     else:
-    #         return
-    # if "Name" in parent:
-    #     if "Children" in parent:
-
-    # items = path.split(" > ")
-    # pl = plistlib.readPlist(ONENOTE_PLIST)
-    # child = None
-    # for x in range(len(items)):
-    #     if x == 0:
-    #         for p in pl:
-    #             if p["Name"] == items[0]:
-    #                 child = p["Children"]
-    #                 break
-    #     else:
-    #         for c in child:
-    #             if c["Name"] == items[x]:
-    #                 if "Children" in c:
-    #                     child = c["Children"]
-    #                 break
-    #
-    # return child
+    items = childstr.split(" > ")
+    pl = plistlib.readPlist(ONENOTE_PLIST)
+    child = None
+    for x in range(len(items)):
+        if x == 0:
+            for p in pl:
+                if p["Name"] == items[0]:
+                    child = p["Children"]
+                    break
+        else:
+            for c in child:
+                if c["Name"] == items[x]:
+                    if "Children" in c:
+                        child = c["Children"]
+                    break
+    return child
 
 
 def browse_child():
@@ -316,37 +397,78 @@ def browse_child():
     which looks like [element] > [element]
     :return: none
     """
+    data = []
     q = os.getenv('q')
-    global child
-    # q = "School"
     log.info("q is: {0}".format(q))
-    q = q.split(" > ")
-    pl = plistlib.readPlist(ONENOTE_PLIST)
-    get_child(pl, q, 0)
+    child = get_child(q)
     for c in child:
         sub = "{0} > {1}".format(q, c["Name"])
         url = makeurl(sub)
         if "Children" in c:
-            it = wf.add_item(title=c["Name"],
-                             subtitle=sub,
-                             arg=sub,
-                             autocomplete=c["Name"],
-                             valid=True,
-                             icon="icons/section.png",
-                             icontype="file",
-                             quicklookurl=ICON_APP)
-            it.add_modifier('cmd', subtitle="open in OneNote", arg=url + ".one", valid=True)
-            it.setvar('theTitle', c["Name"])
+            item = {
+                "Name": c["Name"],
+                "subtitle": sub,
+                "arg": sub,
+                "autocomplete": c["Name"],
+                "valid": True,
+                "icon": "icons/section.png",
+                "icontype": "file",
+                "quicklookurl": ICON_APP,
+                "url": url
+            }
 
         else:
-            it = wf.add_item(title=c["Name"],
-                             subtitle=sub,
-                             arg=url + ".one",
-                             autocomplete=c["Name"],
-                             valid=True,
-                             icon="icons/page.png",
-                             icontype="file",
-                             quicklookurl=ICON_APP)
+            item = {
+                "Name": c["Name"],
+                "subtitle": sub,
+                "arg": url + ".one",
+                "autocomplete": c["Name"],
+                "valid": True,
+                "icon": "icons/page.png",
+                "icontype": "file",
+                "quicklookurl": ICON_APP
+            }
+
+        data.append(item)
+
+    return data
+
+
+def set_url(urlbase):
+    if 'sharepoint' in urlbase:
+        # sharepoint URLs will not work, pass as an error
+        print("sharepoint")
+        return 0
+    elif 'onenote:https' in urlbase:
+        # extract onenote url
+        urlbase = re.search('(onenote:.*)', urlbase).group(1)
+        url = urlbase.split("/")
+        urlbase = url[0] + "//" + url[2] + "/" + url[3] + "/" + url[4] + "/"
+        # write to plist
+        plistlib.writePlist({"urlbase": urlbase}, SETTINGS_PATH)
+        # notify("OneNote URL setup", "OneNote URL base was stored successfully")
+        # tell alfred how to display a success notification
+        print("true")
+    else:
+        # tell alfred how to display alert that the url is bad
+        print("invalid")
+    return 0
+
+
+def warn(query):
+    if "sharepoint" in query:
+        wf.add_item(title='URL is a Microsoft Sharepoint URL, these '
+                          'cannot be opened locally.',
+                    subtitle="OneNote must be in OneDrive for URLs to work",
+                    valid=False,
+                    icon=ICON_ERROR)
+    else:
+        wf.add_item(title='Argument is not a valid OneNote url.',
+                    subtitle="Right click a OneNote notebook/section/page "
+                             "& choose 'Copy Link to ...' & try again",
+                    valid=False,
+                    icon=ICON_WARNING)
+    wf.send_feedback()
 
 
 def browse_notebooks():
