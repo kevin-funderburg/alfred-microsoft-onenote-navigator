@@ -15,23 +15,24 @@ from workflow.notify import notify
 
 __version__ = '1.3.1'
 
-
 wf = None
 log = None
 sub = []
 subtitle = ""
 url = ""
 urlbase = None
+child = None
 # prefix = None
 
 HELP_URL = 'https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator'
 
 # GitHub repo for self-updating
-UPDATE_SETTINGS={'github_slug': 'kevin-funderburg/alfred-microsoft-onenote-navigator'}
+UPDATE_SETTINGS = {'github_slug': 'kevin-funderburg/alfred-microsoft-onenote-navigator'}
 
 DEFAULT_SETTINGS = {'urlbase': "null"}
 
-ONENOTE_PLIST = os.path.expanduser("~/Library/Group Containers/UBF8T346G9.Office/OneNote/ShareExtension/Notebooks.plist")
+ONENOTE_PLIST = os.path.expanduser(
+    "~/Library/Group Containers/UBF8T346G9.Office/OneNote/ShareExtension/Notebooks.plist")
 ICON_APP = "/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns"
 DATA_DIR = "~/Library/Application Support/Alfred/Workflow Data/com.kfunderburg.oneNoteNav/"
 
@@ -225,29 +226,87 @@ def makeurl(prefix):
     return newurl
 
 
-def get_child(path):
+def get_child(parent, names, index):
     """ finds the child of the onenote plist
 
+    :param parent:
+    :type index: int
     :param childstr: path of child, formatted as '[element] > [element]'
     :return: child element of ooenote plist
     """
-    items = path.split(" > ")
-    pl = plistlib.readPlist(ONENOTE_PLIST)
-    child = None
-    for x in range(len(items)):
-        if x == 0:
-            for p in pl:
-                if p["Name"] == items[0]:
-                    child = p["Children"]
-                    break
-        else:
-            for c in child:
-                if c["Name"] == items[x]:
-                    if "Children" in c:
-                        child = c["Children"]
-                    break
+    global child
+    # print(type(parent))
+    # assert isinstance(parent, dict)
+    # assert isinstance(names, list)
+    # assert isinstance(index, int)
+    if type(parent) is list:
+        for x in parent:
+            if x["Name"] == names[index]:
+                get_child(x, names, index)
 
-    return child
+    else:
+        if (index < (len(names) - 1)) and "Name" in parent:
+            # print(type(parent))
+            if parent["Name"] == names[index]:
+                if "Children" in parent:
+                    get_child(parent["Children"], names, index + 1)
+                else:
+                    get_child(parent, names, index + 1)
+
+        if index == (len(names) - 1) and "Name" in parent:
+            if parent["Name"] == names[index]:
+                if "Children" in parent:
+                    child = parent["Children"]
+                else:
+                    child = parent
+                    # return parent
+
+
+
+
+
+    # if len(parent) > 0 and "Name" not in parent:
+    #     for n in parent:
+    #         get_child(n, names, index)
+    #
+    # else:
+    #     assert isinstance(index, int)
+    #     print("parent[\"Name\"]: " + parent["Name"]
+    #           + "\t\t\t\tnames[index]: " + names[index])
+    #
+    #     if parent["Name"] == names[index]:
+    #         if index < (len(names) - 1):
+    #             get_child(parent["Children"], names, index + 1)
+    #
+    #         elif index == (len(names) - 1):
+    #             if "Children" in parent:
+    #                 # child = parent["Children"]
+    #                 return [parent, parent["Children"]]
+    #             else:
+    #                 # child =  parent["Name"]
+    #                 return parent["Name"]
+    #     else:
+    #         return
+    # if "Name" in parent:
+    #     if "Children" in parent:
+
+    # items = path.split(" > ")
+    # pl = plistlib.readPlist(ONENOTE_PLIST)
+    # child = None
+    # for x in range(len(items)):
+    #     if x == 0:
+    #         for p in pl:
+    #             if p["Name"] == items[0]:
+    #                 child = p["Children"]
+    #                 break
+    #     else:
+    #         for c in child:
+    #             if c["Name"] == items[x]:
+    #                 if "Children" in c:
+    #                     child = c["Children"]
+    #                 break
+    #
+    # return child
 
 
 def browse_child():
@@ -258,9 +317,12 @@ def browse_child():
     :return: none
     """
     q = os.getenv('q')
+    global child
+    # q = "School"
     log.info("q is: {0}".format(q))
-    # q = q.split(" > ")
-    child = get_child(q)
+    q = q.split(" > ")
+    pl = plistlib.readPlist(ONENOTE_PLIST)
+    get_child(pl, q, 0)
     for c in child:
         sub = "{0} > {1}".format(q, c["Name"])
         url = makeurl(sub)
@@ -315,7 +377,7 @@ def open_url(url):
     #       "with argument \"test\""
     # run_applescript(aps)
     url.replace(" ", "%20")
-    run_trigger('hide', wf.bundleid)    # hide alfred
+    run_trigger('hide', wf.bundleid)  # hide alfred
     run_command(['open', url])
     aps = "tell application id \"com.runningwithcrayons.Alfred\" to " \
           "remove configuration \"q\" in workflow \"com.kfunderburg.oneNoteNav\""

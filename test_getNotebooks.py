@@ -17,9 +17,9 @@ class MyTestCase(unittest.TestCase):
     #         s.split(2)
 
     def test_get_child(self):
-        names = ['Mac', 'AppleScript', 'Guides']
+        names = ["Mac", "AppleScript", "Guides"]
         onenote_pl = plistlib.readPlist(getNotebooks.ONENOTE_PLIST)
-        getNotebooks.get_child(onenote_pl, names)
+        child = getNotebooks.get_child(onenote_pl, names, 0)
 
 if __name__ == '__main__':
     unittest.main()
