@@ -73,7 +73,18 @@
 			</dict>
 		</array>
 		<key>67B91701-5160-4BF2-83EE-17F8159DF2E9</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>76262B95-3C87-474D-BC55-1807CD03B0DA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>71141C6A-C118-42E4-9E99-B06F5A067CC5</key>
 		<array>
 			<dict>
@@ -225,7 +236,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -249,7 +260,7 @@
 				<key>runningsubtext</key>
 				<string>getting all notebooks and sections...</string>
 				<key>script</key>
-				<string>/usr/bin/python getNotebooks.py --type searchall</string>
+				<string>/usr/bin/python getNotebooks.py --type searchall $1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -525,6 +536,19 @@
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>hide</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>C7954467-8DC2-413C-B867-7480390F51C6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
@@ -550,15 +574,51 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>inboundconfig</key>
+			<key>config</key>
 			<dict>
-				<key>externalid</key>
-				<string>hide</string>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>onenote.*</string>
+						<key>outputlabel</key>
+						<string>is url</string>
+						<key>uid</key>
+						<string>EFD81248-9CAA-4A27-BF0B-1E3E97E0A5AD</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>browse</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>C7954467-8DC2-413C-B867-7480390F51C6</string>
+			<string>019F6201-F9A7-4B8A-9912-B9E24F86ACCD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>browse</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>DA606373-D979-4C12-AE2E-A683408A9F59</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -789,55 +849,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>onenote.*</string>
-						<key>outputlabel</key>
-						<string>is url</string>
-						<key>uid</key>
-						<string>EFD81248-9CAA-4A27-BF0B-1E3E97E0A5AD</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>browse</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>019F6201-F9A7-4B8A-9912-B9E24F86ACCD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>browse</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>DA606373-D979-4C12-AE2E-A683408A9F59</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Use Alfred to search &amp; browse through your Microsoft OneNote notebooks, section groups and sections and then jump to them instantly.</string>
@@ -846,9 +857,9 @@
 		<key>019F6201-F9A7-4B8A-9912-B9E24F86ACCD</key>
 		<dict>
 			<key>xpos</key>
-			<integer>320</integer>
+			<integer>480</integer>
 			<key>ypos</key>
-			<integer>1090</integer>
+			<integer>580</integer>
 		</dict>
 		<key>1416E0D6-5E7C-43BA-BD94-413455B111B7</key>
 		<dict>
@@ -1023,9 +1034,9 @@
 		<key>C7954467-8DC2-413C-B867-7480390F51C6</key>
 		<dict>
 			<key>xpos</key>
-			<integer>430</integer>
+			<integer>480</integer>
 			<key>ypos</key>
-			<integer>495</integer>
+			<integer>455</integer>
 		</dict>
 		<key>CDC04AE0-AEE7-43D9-908E-1F36FAC31A50</key>
 		<dict>
@@ -1043,9 +1054,9 @@
 			<key>note</key>
 			<string>browse section or section group</string>
 			<key>xpos</key>
-			<integer>545</integer>
+			<integer>665</integer>
 			<key>ypos</key>
-			<integer>1130</integer>
+			<integer>600</integer>
 		</dict>
 		<key>F6EAE9E6-2598-4E1C-8067-69CBC571BD9B</key>
 		<dict>
@@ -1062,11 +1073,17 @@
 	<key>variables</key>
 	<dict>
 		<key>q</key>
-		<string>School &gt; Undergrad</string>
+		<string>Work &gt; Career &gt; Interviews</string>
+		<key>theTitle</key>
+		<string>Interviews</string>
+		<key>urlbase</key>
+		<string>onenote:https://d.docs.live.net/9478a1a4ec3795b7/Documents/</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
+		<string>urlbase</string>
 		<string>q</string>
+		<string>theTitle</string>
 	</array>
 	<key>version</key>
 	<string>1.3.1</string>
