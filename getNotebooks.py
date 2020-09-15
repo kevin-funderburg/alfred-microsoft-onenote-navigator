@@ -7,11 +7,11 @@ import os
 import sys
 import re
 import argparse
-import plistlib
-import unittest
+from plistlib import readPlist
 
-from workflow import Workflow3, ICON_INFO, ICON_WARNING, \
-    ICON_ERROR, MATCH_ALL, MATCH_ALLCHARS, MATCH_SUBSTRING, MATCH_STARTSWITH
+from workflow import (Workflow3, ICON_INFO, ICON_WARNING,
+                      ICON_ERROR, MATCH_ALL, MATCH_ALLCHARS,
+                      MATCH_SUBSTRING, MATCH_STARTSWITH)
 from workflow.util import run_trigger, run_command, unset_config
 
 __version__ = '1.3.1'
@@ -41,18 +41,6 @@ def main(wf):
     global ONENOTE_PLIST_PATH
     global ONENOTE_PLIST
 
-    # v = wf.settings.get('urlbase')
-    # if v is None:
-    try:
-        ONENOTE_PLIST_PATH = os.path.expanduser(ONENOTE_PLIST_PATH)
-    except OSError:
-        wf.add_item('OneNote plist not found.',
-                    'Make sure OneNote is installed correctly and try again.',
-                    valid=False,
-                    icon=ICON_WARNING)
-        wf.send_feedback()
-        return 0
-
     if wf.update_available:
         # Add a notification to top of Script Filter results
         wf.add_item('New version available',
@@ -64,7 +52,6 @@ def main(wf):
     # --seturl argument and save its value to 'urlbase' (dest).
     parser.add_argument('--seturl', dest='urlbase', nargs='?', default=None)
     parser.add_argument('--browse', dest='browse', nargs='?', default=None)
-    parser.add_argument('--write', dest='write', nargs='?', default=None)
     parser.add_argument('--type', dest='type', nargs='?', default=None)
     parser.add_argument('--searchall', dest='searchall', action='store_true')
     parser.add_argument('--warn', dest='warn', nargs='?', default=None)
@@ -111,8 +98,17 @@ def main(wf):
         wf.send_feedback()
         return 0
 
+    try:
+        ONENOTE_PLIST_PATH = os.path.expanduser(ONENOTE_PLIST_PATH)
+    except OSError:
+        wf.add_item('OneNote plist not found.',
+                    'Make sure OneNote is installed correctly and try again.',
+                    valid=False,
+                    icon=ICON_WARNING)
+        wf.send_feedback()
+        return 0
     # get plist data from OneNote plist
-    ONENOTE_PLIST = plistlib.readPlist(ONENOTE_PLIST_PATH)
+    ONENOTE_PLIST = readPlist(ONENOTE_PLIST_PATH)
     urlbase = os.getenv('urlbase')
 
     if args.type == 'searchall':
@@ -122,9 +118,9 @@ def main(wf):
         items = wf.filter(args.query,
                           all_data,
                           key_for_data,
-                          min_score=30,
+                          min_score=30)
                           # match_on=MATCH_STARTSWITH | MATCH_SUBSTRING)
-                          match_on=MATCH_ALL ^ MATCH_ALLCHARS ^ MATCH_SUBSTRING)
+                          # match_on=MATCH_ALL ^ MATCH_ALLCHARS ^ MATCH_SUBSTRING)
 
         if not items:
             wf.add_item(title='No matches',
@@ -239,7 +235,6 @@ def get_notebook_data():
 
     :return: dict
     """
-    # onenote_pl = plistlib.readPlist(ONENOTE_PLIST)
     data = []
     for n in ONENOTE_PLIST:
         sub = "{0}".format(n["Name"])
@@ -426,7 +421,6 @@ def browse_child():
     """
     data = []
     q = os.getenv('q')
-    # q = os.getenv('q')
     log.info("q is: {0}".format(q))
     child = get_child(q)
     for c in child:
