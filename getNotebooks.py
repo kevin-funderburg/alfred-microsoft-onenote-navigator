@@ -8,6 +8,8 @@ import sys
 import re
 import argparse
 from plistlib import readPlist
+import sqlite3
+from sqlite3 import Error
 
 from workflow import (Workflow3, ICON_INFO, ICON_WARNING,
                       ICON_ERROR, MATCH_ALL, MATCH_ALLCHARS,
@@ -22,6 +24,7 @@ sub = []
 subtitle = ""
 url = ""
 urlbase = None
+gosids = []
 all_data = []
 
 HELP_URL = 'https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator'
@@ -29,11 +32,130 @@ HELP_URL = 'https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigat
 # GitHub repo for self-updating
 UPDATE_SETTINGS = {'github_slug': 'kevin-funderburg/alfred-microsoft-onenote-navigator'}
 DEFAULT_SETTINGS = {'urlbase': None}
-# DEFAULT_SETTINGS = {'urlbase': "null"}
 
+ONENOTE_APP_SUPPORT = "~/Library/Containers/com.microsoft.onenote.mac/Data/Library/Application Support"
+ONENOTE_FULL_SEARCH_PATH = ONENOTE_APP_SUPPORT + "/Microsoft User Data/OneNote/15.0/FullTextSearchIndex/"
+ONENOTE_USER_INFO_CACHE = ONENOTE_APP_SUPPORT + "/Microsoft/UserInfoCache/9478a1a4ec3795b7_LiveId.db"
 ONENOTE_PLIST_PATH = "~/Library/Group Containers/UBF8T346G9.Office/OneNote/ShareExtension/Notebooks.plist"
+ONENOTE_ICON = "/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns"
+ONENOTE_USER_UID = None
 ONENOTE_PLIST = None  # type: dict
-ICON_APP = "/Applications/Microsoft OneNote.app/Contents/Resources/OneNote.icns"
+ALL_DB_PATHS = []
+
+
+def db_test():
+    set_user_uid(ONENOTE_USER_INFO_CACHE)
+
+    i = 0
+    union_all = ""
+    for f in os.listdir(os.path.expanduser(ONENOTE_FULL_SEARCH_PATH)):
+        if '.db' in f and 'journal' not in f:
+            path = ONENOTE_FULL_SEARCH_PATH + f
+            ALL_DB_PATHS.append(ONENOTE_FULL_SEARCH_PATH + f)
+
+    attach_dbs = ""
+    db = ALL_DB_PATHS[0]
+
+    # create a database connection
+    # conn.row_factory = sqlite3.Row
+    conn = create_connection(db)
+    cur = conn.cursor()
+
+    cur.execute(union_all)
+    # print(attach_dbs)
+    # print(union_all)
+    rows = cur.fetchall()
+    for r in rows:
+        print(r[0])
+
+
+def create_db():
+    sql = make_sql_script()
+    conn = create_connection('all-onenote.db')
+    cur = conn.cursor()
+    lines = sql.splitlines()
+    for line in lines:
+        if line is not "":
+            cur.execute(str(line))
+
+    conn.commit()
+    rows = cur.fetchall()
+    for r in rows:
+        print(r[0])
+
+
+def reset_db():
+    sql = "DROP TABLE Entities;\n"
+
+
+def make_sql_script():
+    for f in os.listdir(os.path.expanduser(ONENOTE_FULL_SEARCH_PATH)):
+        if '.db' in f and 'journal' not in f:
+            ALL_DB_PATHS.append(ONENOTE_FULL_SEARCH_PATH + f)
+
+    drop_table = "DROP TABLE IF EXISTS Entities;\n"
+
+    create_table = "CREATE TABLE Entities (" \
+                   "Type INTEGER, " \
+                   "GOID NVARCHAR(50) NOT NULL, " \
+                   "GUID NVARCHAR(38) NOT NULL, " \
+                   "GOSID NVARCHAR(50), " \
+                   "ParentGOID NVARCHAR(50), " \
+                   "GrandparentGOIDs TEXT, " \
+                   "ContentRID NVARCHAR(50), " \
+                   "RootRevGenCount INTEGER, " \
+                   "LastModifiedTime INTEGER, " \
+                   "RecentTime INTEGER, " \
+                   "PinTime INTEGER, " \
+                   "Color INTEGER, " \
+                   "Title TEXT, " \
+                   "EnterpriseIdentity TEXT" \
+                   ")"
+
+    assert (len(ALL_DB_PATHS) > 0)
+    attaches = ""
+    inserts = ""
+    keys = "Type, GOID, GUID, GOSID, ParentGOID, GrandparentGOIDs, " \
+           "ContentRID, RootRevGenCount, LastModifiedTime, RecentTime, " \
+           "PinTime, Color, Title, EnterpriseIdentity"
+
+    for i in range(1, len(ALL_DB_PATHS)):
+        attaches += "ATTACH DATABASE \"{0}\" as db{1};\n".format(os.path.expanduser(ALL_DB_PATHS[i]), i)
+        inserts += "INSERT INTO Entities SELECT {0} FROM db{1}.Entities;\n".format(keys, i)
+
+    sql = drop_table\
+          + create_table + \
+          "\n\n" + \
+          attaches + \
+          "\n\n" \
+          + inserts
+    # print(create_table + "\n\n" + attaches + "\n\n" + inserts)
+
+    return sql
+
+
+def create_connection(db_file):
+    """ create a database connection to the SQLite database
+        specified by the db_file
+    :param db_file: database file
+    :return: Connection object or None
+    """
+    conn = None
+    rdb = r"{0}".format(os.path.expanduser(db_file))
+    try:
+        conn = sqlite3.connect(rdb)
+    except Error as e:
+        print(e)
+
+    return conn
+
+
+def set_user_uid(path):
+    try:
+        global ONENOTE_USER_UID
+        ONENOTE_USER_UID = re.search('.*UserInfoCache/(.*)_LiveId\\.db', ONENOTE_USER_INFO_CACHE).group(1)
+    except Error as e:
+        raise Exception("Unable to create the OneNote user name")
 
 
 def main(wf):
@@ -54,6 +176,7 @@ def main(wf):
     parser.add_argument('--browse', dest='browse', nargs='?', default=None)
     parser.add_argument('--type', dest='type', nargs='?', default=None)
     parser.add_argument('--searchall', dest='searchall', action='store_true')
+    parser.add_argument('--db', dest='db', action='store_true')
     parser.add_argument('--warn', dest='warn', nargs='?', default=None)
     parser.add_argument('--url', dest='url', nargs='?', default=None)
     parser.add_argument('query', nargs='?', default=None)
@@ -107,6 +230,7 @@ def main(wf):
                     icon=ICON_WARNING)
         wf.send_feedback()
         return 0
+
     # get plist data from OneNote plist
     ONENOTE_PLIST = readPlist(ONENOTE_PLIST_PATH)
     urlbase = os.getenv('urlbase')
@@ -264,15 +388,18 @@ def get_all_data(parent, prefix):
     global subtitle
     global url
     global all_data
+    global gosids
 
     if len(parent) > 0 and "Name" not in parent:
         for n in parent:
             get_all_data(n, prefix)
         prefix = None
         url = ""
+        gosids = []
 
     if "Name" in parent:
         if "Children" in parent:
+            gosids.append(parent["Gosid"])
 
             if prefix is None:
                 pre = parent["Name"]
@@ -284,7 +411,8 @@ def get_all_data(parent, prefix):
                     "arg": subtitle,
                     "autocomplete": parent["Name"],
                     "icon": "icons/notebook.png",
-                    "url": url
+                    "url": url,
+                    "gosids": gosids
                 }
                 all_data.append(data)
 
@@ -298,7 +426,8 @@ def get_all_data(parent, prefix):
                     "arg": subtitle,
                     "autocomplete": parent["Name"],
                     "icon": "icons/section.png",
-                    "url": url
+                    "url": url,
+                    "gosids": gosids
                 }
                 all_data.append(data)
 
@@ -312,8 +441,10 @@ def get_all_data(parent, prefix):
                 "subtitle": subtitle,
                 "arg": url + ".one",
                 "autocomplete": parent["Name"],
-                "icon": "icons/page.png"
+                "icon": "icons/page.png",
+                "gosids": gosids
             }
+
             all_data.append(data)
 
 
@@ -349,7 +480,7 @@ def getAll(parent, prefix):
                                  valid=True,
                                  icon="icons/notebook.png",
                                  icontype="file",
-                                 quicklookurl=ICON_APP)
+                                 quicklookurl=ONENOTE_ICON)
                 it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
                 it.setvar('theTitle', parent["Name"])
 
@@ -365,7 +496,7 @@ def getAll(parent, prefix):
                                  valid=True,
                                  icon="icons/section.png",
                                  icontype="file",
-                                 quicklookurl=ICON_APP)
+                                 quicklookurl=ONENOTE_ICON)
                 it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
                 it.setvar('theTitle', parent["Name"])
 
@@ -381,7 +512,7 @@ def getAll(parent, prefix):
                              valid=True,
                              icon="icons/page.png",
                              icontype="file",
-                             quicklookurl=ICON_APP)
+                             quicklookurl=ONENOTE_ICON)
 
 
 def makeurl(prefix):
@@ -500,7 +631,7 @@ def browse_notebooks():
                          valid=True,
                          icon="icons/notebook.png",
                          icontype="file",
-                         quicklookurl=ICON_APP)
+                         quicklookurl=ONENOTE_ICON)
         it.add_modifier('cmd', subtitle="open in OneNote", arg=url, valid=True)
         it.setvar('theTitle', n["Name"])
         it.setvar("q", sub)
@@ -515,12 +646,13 @@ def open_url(url):
 
 
 def clear_config():
-    unset_config('q')
-    unset_config('theTitle')
+    # unset_config('q')
+    # unset_config('theTitle')
     log.info("'q' and 'theTitle' cleared")
 
 
 if __name__ == "__main__":
+    # db_test()
     wf = Workflow3(default_settings=DEFAULT_SETTINGS,
                    update_settings=UPDATE_SETTINGS,
                    help_url=HELP_URL)
