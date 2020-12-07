@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import os
 import sys
 import re
-import urllib
+import urllib2
 import time
 import argparse
 from plistlib import readPlist
@@ -16,7 +16,7 @@ from sqlite3 import Error
 from workflow import (Workflow3, ICON_INFO, ICON_WARNING,
                       ICON_ERROR, MATCH_ALL, MATCH_ALLCHARS,
                       MATCH_SUBSTRING, MATCH_STARTSWITH)
-from workflow.util import run_trigger, run_command, unset_config
+from workflow.util import run_trigger, run_command, unicodify, utf8ify, unset_config
 
 __version__ = '1.3.1'
 
@@ -52,40 +52,38 @@ MERGED_DB = '~/Dropbox/Library/Application Support/Alfred/Alfred.alfredpreferenc
             'user.workflow.F656F39C-B1D5-471E-942E-8D76BDDBE40A/all-onenote.db'
 
 
-def search_all_db_entries(entry):
+def search_all_db_entries():
     conn = create_connection(MERGED_DB)
 
-    conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
-    cur = conn.cursor()
-    log.debug('starting loop')
-    for row in cur.execute(str("SELECT * FROM Entities;")):
+    # cur = conn.cursor()
+    log.debug('\nstarting loop')
+    for row in conn.execute(str("SELECT * FROM Entities;")):
         if row[str('Type')] == 4:
             icon = ICON_NOTEBOOK
         elif row[str('Type')] == 3 or row[str('Type')] == 2:
             icon = ICON_SECTION
         else:
             icon = ICON_PAGE
-        # url = make_url(row)
         it = wf.add_item(
-            row[str('Title')],
-            arg=row[str('GUID')],
-            subtitle=get_page_path(row, conn).replace('.one#', ''),
-            # arg=dict(row),
-            # arg=make_url(row),
-            uid=row[str('GUID')],
-            autocomplete=row[str('Title')],
-            valid=True,
-            icon=icon,
-            icontype="file"
-        )
-    log.info('loop complete')
+                row[str('Title')],
+                arg=row[str('GUID')],
+                subtitle=get_page_path(row, conn).replace('.one#', '/'),
+                # arg=dict(row),
+                # arg=make_url(row),
+                uid=row[str('GUID')],
+                autocomplete=row[str('Title')],
+                valid=True,
+                icon=icon,
+                icontype="file"
+            )
+    log.debug('\nloop complete')
     wf.send_feedback()
 
 
 def get_recent():
     conn = create_connection(MERGED_DB)
 
-    conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
+    # conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
     cur = conn.cursor()
     log.debug('recent')
     for row in cur.execute(str("SELECT * FROM Entities ORDER BY RecentTime DESC;")):
@@ -95,10 +93,39 @@ def get_recent():
             icon = ICON_SECTION
         else:
             icon = ICON_PAGE
-        # url = make_url(row)
         it = wf.add_item(
             row[str('Title')],
-            subtitle=get_page_path(row, conn),
+            subtitle=get_page_path(row, conn).replace('.one#', '/'),
+            arg=row[str('GUID')],
+            # arg=dict(row),
+            # arg=make_url(row),
+            # uid=row[str('GUID')],
+            autocomplete=row[str('Title')],
+            valid=True,
+            icon=icon,
+            icontype="file"
+        )
+    log.info('loop complete')
+    wf.send_feedback()
+
+
+def get_modified():
+    conn = create_connection(MERGED_DB)
+
+    # conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
+    cur = conn.cursor()
+    log.debug('modified')
+    for row in cur.execute(str("SELECT * FROM Entities ORDER BY LastModifiedTime DESC;")):
+        if row[str('Type')] == 4:
+            icon = ICON_NOTEBOOK
+        elif row[str('Type')] == 3 or row[str('Type')] == 2:
+            icon = ICON_SECTION
+        else:
+            icon = ICON_PAGE
+
+        it = wf.add_item(
+            row[str('Title')],
+            subtitle=get_page_path(row, conn).replace('.one#', '/'),
             arg=row[str('GUID')],
             # arg=dict(row),
             # arg=make_url(row),
@@ -117,26 +144,33 @@ def make_url(row):
     conn = create_connection(MERGED_DB)
     cur = conn.cursor()
     set_user_uid(None)
-    base = 'onenote:https://d.docs.live.net/' + ONENOTE_USER_UID + '/Documents/'
-    # start = time.time()
+    base = 'onenote:https://d.docs.live.net/{0}/Documents/'.format(ONENOTE_USER_UID)
     path = get_page_path(row, conn)
-    # end = time.time()
-    # print ('it took: '.format(end - start))
-    url = base + path
+    url = "{0}{1}".format(base, path)
 
     if row[str('Type')] <= 2:   # if section or page
-        cur.execute("SELECT * FROM Entities WHERE GOID = \"{0}\"".format(row[str('ParentGOID')]))
+        cur.execute(str("SELECT * FROM Entities WHERE GOID = \"{0}\"".format(row[str('ParentGOID')])))
         r = cur.fetchone()
         section_id = r[str('GUID')]
         if row[str('Type')] == 2:
-            url += '&section-id=' + row[str('GUID')] + '&end'
+            url = "{0}&section-id={1}&end".format(url,  row[str('GUID')])
+            # url += '&section-id=' + row[str('GUID')] + '&end'
         else:
-            url += '&section-id=' + section_id + '&page-id=' + row[str('GUID')] + '&end'
+            url = "{0}&section-id={1}&page-id={2}&end".format(url,  section_id, row[str('GUID')])
+            # url += '&section-id=' + section_id + '&page-id=' + row[str('GUID')] + '&end'
+    else:
+        # url += '/'
+        pass
 
     # url = encode_url(url)
-    log.debug ('somethings up with url: ' + url)
-    return encode_url(url)
-    # return url
+    log.debug('\nsomethings up with url')
+    log.debug('\nBEFORE\n' + url)
+
+    url = encode_url(url)
+    # log.debug(str(type(url)))
+    log.debug('\nAFTER\n' + url + '\n' + str(type(url)))
+    
+    return url
 
 
 def get_page_path(row, conn):
@@ -145,51 +179,34 @@ def get_page_path(row, conn):
     # print(row[str('Type')])
     cur = conn.cursor()
     if not row[str('ParentGOID')]:
-    # if row[str('Type')] == 4 or (not row[str('GrandparentGOIDs')] and not row[str('ParentGOID')]):
         return row[str('Title')]
+
     elif row[str('Type')] == 3:
         if row[str('GrandparentGOIDs')]:
             # check count of grandparents
-            bracketCount = 0
-
             if len(row[str('GrandparentGOIDs')]) > 50:
                 grandparentIDs = split_grandparents(row[str('GrandparentGOIDs')])
                 grandparent_id = grandparentIDs[0]
             else:
                 grandparent_id = row[str('GrandparentGOIDs')]
-
-            cur.execute(
-                "SELECT * FROM Entities WHERE GOID = \"{0}\"".format(grandparent_id)
-            )
-            # cur.execute(sql)
+            cur.execute("SELECT * FROM Entities WHERE GOID = \"{0}\"".format(grandparent_id))
             parent_row = cur.fetchone()
-            # if parent_row[]
         else:
-            # sql = "SELECT * FROM Entities WHERE GOID = \"{0}\"".format(row[str('ParentGOID')])
-            cur.execute(
-                "SELECT * FROM Entities WHERE GOID = \"{0}\"".format(row[str('ParentGOID')])
-            )
+            cur.execute("SELECT * FROM Entities WHERE GOID = \"{0}\"".format(row[str('ParentGOID')]))
             parent_row = cur.fetchone()
-            # cur.execute(sql)
-        # cur.execute(sql)
-        # parent_row = cur.fetchone()
-        # print(parent_row[str('ParentGOID')])
-        # print(row[str('Title')])
-        # print(parent_row[str('Title')])
+
         return "{0}/{1}".format(get_page_path(parent_row, conn), row[str('Title')])
+
     else:
-        if row[str('ParentGOID')]:
-            cur.execute(
-                    "SELECT * FROM Entities WHERE GOID = \"{0}\"".format(row[str('ParentGOID')])
-            )
-            parent_row = cur.fetchone()
-            # print(parent_row[str('ParentGOID')])
-            # print(row[str('Title')])
-            # print(parent_row[str('Title')])
-            if row[str('Type')] == 2:
-                return get_page_path(parent_row, conn) + '.one#' + row[str('Title')]
-            else:
-                return get_page_path(parent_row, conn) + "/" + row[str('Title')]
+        cur.execute("SELECT * FROM Entities WHERE GOID = \"{0}\"".format(row[str('ParentGOID')]))
+        parent_row = cur.fetchone()
+
+        if row[str('Type')] == 2:
+            return "{0}.one#{1}".format(get_page_path(parent_row, conn), row[str('Title')])
+            # return get_page_path(parent_row, conn) + '.one#' + row[str('Title')]
+        else:
+            return "{0}/{1}".format(get_page_path(parent_row, conn), row[str('Title')])
+            # return get_page_path(parent_row, conn) + "/" + row[str('Title')]
 
 
 def split_grandparents(grandparentIDs):
@@ -204,11 +221,9 @@ def split_grandparents(grandparentIDs):
 
 
 def get_section_pages(sec_guid):
-    # if
     sql = "SELECT * FROM Entities WHERE ParentGOID = \"{0}\"".format(sec_guid)
     conn = create_connection(MERGED_DB)
-    cur = conn.cursor()
-    for row in cur.execute(str(sql)):
+    for row in conn.execute(str(sql)):
         print (row)
 
 
@@ -227,6 +242,9 @@ def create_db():
         print(r[0])
 
 
+def update_db(): create_db()
+
+
 def reset_db():
     conn = create_connection(MERGED_DB)
     conn.execute(str("DROP TABLE Entities;"))
@@ -234,11 +252,8 @@ def reset_db():
 
 
 def get_page_name(GUID):
-    # log.info('getting page name for: ' + GUID)
-    # log.debug(GUID)
     conn = create_connection(MERGED_DB)
-
-    conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
+    conn.text_factory = unicode
     cur = conn.cursor()
     cur.execute(str("SELECT * FROM Entities WHERE GUID = \"{0}\"".format(GUID)))
     r = cur.fetchone()
@@ -299,8 +314,9 @@ def create_connection(db_file):
     try:
         conn = sqlite3.connect(rdb)
         conn.row_factory = sqlite3.Row
+        conn.text_factory = unicode
     except Error as e:
-        print(e)
+        raise e
 
     return conn
 
@@ -331,12 +347,14 @@ def main(wf):
     parser.add_argument('--browse', dest='browse', nargs='?', default=None)
     parser.add_argument('--type', dest='type', nargs='?', default=None)
     parser.add_argument('--searchall', dest='searchall', action='store_true')
-    parser.add_argument('--db', dest='db', action='store_true')
-    parser.add_argument('--r', dest='recent', action='store_true')
-    parser.add_argument('--warn', dest='warn', nargs='?', default=None)
-    parser.add_argument('--o', dest='open', nargs='?', default=None)
-    parser.add_argument('--n', dest='name', nargs='?', default=None)
+    parser.add_argument('-db', dest='db', action='store_true')
+    parser.add_argument('-r', dest='recent', action='store_true')
+    parser.add_argument('-m', dest='modified', action='store_true')
+    parser.add_argument('-u', dest='update', action='store_true')
+    parser.add_argument('-o', dest='open', nargs='?', default=None)
+    parser.add_argument('-n', dest='name', nargs='?', default=None)
     parser.add_argument('--url', dest='url', nargs='?', default=None)
+    parser.add_argument('--warn', dest='warn', nargs='?', default=None)
     parser.add_argument('query', nargs='?', default=None)
     args = parser.parse_args(wf.args)
 
@@ -373,20 +391,33 @@ def main(wf):
 
     if args.open:
         conn = create_connection(MERGED_DB)
-        conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
         cur = conn.cursor()
         cur.execute(str("SELECT * FROM Entities WHERE GUID = \"{0}\"".format(args.open)))
         r = cur.fetchone()
-        log.debug('opening...')
-        # open_url(make_url(r))
-        print(make_url(r))
+        open_url(make_url(r))
+        return 0
 
     if args.db:
-        search_all_db_entries(None)
+        search_all_db_entries()
         return 0
 
     if args.recent:
+        update_db()
         get_recent()
+        return 0
+
+    if args.modified:
+        update_db()
+        get_modified()
+        return 0
+
+    if args.update:
+        update_db()
+        wf.add_item('Updating OneNote cache.',
+                    'Give me a minute and then try searching again.',
+                    valid=False,
+                    icon=ICON_WARNING)
+        wf.send_feedback()
         return 0
 
     ####################################################################
@@ -427,8 +458,7 @@ def main(wf):
                           # match_on=MATCH_ALL ^ MATCH_ALLCHARS ^ MATCH_SUBSTRING)
 
         if not items:
-            wf.add_item(title='No matches',
-                        icon=ICON_WARNING)
+            wf.add_item(title='No matches', icon=ICON_WARNING)
 
         for item in items:
             it = wf.add_item(
@@ -817,18 +847,36 @@ def browse_notebooks():
         it.setvar("q", sub)
 
 
-def encode_url(url): return url.replace(" ", "%20")
+def encode_url(url):
+    """
+
+    :rtype: str
+    """
+    return url.replace(" ", "%20")
 
 
 def open_url(url):
+    # assert isinstance(url, unicode), 'url is {0}, expected unicode'.format(type(url))
+    # log.debug('OPENING URL\n data type: ' + str(type(url)))
     # run_trigger('hide', wf.bundleid)    # hide alfred
-    run_command(['open', encode_url(url)])
+    log.debug("\n-----------\n"
+              "\n"
+              "\n"
+              "url encoding: {}\n"
+              "\n"
+              "\n"
+              "-----------\n".format(type(url))
+              )
+    # urllib2.urlopen(utf8ify(url))
+    # run_command(['open', utf8ify(encode_url(url))])
+    print(unicodify(encode_url(url)))
 
 
 def clear_config():
-    # unset_config('q')
-    # unset_config('theTitle')
+    unset_config('q')
+    unset_config('theTitle')
     log.info("'q' and 'theTitle' cleared")
+    pass
 
 
 def init_wf():
@@ -838,7 +886,7 @@ def init_wf():
                    help_url=HELP_URL)
     log = wf.logger
 
+
 if __name__ == "__main__":
-    # db_test()
     init_wf()
     sys.exit(wf.run(main))

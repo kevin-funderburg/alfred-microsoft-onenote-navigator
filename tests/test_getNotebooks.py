@@ -9,18 +9,14 @@ class MyTestCase(unittest.TestCase):
     def test_sanity(self):
         self.assertEqual(1+1, 2, "it's working")
 
-    def test_db_search(int,issing):
-        getNotebooks.db_test()
-
     def test_paths_exist(self):
         self.assertTrue(os.path.exists(os.path.expanduser(getNotebooks.ONENOTE_FULL_SEARCH_PATH)),
                         "database folder not found")
         self.assertTrue(os.path.exists(os.path.expanduser(getNotebooks.ONENOTE_USER_INFO_CACHE)),
                         "database folder not found")
-        self.assertRegexpMatches(getNotebooks.ONENOTE_USER_INFO_CACHE, "_LiveId\\.db")
+        self.assertRaisesRegexp(ValueError, "invalid literal for.*XYZ'$",
+                                int, 'XYZ')
 
-    def test_invalid_uid(self):
-        self.assertRaises(Exception, getNotebooks.set_user_uid("invalid/path"))
 
     def CheckSqliteRowIndex(self):
         con = sqlite3.connect(getNotebooks.MERGED_DB)
@@ -72,6 +68,22 @@ class MyTestCase(unittest.TestCase):
     def test_make_url(self):
         getNotebooks.init_wf()
         getNotebooks.make_url(getNotebooks.get_page_name('{6C26AF5F-0E1A-3447-8193-21E36B47A09B}'))
+
+    def test_open_url(self):
+        getNotebooks.init_wf()
+        url = getNotebooks.make_url(getNotebooks.get_page_name('{6C26AF5F-0E1A-3447-8193-21E36B47A09B}'))
+        getNotebooks.open_url(url)
+
+    class ExpectedFailureTestCase(unittest.TestCase):
+        @unittest.expectedFailure
+        def test_open_url_fail(self):
+            with self.assertRaises(Exception, getNotebooks.open_url(None)) as cm:
+                the_exception = cm.exception
+                print(the_exception)
+
+        def test_invalid_uid(self):
+            self.assertRaises(Exception, getNotebooks.set_user_uid("invalid/path"))
+
 
 if __name__ == '__main__':
     unittest.main()
