@@ -17,7 +17,6 @@ class MyTestCase(unittest.TestCase):
         self.assertRaisesRegexp(ValueError, "invalid literal for.*XYZ'$",
                                 int, 'XYZ')
 
-
     def CheckSqliteRowIndex(self):
         con = sqlite3.connect(getNotebooks.MERGED_DB)
         con.row_factory = sqlite3.Row
@@ -46,16 +45,33 @@ class MyTestCase(unittest.TestCase):
     # def test_make_url(self):
     #     getNotebooks.init_wf()
         # getNotebooks.make_url()
+    def test_get_all(self):
+        getNotebooks.init_wf()
+        getNotebooks.get_all()
 
     def test_create_db(self):
+        getNotebooks.init_wf()
         getNotebooks.create_db()
 
-    def test_get_sec_pages(self):
-        getNotebooks.get_section_pages('Algorithm Design')
+    def test_get_children(self):
+        getNotebooks.init_wf()
+        getNotebooks.get_children('{F71CBF45-C86C-104C-B90B-147B10D2F615}')
+        
+    def test_top_down(self):
+        getNotebooks.init_wf()
+        getNotebooks.top_down('{9E1EACD4-A21C-B947-9E83-C599172503C6}{75}')
 
     def test_search_all_db_entries(self):
         getNotebooks.init_wf()
         getNotebooks.search_all_db_entries()
+
+    def test_search_recent(self):
+        getNotebooks.init_wf()
+        getNotebooks.get_recent()
+
+    def test_search_modified(self):
+        getNotebooks.init_wf()
+        getNotebooks.get_modified()
 
     def test_get_page_name(self):
         getNotebooks.init_wf()
@@ -71,8 +87,19 @@ class MyTestCase(unittest.TestCase):
 
     def test_open_url(self):
         getNotebooks.init_wf()
-        url = getNotebooks.make_url(getNotebooks.get_page_name('{6C26AF5F-0E1A-3447-8193-21E36B47A09B}'))
+        item = getNotebooks.NotebookItem(getNotebooks.get_row('{8392576E-34AB-2F40-A1F3-46B5ECF3E17A}'))
+        url = getNotebooks.make_url(item)
         getNotebooks.open_url(url)
+
+    def test_cache_data(self):
+        getNotebooks.init_wf()
+        getNotebooks.cache_data()
+
+    def test_get_row(self):
+        getNotebooks.init_wf()
+        self.assertIsInstance(getNotebooks.get_row('{6C26AF5F-0E1A-3447-8193-21E36B47A09B}'),
+                              sqlite3.Row,
+                              "row is not instance of sqlite.Row")
 
     class ExpectedFailureTestCase(unittest.TestCase):
         @unittest.expectedFailure
