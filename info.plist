@@ -1026,29 +1026,6 @@ on run argv
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>/usr/bin/python getNotebooks.py -o $1</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8FB60A23-AF3A-48DA-94A2-F960644EA6B1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1098,6 +1075,29 @@ on run argv
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/usr/bin/python getNotebooks.py -o $1</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8FB60A23-AF3A-48DA-94A2-F960644EA6B1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>'{query}', {allvars}</string>
 				<key>cleardebuggertext</key>
@@ -1108,7 +1108,7 @@ on run argv
 			<key>type</key>
 			<string>alfred.workflow.utility.debug</string>
 			<key>uid</key>
-			<string>FEE8D3B6-E4CE-4E6E-A611-09C54776BF54</string>
+			<string>532B74B0-C7DC-4489-BBBA-803608171DFA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1125,7 +1125,7 @@ on run argv
 			<key>type</key>
 			<string>alfred.workflow.utility.debug</string>
 			<key>uid</key>
-			<string>532B74B0-C7DC-4489-BBBA-803608171DFA</string>
+			<string>FEE8D3B6-E4CE-4E6E-A611-09C54776BF54</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1530,9 +1530,9 @@ on run argv
 		<key>8FB60A23-AF3A-48DA-94A2-F960644EA6B1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>370</integer>
+			<integer>355</integer>
 			<key>ypos</key>
-			<integer>1155</integer>
+			<integer>1225</integer>
 		</dict>
 		<key>93D9A07A-5CED-49CE-880D-D9C0516A9882</key>
 		<dict>
@@ -1657,15 +1657,15 @@ on run argv
 		<key>FEE8D3B6-E4CE-4E6E-A611-09C54776BF54</key>
 		<dict>
 			<key>xpos</key>
-			<integer>245</integer>
+			<integer>235</integer>
 			<key>ypos</key>
-			<integer>1185</integer>
+			<integer>1255</integer>
 		</dict>
 	</dict>
 	<key>variables</key>
 	<dict>
 		<key>q</key>
-		<string>{294EF16B-A6BF-4844-87D9-5285255E19A0}</string>
+		<string>{F6617C89-8D87-EA41-8322-8218A9259883}</string>
 		<key>urlbase</key>
 		<string>onenote:https://d.docs.live.net/9478a1a4ec3795b7/Documents/</string>
 	</dict>
