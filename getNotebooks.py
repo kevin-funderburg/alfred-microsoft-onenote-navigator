@@ -25,17 +25,12 @@ __version__ = '1.3.1'
 
 wf = None  # type: Workflow3
 log = None
-# sub = []
-# subtitle = ""
-# url = ""
-# urlbase = None
+
 all_data = []
 nitems =[]
 path_map = {}
-# path_tablee = [][]
 
 HELP_URL = 'https://github.com/kevin-funderburg/alfred-microsoft-onenote-navigator'
-
 # GitHub repo for self-updating
 UPDATE_SETTINGS = {'github_slug': 'kevin-funderburg/alfred-microsoft-onenote-navigator'}
 DEFAULT_SETTINGS = {'urlbase': None}
@@ -56,119 +51,31 @@ data = []
 sec_paths = []
 
 
-def search_all_db_entries():
-    conn = create_connection(wf.datafile(MERGED_DB))
-
-    log.debug('\nstarting loop')
-    for row in conn.execute(str("SELECT * FROM Entities;")):
-        item = NotebookItem(row)
-        item.set_path(get_page_path(item))
-        it = wf.add_item(
-                item.Title,
-                arg=item.GUID,
-                subtitle=item.path,
-                # arg=dict(row),
-                # arg=make_url(row),
-                uid=item.GUID,
-                autocomplete=item.Title,
-                valid=True,
-                icon=item.icon,
-                icontype="file"
-            )
-        data.append(it)
-    log.debug('\nloop complete')
-    wf.send_feedback()
-
-
-def get_notebook_items(args):
-
-    query = populate_query(args)
-    # if search == 'recent':
-    #     query = "SELECT * FROM Entities ORDER BY RecentTime DESC;"
-    # elif search == 'modified':
-    #     query = "SELECT * FROM Entities ORDER BY LastModifiedTime DESC;"
-    # elif search == 'all':
-    #     query = "SELECT * FROM Entities;"
-
-    # conn = create_connection(wf.datafile(MERGED_DB))
-    #
-    # for row in conn.execute(str(query)):
-    for row in run_query(query):
-        ni = NotebookItem(row)
-        ni.set_path(get_page_path(ni))
-        nitems.append(ni)
-        it = wf.add_item(
-                ni.Title,
-                arg=ni.GUID,
-                subtitle=ni.path,
-                uid=ni.GUID,
-                autocomplete=ni.Title,
-                valid=True,
-                icon=ni.icon,
-                icontype="file"
-            )
-    log.info('loop complete')
-    wf.send_feedback()
-    return nitems
-
-
-def update_path_map():
-    conn = create_connection(wf.datafile(MERGED_DB))
-    query = "SELECT * FROM Entities;"
-
-    for row in conn.execute(str(query)):
-        ni = NotebookItem(row)
-        ni.set_path(get_page_path(ni))
-
-
-def make_url(item):
-    # log.debug('row type is: ' + str(typ/e(row)))
-    # assert isinstance(row, list), 'expected <list> and got ' + str(type(row))
-
-    conn = create_connection(wf.datafile(MERGED_DB))
-    cur = conn.cursor()
-    set_user_uid(None)
-    base = 'onenote:https://d.docs.live.net/{0}/Documents/'.format(ONENOTE_USER_UID)
-    path = get_page_path(item)
-    url = "{0}{1}".format(base, path)
-
-    if item.Type <= 2:   # if section or page
-        # cur.execute(str("SELECT * FROM Entities WHERE GOID = \"{0}\"".format(item.ParentGOID)))
-        # r = cur.fetchone()
-        section_id = item.GUID
-        if item.Type == 2:
-            url = "{0}&section-id={1}&end".format(url, section_id)
-        else:
-            url = "{0}&section-id={1}&page-id={2}&end".format(url, section_id, item.GUID)
-
-    return url
-
-
 def get_page_path(ni):
     global path_map
 
     if ni.GOID not in path_map:
         if ni.Type == 4:
             entry = {ni.GOID: ni.Title}
-            path_map.update(entry)
-            return path_map[ni.GOID]
 
-        parent_path = None
-        if ni.Type == 3:
-            if ni.has_grandparent():
-                if ni.last_grandparent in path_map:
-                    parent_path = path_map[ni.last_grandparent]
+        else:
+            parent_path = None
+            if ni.Type == 3:
+                if ni.has_grandparent():
+                    if ni.last_grandparent in path_map:
+                        parent_path = path_map[ni.last_grandparent]
+                    else:
+                        parent_row = NotebookItem(get_parent_row(ni.last_grandparent))
+                        parent_path = get_page_path(parent_row)
                 else:
-                    parent_row = NotebookItem(get_parent_row(ni.last_grandparent))
-                    parent_path = get_page_path(parent_row)
-            else:
+                    parent_path = get_parent_path(ni)
+
+            elif ni.Type < 3:
                 parent_path = get_parent_path(ni)
 
-        elif ni.Type == 2 or ni.Type == 1:
-            parent_path = get_parent_path(ni)
+            page_path = "{0}/{1}".format(parent_path, ni.Title)
+            entry = {ni.GOID: page_path}
 
-        page_path = "{0}/{1}".format(parent_path, ni.Title)
-        entry = {ni.GOID: page_path}
         path_map.update(entry)
 
     return path_map[ni.GOID]
@@ -176,7 +83,7 @@ def get_page_path(ni):
 
 def get_parent_row(parent_goid):
     conn = create_connection(wf.datafile(MERGED_DB))
-    for row in conn.execute(str("SELECT * FROM Entities WHERE GOID = \"{0}\"".format(parent_goid))):
+    for row in conn.execute(queries.get_parent_row(parent_goid)):
         return row
 
 
@@ -190,16 +97,11 @@ def get_parent_path(item):
 
 
 def get_row(uid):
-    sql = "SELECT * FROM Entities WHERE GUID = \"{0}\"".format(uid)
-    conn = create_connection(wf.datafile(MERGED_DB))
-    cur = conn.cursor()
-    cur.execute(sql)
-    res = cur.fetchall()
+    res = run_query(queries.get_row(uid))
     if res:
         log.debug('row type in get_row: ' + str(type(res)))
         return res[0]
-    else:
-        return None
+    return None
 
 
 def get_children(sec_guid):
@@ -224,8 +126,16 @@ def create_db():
 def update_db(): create_db()
 
 
-def reset_db():
-    run_query(queries.reset_db())
+def reset_db(): run_query(queries.reset_db())
+
+
+def update_path_map():
+    conn = create_connection(wf.datafile(MERGED_DB))
+    query = "SELECT * FROM Entities;"
+
+    for row in conn.execute(str(query)):
+        ni = NotebookItem(row)
+        ni.set_path(get_page_path(ni))
 
 
 def get_page_name(GUID):
@@ -295,8 +205,8 @@ def set_user_uid(path):
         raise Exception("Unable to create the OneNote user name")
 
 
-def get_results(sql):
-    wf.logger.debug(sql)
+def get_results(sql, args):
+    log.debug(sql)
     results = run_query(sql)
 
     if not results:
@@ -307,24 +217,25 @@ def get_results(sql):
             item.set_path(get_page_path(item))
             nitems.append(item)
             log.debug(item)
+            if args.recent or args.modified:
+                uid = None  # set uid to None so alfred doesn't sort the results
+            else:
+                uid = item.GUID
             it = wf.add_item(
                 title=item.Title,
                 arg=item.GUID,
                 subtitle=item.path,
-                uid=item.GUID,
+                uid=uid,
                 autocomplete=item.Title,
                 valid=True,
                 icon=item.icon,
                 icontype="file"
             )
+            it.add_modifier('cmd', subtitle="open in OneNote", arg=item.url, valid=True)
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Search OneNote")
-
-    parser.add_argument('--seturl', dest='urlbase', nargs='?', default=None)
-    parser.add_argument('--type', dest='type', nargs='?', default=None)
-    parser.add_argument('--searchall', dest='searchall', action='store_true')
     parser.add_argument('-a', '--all', dest='all', action='store_true',
                         help='search unordered notebook items')
     parser.add_argument('-r', '--recent', dest='recent', action='store_true',
@@ -337,10 +248,6 @@ def parse_args():
                         help='open the notebook item with provided guid')
     parser.add_argument('-b', '--browse', dest='browse', nargs='?', default=None,
                         help='browse notebooks from top level')
-
-    parser.add_argument('-n', dest='name', nargs='?', default=None)
-    parser.add_argument('--url', dest='url', nargs='?', default=None)
-    parser.add_argument('--warn', dest='warn', nargs='?', default=None)
     parser.add_argument('query', nargs='?', default=None)
     log.debug(wf.args)
     args = parser.parse_args(wf.args)
@@ -366,7 +273,6 @@ def main(wf):
         if ni.Type == 1:
             log.debug('argument is a page, preparing to open...' + ni.Title)
             open_url(ni.url)
-            # open_url(make_url(item))
         else:
             log.info("setting 'q' to: {0}".format(args.open))
             log.debug('argument is not a page, gathering sub-pages...')
@@ -376,7 +282,7 @@ def main(wf):
         return 0
 
     query = populate_query(args)
-    get_results(query)
+    get_results(query, args)
     wf.send_feedback()
     return
 
@@ -425,10 +331,6 @@ def main(wf):
                     icon=ICON_INFO)
         wf.send_feedback()
         return 0
-
-
-
-
 
 
 def key_for_data(data): return '{}'.format(data['Name'])
@@ -677,13 +579,10 @@ def encode_url(url):
     encode url for shell to open
     :rtype: str
     """
-    delims = {
-        " ": "%20",
-        "&": "%26",
-        "{": "%7B",
-        "}": "%7D",
-    }
-
+    delims = {" ": "%20",
+              "&": "%26",
+              "{": "%7B",
+              "}": "%7D",}
     for key, val in delims.items():
         url = url.replace(key, val)
     return url
@@ -699,7 +598,6 @@ def clear_config():
     unset_config('q')
     unset_config('theTitle')
     log.info("'q' and 'theTitle' cleared")
-    pass
 
 
 def init_wf():

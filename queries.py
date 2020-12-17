@@ -4,8 +4,7 @@ from getNotebooks import ONENOTE_FULL_SEARCH_PATH, ALL_DB_PATHS
 
 
 def get_all_items():
-    query = "SELECT * FROM Entities;"
-    return query
+    return "SELECT * FROM Entities;"
 
 
 def get_recent_items():
