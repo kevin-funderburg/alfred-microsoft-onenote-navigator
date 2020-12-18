@@ -38,7 +38,7 @@ class NotebookItem:
         if self.has_grandparent():
             if len(self.GrandparentGOIDs) > 50:
                 grandparents = self.split_grandparents()
-                self.last_grandparent = grandparents[1]
+                self.last_grandparent = grandparents[-1]
 
     def split_grandparents(self):
         new_ids = []
@@ -57,10 +57,7 @@ class NotebookItem:
         if self.Type == 4:
             self.icon = ICON_NOTEBOOK
         elif self.Type == 3:
-            if self.has_grandparent():
-                self.icon = ICON_SECTION_GROUP
-            else:
-                self.icon = ICON_SECTION
+            self.icon = ICON_SECTION_GROUP
         elif self.Type == 2:
             self.icon = ICON_SECTION
         else:

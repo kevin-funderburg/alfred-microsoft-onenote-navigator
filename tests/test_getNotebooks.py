@@ -1,5 +1,6 @@
 import unittest
 import getNotebooks
+import queries
 import plistlib
 import os
 import sqlite3
@@ -87,9 +88,14 @@ class MyTestCase(unittest.TestCase):
 
     def test_open_url(self):
         getNotebooks.init_wf()
-        item = getNotebooks.NotebookItem(getNotebooks.get_row('{8392576E-34AB-2F40-A1F3-46B5ECF3E17A}'))
+        item = getNotebooks.NotebookItem(getNotebooks.get_row_by_guid('{8392576E-34AB-2F40-A1F3-46B5ECF3E17A}'))
         url = getNotebooks.make_url(item)
         getNotebooks.open_url(url)
+
+    def test_get_children(self):
+        getNotebooks.init_wf()
+        item = getNotebooks.NotebookItem(getNotebooks.get_row_by_goid('{9E1EACD4-A21C-B947-9E83-C599172503C6}{20}'))
+        children = getNotebooks.get_children(item)
 
     def test_cache_data(self):
         getNotebooks.init_wf()
@@ -97,7 +103,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_get_row(self):
         getNotebooks.init_wf()
-        self.assertIsInstance(getNotebooks.get_row('{6C26AF5F-0E1A-3447-8193-21E36B47A09B}'),
+        self.assertIsInstance(getNotebooks.get_row_by_guid('{6C26AF5F-0E1A-3447-8193-21E36B47A09B}'),
                               sqlite3.Row,
                               "row is not instance of sqlite.Row")
 

@@ -18,7 +18,7 @@ import queries
 from workflow import (Workflow3, ICON_INFO, ICON_WARNING,
                       ICON_ERROR, MATCH_ALL, MATCH_ALLCHARS,
                       MATCH_SUBSTRING, MATCH_STARTSWITH)
-from workflow.util import run_trigger, run_command, unicodify, utf8ify, unset_config
+from workflow.util import run_trigger, run_command, unicodify, utf8ify, set_config, unset_config
 from workflow.background import run_in_background, is_running
 
 __version__ = '1.3.1'
@@ -48,7 +48,6 @@ ALL_DB_PATHS = []
 MERGED_DB = 'merged-onenote-data.db'
 
 data = []
-sec_paths = []
 
 
 def get_page_path(ni):
@@ -96,16 +95,23 @@ def get_parent_path(item):
         return get_page_path(parent_row)
 
 
-def get_row(uid):
-    res = run_query(queries.get_row(uid))
+def get_row_by_guid(uid):
+    res = run_query(queries.get_row_by_guid(uid))
     if res:
-        log.debug('row type in get_row: ' + str(type(res)))
         return res[0]
     return None
 
 
-def get_children(sec_guid):
-    return run_query(queries.get_children(sec_guid))
+def get_row_by_goid(goid):
+    res = run_query(queries.get_row_by_goid(goid))
+    if res:
+        return res[0]
+    return None
+
+
+def get_children(ni):
+    results = run_query(queries.get_children(ni))
+    return results
 
 
 def create_db():
@@ -118,9 +124,6 @@ def create_db():
             cur.execute(str(line))
 
     conn.commit()
-    rows = cur.fetchall()
-    for r in rows:
-        print(r[0])
 
 
 def update_db(): create_db()
@@ -131,11 +134,30 @@ def reset_db(): run_query(queries.reset_db())
 
 def update_path_map():
     conn = create_connection(wf.datafile(MERGED_DB))
-    query = "SELECT * FROM Entities;"
-
-    for row in conn.execute(str(query)):
+    for row in conn.execute(queries.get_all_items()):
         ni = NotebookItem(row)
         ni.set_path(get_page_path(ni))
+
+    return path_map
+
+
+def update_notebook_items():
+    global nitems
+    sql = "SELECT * FROM Entities;"
+    log.debug(sql)
+    results = run_query(sql)
+    if not results:
+        nitems = None
+        # wf.add_item('No items', icon=ICON_WARNING)
+    else:
+        for result in results:
+            item = NotebookItem(result)
+            item.set_path(get_page_path(item))
+            nitems.append(item)
+            log.debug(item)
+
+    wf.cache_data('notebook_items', nitems)
+    return nitems
 
 
 def get_page_name(GUID):
@@ -166,10 +188,8 @@ def populate_query(args):
 
 
 def run_query(sql):
-    db_path = wf.datafile(MERGED_DB)
-
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
+    log.debug("sql: {0}".format(sql))
+    conn = create_connection(wf.datafile(MERGED_DB))
     cursor = conn.cursor()
     log.debug(sql)
     cursor.execute(sql)
@@ -205,10 +225,13 @@ def set_user_uid(path):
         raise Exception("Unable to create the OneNote user name")
 
 
-def get_results(sql, args):
+def get_results(sql):
+    global nitems
     log.debug(sql)
-    results = run_query(sql)
+    return run_query(sql)
 
+
+def build_wf_items(results, args):
     if not results:
         wf.add_item('No items', icon=ICON_WARNING)
     else:
@@ -216,10 +239,8 @@ def get_results(sql, args):
             item = NotebookItem(result)
             item.set_path(get_page_path(item))
             nitems.append(item)
-            log.debug(item)
-            if args.recent or args.modified:
-                uid = None  # set uid to None so alfred doesn't sort the results
-            else:
+            uid = None  # set uid to None so alfred doesn't sort the results
+            if args.all:
                 uid = item.GUID
             it = wf.add_item(
                 title=item.Title,
@@ -242,11 +263,13 @@ def parse_args():
                         help='search recent notebook items')
     parser.add_argument('-m', '--modified', dest='modified', action='store_true',
                         help='search last modified notebook items')
+    parser.add_argument('-n', '--notebooks', dest='notebooks', action='store_true',
+                        help='search last modified notebook items')
     parser.add_argument('-u', '--update', dest='update', action='store_true',
                         help='update consolidated database')
     parser.add_argument('-o', '--open', dest='open', nargs='?', default=None,
                         help='open the notebook item with provided guid')
-    parser.add_argument('-b', '--browse', dest='browse', nargs='?', default=None,
+    parser.add_argument('-b', '--browse', dest='browse', action='store_true',
                         help='browse notebooks from top level')
     parser.add_argument('query', nargs='?', default=None)
     log.debug(wf.args)
@@ -256,6 +279,8 @@ def parse_args():
 
 def main(wf):
     log.debug('Started workflow')
+    log.debug("os.getenv('q'): {0}".format(os.getenv('q')))
+
     args = parse_args()
 
     global path_map
@@ -267,60 +292,32 @@ def main(wf):
                     autocomplete='workflow:update',
                     icon=ICON_INFO)
 
-    if args.open:
-        ni = NotebookItem(get_row(args.open))
-
-        if ni.Type == 1:
-            log.debug('argument is a page, preparing to open...' + ni.Title)
-            open_url(ni.url)
-        else:
-            log.info("setting 'q' to: {0}".format(args.open))
-            log.debug('argument is not a page, gathering sub-pages...')
-            # get_section_pages(args.open)
-            wf.setvar("q", ni.GUID, True)
-            run_trigger('browse')
-        return 0
-
-    query = populate_query(args)
-    get_results(query, args)
-    wf.send_feedback()
-    return
-
+    path_map = wf.cached_data('path_map', update_path_map, max_age=600)
+    # results = wf.cached_data('notebook_items', update_notebook_items, max_age=600)
 
     if args.browse:
-        get_children(args.browse)
-        return 0
-
-    if args.name:
-        get_children(args.name)
+        log.debug("arg type: args.browse")
+        goid = os.getenv('q')
+        # goid = '{9E1EACD4-A21C-B947-9E83-C599172503C6}{20}';
+        ni = NotebookItem(get_row_by_goid(goid))
+        log.debug("ni.GOID: {0}".format(ni.GOID))
+        results = get_children(ni)
+        build_wf_items(results, args)
+        wf.send_feedback()
         return 0
 
     if args.open:
-        ni = NotebookItem(get_row(args.open))
+        log.debug("arg type: args.open")
+        ni = NotebookItem(get_row_by_guid(args.open))
 
         if ni.Type == 1:
             log.debug('argument is a page, preparing to open...' + ni.Title)
             open_url(ni.url)
-            # open_url(make_url(item))
         else:
             log.info("setting 'q' to: {0}".format(args.open))
             log.debug('argument is not a page, gathering sub-pages...')
-            # get_section_pages(args.open)
-            wf.setvar("q", ni.GUID, True)
-            run_trigger('browse')
-        return 0
-
-    if args.all:
-        get_notebook_items('all')
-        return 0
-
-    if args.recent:
-        get_notebook_items('recent')
-        return 0
-
-    if args.modified:
-        update_db()
-        get_notebook_items('modified')
+            set_config("q", ni.GOID)
+            run_trigger('1b')
         return 0
 
     if args.update:
@@ -332,14 +329,19 @@ def main(wf):
         wf.send_feedback()
         return 0
 
+    query = populate_query(args)
+    results = get_results(query)
+    build_wf_items(results, args)
+    wf.send_feedback()
+
+
 
 def key_for_data(data): return '{}'.format(data['Name'])
 
 
 def get_notebook_data():
-    """
-    get the data for only the notebooks,
-    not their subsections
+    """get the data for only the notebooks,
+       not their subsections
 
     :return: dict
     """
@@ -575,28 +577,26 @@ def browse_notebooks():
 
 
 def encode_url(url):
-    """
-    encode url for shell to open
+    """encode url for shell to open
+
     :rtype: str
     """
     delims = {" ": "%20",
               "&": "%26",
               "{": "%7B",
-              "}": "%7D",}
+              "}": "%7D"}
     for key, val in delims.items():
         url = url.replace(key, val)
     return url
 
 
 def open_url(url):
-    url = encode_url(url)
-    log.debug('\n\nafter ut8ify: {0}\n\n'.format(url))
-    run_command(['open', url])
+    run_command(['open', encode_url(url)])
 
 
 def clear_config():
     unset_config('q')
-    unset_config('theTitle')
+    # unset_config('theTitle')
     log.info("'q' and 'theTitle' cleared")
 
 

@@ -19,12 +19,25 @@ def get_parent_row(parent_goid):
     return "SELECT * FROM Entities WHERE GOID = \"{0}\"".format(parent_goid)
 
 
-def get_row(uid):
-    return "SELECT * FROM Entities WHERE GUID = \"{0}\"".format(uid)
+def get_row_by_guid(guid):
+    return "SELECT * FROM Entities WHERE GUID = \"{0}\"".format(guid)
 
 
-def get_children(sec_guid):
-    return "SELECT * FROM Entities WHERE ParentGOID = \"{0}\"".format(sec_guid)
+def get_row_by_goid(goid):
+    return "SELECT * FROM Entities WHERE GOID = \"{0}\"".format(goid)
+
+
+def get_children(ni):
+    if ni.Type == 4:
+        return str("SELECT * FROM Entities "
+                   "WHERE ParentGOID = \"{0}\" "
+                   "AND "
+                   "GrandparentGOIDs is NULL".format(ni.GOID))
+
+    return str("SELECT * FROM Entities "
+               "WHERE ParentGOID = \"{0}\" "
+               "OR "
+               "GrandparentGOIDs GLOB \"*{0}\"".format(ni.GOID))
 
 
 def reset_db():
