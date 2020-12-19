@@ -310,7 +310,10 @@ def main(wf):
                     autocomplete='workflow:update',
                     icon=ICON_INFO)
 
-    path_map = wf.cached_data('path_map', update_path_map, max_age=600)
+    path_map = wf.cached_data('path_map', update_path_map, max_age=300)
+    if not wf.cached_data_fresh('path_map', 300):
+        log.debug('data is stale, updating DB')
+        update_db()
     # results = wf.cached_data('notebook_items', update_notebook_items, max_age=600)
 
     if args.browse:
