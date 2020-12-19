@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import os
 from getNotebooks import ONENOTE_FULL_SEARCH_PATH, ALL_DB_PATHS
 
 

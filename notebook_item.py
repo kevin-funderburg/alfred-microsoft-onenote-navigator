@@ -1,3 +1,10 @@
+import re
+import os
+
+ONENOTE_USER_INFO_CACHE = "~/Library/Containers/com.microsoft.onenote.mac/" \
+                          "Data/Library/Application Support/Microsoft/UserInfoCache/"
+ONENOTE_USER_UID = None
+
 ICON_PAGE = 'icons/page.png'
 ICON_SECTION = 'icons/section.png'
 ICON_NOTEBOOK = 'icons/notebook.png'
@@ -64,4 +71,17 @@ class NotebookItem:
             self.icon = ICON_PAGE
 
     def set_url(self):
-        self.url = 'onenote:#page-id={0}&end'.format(self.GUID)
+        if self.Type == 4:
+            self.url = 'onenote:https://d.docs.live.net/{0}/Documents/{1}'.format(get_user_uid(), self.Title)
+        else:
+            self.url = 'onenote:#page-id={0}&end'.format(self.GUID)
+
+
+def get_user_uid():
+    global ONENOTE_USER_UID
+    if ONENOTE_USER_UID is None:
+        files = os.listdir(os.path.expanduser(ONENOTE_USER_INFO_CACHE))
+        for f in files:
+            if 'LiveId.db' in f:
+                ONENOTE_USER_UID = re.search('(.*)_LiveId\\.db', f).group(1)
+    return ONENOTE_USER_UID
